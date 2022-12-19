@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { Room, PrismaClient } from '@prisma/client';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 
 interface HomeProps {
   rooms: Room[];
@@ -13,7 +13,7 @@ const Home: NextPage<HomeProps> = ({ rooms }) => {
       <h2>{room.name}</h2>
       <span>{room.desc}</span>
     </a>
-  ))
+  ));
 
   return (
     <>
@@ -22,7 +22,7 @@ const Home: NextPage<HomeProps> = ({ rooms }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="">
+      <main>
         <h1 className="text-primary">
           Welcome to the TUC Forum!
         </h1>
@@ -35,10 +35,9 @@ const Home: NextPage<HomeProps> = ({ rooms }) => {
   )
 }
 
-export async function getServerSideProps(): Promise<{props: HomeProps }> {
+export const getServerSideProps: GetServerSideProps = async () => {
   const prisma = new PrismaClient();
   const rooms = await prisma.room.findMany();
   return { props: { rooms } }
 }
-
 export default Home;
