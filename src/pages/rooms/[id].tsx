@@ -16,7 +16,7 @@ const Home: NextPage<RoomProps> = ({ room }) => {
   return (
     <>
       <Head>
-        <title>TUC Forum - {room.name}</title>
+        <title>{`TUC Forum - ${room.name}`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -27,6 +27,7 @@ const Home: NextPage<RoomProps> = ({ room }) => {
         <span>{room.desc}</span>
 
         <div className="d-flex flex-column m-2" style={{gap: "1em"}}>
+          {/* TODO: put user list here */}
           placeholder
         </div>
       </main>

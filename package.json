@@ -9,6 +9,9 @@
     "lint": "next lint",
     "tunnel": "cloudflared access tcp --hostname postgres.jeschek.eu --url localhost:5432"
   },
+  "imports": {
+    "#bootstrap/*": "./node_modules/bootstrap"
+  },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "@prisma/client": "4.7.1",

@@ -9,13 +9,14 @@ datasource db {
 
 model User {
   id      Int      @id @default(autoincrement())
-  name    String?
+  name    String
+  age     Int?
   rooms   Room[]
 }
 
 model Room {
   id      Int      @id @default(autoincrement())
-  name    String?
+  name    String
   desc    String?
   users   User[]
 }
