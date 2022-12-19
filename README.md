@@ -18,3 +18,8 @@ DELETE FROM <schema>."<table>";
 INSERT INTO <schema>."<table>" SELECT * FROM testdata"<table>";
 ```
 - Basierend auf dem aktuellen Schema können mit dem script `yarn testdata` die Befehle automatisiert erstellt werden
+
+## Contributing
+- Have a look at [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/)
+- follow style guidelines, preferably enforced by a plugin
+  - TODO: write style guidelines, (eslint + editorconfig)
