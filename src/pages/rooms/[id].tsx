@@ -24,7 +24,7 @@ const Home: NextPage<RoomProps> = ({ room }) => {
         <h1 className="text-primary">
           {room.name}
         </h1>
-        <span>{room.desc}</span>
+        <span>{room.dsc}</span>
 
         <div className="d-flex flex-column m-2" style={{gap: "1em"}}>
           {/* TODO: put user list here */}

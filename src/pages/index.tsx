@@ -11,7 +11,7 @@ const Home: NextPage<HomeProps> = ({ rooms }) => {
   const roomCards = rooms.map(room => (
     <a href={`/rooms/${room.id}`} className="card">
       <h2>{room.name}</h2>
-      <span>{room.desc}</span>
+      <span>{room.dsc}</span>
     </a>
   ));
 

@@ -17,6 +17,6 @@ model User {
 model Room {
   id      Int      @id @default(autoincrement())
   name    String
-  desc    String?
+  dsc    String?
   users   User[]
 }
