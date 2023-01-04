@@ -25,5 +25,5 @@ read -p "Execute? [y/N] " confirmation
 case $confirmation in
   y|Y|yes|YES)
     echo "$sql" | psql -h localhost -U $1 -d top22
-  ;;&
+  ;;
 esac
