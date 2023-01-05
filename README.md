@@ -6,7 +6,6 @@
   - `cloudflared` must be installed
 - `yarn testdata <user>`: Generiert SQL-Befehle um Testdaten in persönliches Schema zu kopieren
   - Befehle können im Anschluss optional ausgeführt werden
-  - psql must be installedBefehle können im Anschluss optional ausgeführt werden
   - psql must be installed
 
 ## Testdaten
