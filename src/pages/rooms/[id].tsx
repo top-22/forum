@@ -2,6 +2,8 @@ import Head from 'next/head';
 import { Room, User, PrismaClient } from '@prisma/client';
 import { GetServerSideProps, NextPage } from 'next';
 
+import People from '../../components/people'
+
 // TODO: extend functionality to show users in the specified room
 // TODO: erweitern funktionalität zu zeigen Benutzer in dem spezifizierten Raum
 // using prisma (room model references users and vice versa)
@@ -28,9 +30,8 @@ const Home: NextPage<RoomProps> = ({ room }) => {
         <h1 className="text-primary">{room.name}</h1>
         <span>{room.dsc}</span>
 
-        <div className="d-flex flex-column m-2" style={{ gap: "1em" }}>
-          {/* TODO: put user list here */}
-          {userCards}
+        <div className="d-flex flex-column m-2" style={{gap: "1em"}}>
+          {People('tessdnjshds')}
         </div>
       </main>
     </>
