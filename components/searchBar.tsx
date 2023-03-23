@@ -15,7 +15,7 @@ const SearchBar = () => {
           type="text"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          className="form-control me-2 bg-dark border-primary"
+          className="form-control me-2 bg-dark border-primary text-white"
           placeholder="Search"
         />
         <button className="btn btn-outline-primary" type="submit">
