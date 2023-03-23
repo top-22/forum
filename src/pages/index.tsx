@@ -21,7 +21,7 @@ const Home: NextPage<HomeProps> = ({ rooms }) => {
         <h1 className="text-primary">
           TUC Forum
         </h1>
-        <button className={homeStyles.button}>Create Post</button>
+        <button className={homeStyles.button}>Create Room</button>
         <button className={homeStyles.button}>Join Room</button>
       </div>
       
