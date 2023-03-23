@@ -1,37 +1,32 @@
 import Head from 'next/head';
 import { Room, PrismaClient } from '@prisma/client';
 import { GetServerSideProps, NextPage } from 'next';
+import RoomPreview from '../../components/roomPreview';
+
+import homeStyles from '../styles/home.module.css';
 
 interface HomeProps {
   rooms: Room[];
 }
 
 const Home: NextPage<HomeProps> = ({ rooms }) => {
-
-  const roomCards = rooms.map(room => (
-    <a href={`/rooms/${room.id}`} className="card">
-      <h2>{room.name}</h2>
-      <span>{room.dsc}</span>
-    </a>
-  ));
-
   return (
-    <>
+    <div className="bg-dark vh-100">
       <Head>
         <title>TUC Forum</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <div className="text-center">
         <h1 className="text-primary">
-          Welcome to the TUC Forum!
+          TUC Forum
         </h1>
-
-        <div className="d-flex flex-column m-2" style={{gap: "1em"}}>
-          {roomCards}
-        </div>
-      </main>
-    </>
+        <button className={homeStyles.button}>Create Post</button>
+        <button className={homeStyles.button}>Join Room</button>
+      </div>
+      
+      <RoomPreview rooms={rooms} title="Your Rooms"/>
+    </div>
   )
 }
 
