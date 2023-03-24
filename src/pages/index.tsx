@@ -21,8 +21,8 @@ const Home: NextPage<HomeProps> = ({ rooms }) => {
         <h1 className="text-primary">
           TUC Forum
         </h1>
-        <button className={homeStyles.button}>Create Room</button>
-        <button className={homeStyles.button}>Join Room</button>
+        <button className="btn btn-primary m-1" type="button">Create Room</button>
+        <button className="btn btn-primary m-1" type="button">Join Room</button>
       </div>
       
       <RoomPreview rooms={rooms} title="Your Rooms"/>

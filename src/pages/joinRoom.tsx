@@ -17,8 +17,8 @@ export default function joinRoom () {
         
         <SearchBar/>
 
-        <button className={homeStyles.button}>Create Room</button>
-        <button className={homeStyles.button}>Home</button>
+        <button className="btn btn-primary m-1" type="button">Create Room</button>
+        <button className="btn btn-primary m-1" type="button">Home</button>
 
         {/* Hier muss noch mittels <RoomPreviw/> die Vorgeschlagenen Posts hinzugefügt werden*/}
       </div>
