@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import homeStyles from '../styles/home.module.css';
-import SearchBar from '../../components/searchBar';
+import SearchBar from '../components/searchBar';
 
 export default function joinRoom () {
   return (

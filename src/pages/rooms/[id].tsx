@@ -16,7 +16,7 @@ interface RoomProps {
 const Home: NextPage<RoomProps> = ({ room }) => {
 
   const userCards = room.users.map(user => (
-    <span>{user.name}</span>
+    <span key={Math.random()}>{user.name}</span>
   ));
 
   return (

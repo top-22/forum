@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image'
-import Avatar from '../src/public/avatar.png';
+import Avatar from '../public/avatar.png';
 
 interface UserMenuProps {
   setShow: (show: boolean) => void;
