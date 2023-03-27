@@ -9,11 +9,7 @@ interface RoomProps {
   room: Room & {users: User[]}
 }
 
-const Home: NextPage<RoomProps> = ({ room }) => {
-
-  const userCards = room.users.map(user => (
-    <span key={Math.random()}>{user.name}</span>
-  ));
+const Room: NextPage<RoomProps> = ({ room }) => {
 
   return (
     <Layout>
@@ -52,4 +48,4 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (context)
   return { props: { room } }
 }
 
-export default Home;
+export default Room;

@@ -1,4 +1,3 @@
-
 import Head from 'next/head';
 import { Room, User, PrismaClient } from '@prisma/client';
 import { GetServerSideProps, NextPage } from 'next';
@@ -10,7 +9,7 @@ interface ThreadProps {
   thread: Number
 }
 
-const Home: NextPage<ThreadProps> = ({ room, thread }) => {
+const Thread: NextPage<ThreadProps> = ({ room, thread }) => {
 
   return (
     <Layout>
@@ -45,4 +44,4 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (contex
   return { props: { room, thread: threadId } }
 }
 
-export default Home;
+export default Thread;

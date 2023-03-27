@@ -1,7 +1,13 @@
 import { Room } from '@prisma/client';
 import Link from 'next/link';
+import { FunctionComponent } from 'react';
 
-export default function RoomPreview({ rooms, title }: { rooms: Room[], title: string}) {
+interface RoomPreviewProps {
+  rooms: Room[];
+  title: string
+};
+
+const RoomPreview:FunctionComponent<RoomPreviewProps> = ({ rooms, title }) => {
   return (
     <div className="p-2">
       <p className="text-white">{title}</p>
@@ -24,3 +30,5 @@ export default function RoomPreview({ rooms, title }: { rooms: Room[], title: st
     </div>
   );
 }
+
+export default RoomPreview

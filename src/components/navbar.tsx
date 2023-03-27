@@ -1,11 +1,11 @@
-import { NextPage } from 'next';
 import Link from 'next/link'
+import { FunctionComponent } from 'react';
 
 interface NavbarProps {
   setShowSettings: (show: boolean) => void;
 }
 
-const Navbar:NextPage<NavbarProps> = ({ setShowSettings }) => {
+const Navbar:FunctionComponent<NavbarProps> = ({ setShowSettings }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">

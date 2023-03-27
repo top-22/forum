@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { FunctionComponent } from 'react';
 import Avatar from '../public/avatar.png';
 
 interface SettingsPopupProps {
@@ -6,7 +7,7 @@ interface SettingsPopupProps {
   show: boolean;
 }
 
-export default function SettingsPopup({ setShow, show }: SettingsPopupProps ) {
+const SettingsPopup:FunctionComponent<SettingsPopupProps> = ({ setShow, show }) => {
 
   // TODO: non full screen popup - what happens if user does not click on X but somewhere else?
   const handleClose = () => setShow(false);
@@ -37,3 +38,5 @@ export default function SettingsPopup({ setShow, show }: SettingsPopupProps ) {
     </>
   );
 }
+
+export default SettingsPopup;

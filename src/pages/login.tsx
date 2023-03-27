@@ -1,7 +1,8 @@
+import { NextPage } from 'next';
 import Image from 'next/image'
 import Logo from '../public/TUC-farbig.png';
 
-export default function login () {
+const Login:NextPage = () => {
   return (
     <div className="bg-dark vh-100 overflow-hidden d-flex align-items-center">
       <div className="row align-items-stretch">
@@ -25,4 +26,6 @@ export default function login () {
       </div>
     </div>
   );
-}
+};
+
+export default Login
