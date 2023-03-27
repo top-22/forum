@@ -1,0 +1,16 @@
+name: format
+on:
+  - push
+jobs:
+  run-prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+      - run: yarn checkformat
