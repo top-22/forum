@@ -2,12 +2,6 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
-/*            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-            </DropdownButton>*/
-
 const SurveyPost = () => {
   return (
     <div>
@@ -27,10 +21,10 @@ const SurveyPost = () => {
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Title:</p>
+            <p>Question:</p>
           </Col>
           <Col>
-            <Form.Control as="textarea" placeholder="title of your post" />
+            <Form.Control as="textarea" placeholder="question of your survey" />
           </Col>
         </Row>
         <br></br>
@@ -48,14 +42,23 @@ const SurveyPost = () => {
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Description:</p>
+            <p>Answers:</p>
           </Col>
-          <Col>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Description of your post goes here"
-            />
+          <Col sm="3">
+            <Form.Control as="textarea" placeholder="Option 1 (mandatory)" />
+          </Col>
+          <Col sm="3">
+            <Form.Control as="textarea" placeholder="Option 2 (mandatory)" />
+          </Col>
+        </Row>
+        <br></br>
+        <Row>
+          <Col sm="3" />
+          <Col sm="3">
+            <Form.Control as="textarea" placeholder="Option 3" />
+          </Col>
+          <Col sm="3">
+            <Form.Control as="textarea" placeholder="Option 4" />
           </Col>
         </Row>
         <br></br>
@@ -68,6 +71,20 @@ const SurveyPost = () => {
               <option>Choose tags which best describe your post</option>
               <option>Large select</option>
               <option>Test</option>
+            </Form.Select>
+          </Col>
+        </Row>
+        <br></br>
+        <Row>
+          <Col sm="3">
+            <p>Choose Endtime:</p>
+          </Col>
+          <Col>
+            <Form.Select size="lg">
+              <option>Choose when the survey ends</option>
+              <option>1 hour</option>
+              <option>2 hours</option>
+              <option>1 day</option>
             </Form.Select>
           </Col>
         </Row>

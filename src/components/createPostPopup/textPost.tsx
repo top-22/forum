@@ -21,10 +21,10 @@ const TextPost = () => {
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Question:</p>
+            <p>Title:</p>
           </Col>
           <Col>
-            <Form.Control as="textarea" placeholder="question of your survey" />
+            <Form.Control as="textarea" placeholder="title of your post" />
           </Col>
         </Row>
         <br></br>
@@ -42,23 +42,14 @@ const TextPost = () => {
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Answers:</p>
+            <p>Description:</p>
           </Col>
-          <Col sm="3">
-            <Form.Control as="textarea" placeholder="Option 1 (mandatory)" />
-          </Col>
-          <Col sm="3">
-            <Form.Control as="textarea" placeholder="Option 2 (mandatory)" />
-          </Col>
-        </Row>
-        <br></br>
-        <Row>
-          <Col sm="3" />
-          <Col sm="3">
-            <Form.Control as="textarea" placeholder="Option 3" />
-          </Col>
-          <Col sm="3">
-            <Form.Control as="textarea" placeholder="Option 4" />
+          <Col>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Description of your post goes here"
+            />
           </Col>
         </Row>
         <br></br>
@@ -71,20 +62,6 @@ const TextPost = () => {
               <option>Choose tags which best describe your post</option>
               <option>Large select</option>
               <option>Test</option>
-            </Form.Select>
-          </Col>
-        </Row>
-        <br></br>
-        <Row>
-          <Col sm="3">
-            <p>Choose Endtime:</p>
-          </Col>
-          <Col>
-            <Form.Select size="lg">
-              <option>Choose when the survey ends</option>
-              <option>1 hour</option>
-              <option>2 hours</option>
-              <option>1 day</option>
             </Form.Select>
           </Col>
         </Row>
