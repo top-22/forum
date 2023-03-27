@@ -1,12 +1,9 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent } from "react";
 
-interface CreateRoomPopupProps {
+interface CreateRoomPopupProps {}
+
+const CreateRoomPopup: FunctionComponent<CreateRoomPopupProps> = () => {
+  return <>CreateRoomPopup</>;
 };
-
-const CreateRoomPopup:FunctionComponent<CreateRoomPopupProps> = () => {
-  return (
-  <>CreateRoomPopup</>
-  );
-}
 
 export default CreateRoomPopup;

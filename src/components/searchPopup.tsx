@@ -1,12 +1,9 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent } from "react";
 
-interface SearchPopupProps {
+interface SearchPopupProps {}
+
+const SearchPopup: FunctionComponent<SearchPopupProps> = () => {
+  return <>SearchPopup</>;
 };
-
-const SearchPopup:FunctionComponent<SearchPopupProps> = () => {
-  return (
-  <>SearchPopup</>
-  );
-}
 
 export default SearchPopup;
