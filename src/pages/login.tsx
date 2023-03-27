@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Logo from '../public/TUC-farbig.png';
 
-export default function LogIn () {
+export default function login () {
   return (
     <div className="bg-dark vh-100 overflow-hidden d-flex align-items-center">
       <div className="row align-items-stretch">

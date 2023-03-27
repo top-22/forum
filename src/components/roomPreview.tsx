@@ -1,4 +1,5 @@
 import { Room } from '@prisma/client';
+import Link from 'next/link';
 
 export default function RoomPreview({ rooms, title }: { rooms: Room[], title: string}) {
   return (
@@ -11,7 +12,7 @@ export default function RoomPreview({ rooms, title }: { rooms: Room[], title: st
               <div className="col mb-2" key={room.id}>
                 <div className="card text-bg-primary h-100" style={{width: "12rem"}}>
                   <div className="card-body">
-                    <h5 className="card-title"><a className="text-white" href={`/rooms/${room.id}`}>{room.name}</a></h5>
+                    <h5 className="card-title"><Link className="text-white" href={`/room/${room.id}`}>{room.name}</Link></h5>
                     <p className="card-text text-secondary">{room.dsc}</p>
                   </div>
                 </div>

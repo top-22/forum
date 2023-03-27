@@ -10,7 +10,7 @@ const TextPost = () => {
         <Form>
             <Row>
                 <Col sm='3'>
-                    <p>Choose Room:</p> 
+                    <p>Choose Room:</p>
                 </Col>
                 <Col >
                     <Form.Select size="lg">
@@ -89,7 +89,7 @@ const TextPost = () => {
             </Row>
             <br></br>
             <Row>
-                <Form.Check 
+                <Form.Check
                     type="switch"
                     id="custom-switch"
                     label="Check this switch"
