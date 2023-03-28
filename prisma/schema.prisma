@@ -8,15 +8,117 @@ datasource db {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  name    String
-  age     Int?
-  rooms   Room[]
+  id           Int           @id @default(autoincrement())
+  name         String
+  messages     Message[]
+  rooms        RoomUser[]
+  affiliations Affiliation[]
+
+  @@map("users")
 }
 
 model Room {
-  id      Int      @id @default(autoincrement())
-  name    String
-  dsc     String?
-  users   User[]
+  id           Int               @id @default(autoincrement())
+  name         String
+  description  String?
+  affiliations RoomAffiliation[]
+  users        RoomUser[]
+  threads      Thread[]
+
+  @@map("rooms")
+}
+
+model Thread {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  room        Room      @relation(fields: [roomId], references: [id])
+  roomId      Int       @map("room_id")
+  messages    Message[]
+
+  @@map("threads")
+}
+
+model Message {
+  id          Int          @id @default(autoincrement())
+  content     String?
+  createdAt   DateTime     @default(now()) @map("created_at")
+  user        User         @relation(fields: [userId], references: [id])
+  userId      Int          @map("user_id")
+  thread      Thread       @relation(fields: [threadId], references: [id])
+  threadId    Int          @map("thread_id")
+  attachments Attachment[]
+  tags        Tag[]
+
+  @@map("messages")
+}
+
+model Tag {
+  id       Int       @id @default(autoincrement())
+  name     String
+  messages Message[]
+
+  @@map("tags")
+}
+
+model Attachment {
+  id        Int            @id @default(autoincrement())
+  type      AttachmentType
+  blob      Bytes
+  message   Message        @relation(fields: [messageId], references: [id])
+  messageId Int            @map("message_id")
+
+  @@map("attachments")
+}
+
+model Affiliation {
+  id          Int               @id @default(autoincrement())
+  name        String
+  description String?
+  users       User[]
+  rooms       RoomAffiliation[]
+
+  @@map("affiliations")
+}
+
+// EXPLICIT RELATIONS
+
+model RoomAffiliation {
+  affiliation   Affiliation     @relation(fields: [affiliationId], references: [id])
+  affiliationId Int             @map("affiliation_id")
+  room          Room            @relation(fields: [roomId], references: [id])
+  roomId        Int             @map("room_id")
+  type          AffiliationType
+
+  @@id([roomId, affiliationId])
+  @@map("room_affiliations")
+}
+
+model RoomUser {
+  room   Room @relation(fields: [roomId], references: [id])
+  user   User @relation(fields: [userId], references: [id])
+  roomId Int
+  userId Int
+  role   Role @default(MEMBER)
+
+  @@id([roomId, userId])
+  @@map("room_user")
+}
+
+// ENUMS
+
+enum AttachmentType {
+  FILE
+  AUDIO
+}
+
+enum AffiliationType {
+  OPTIONAL
+  REQUIRED
+}
+
+enum Role {
+  MEMBER
+  MODERATOR
+  ADMIN
 }
