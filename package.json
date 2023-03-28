@@ -10,7 +10,7 @@
     "format": "yarn prettier --write .",
     "checkformat": "yarn prettier --check .",
     "tunnel": "cloudflared access tcp --hostname postgres.jeschek.eu --url localhost:5432",
-    "testdata": "./scripts/testdata.sh"
+    "testdata": "node ./scripts/testdata.js"
   },
   "imports": {
     "#bootstrap/*": "./node_modules/bootstrap"

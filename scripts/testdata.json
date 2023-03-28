@@ -1,0 +1,658 @@
+{
+  "users": [
+    {
+      "name": "Sophie Anderson",
+      "affiliations": ["Biology Major", "Student"],
+      "rooms": [
+        {
+          "name": "BioTalk",
+          "role": "MODERATOR"
+        },
+        {
+          "name": "SciSwap",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Luke Parker",
+      "affiliations": ["Computer Science Major", "Student"],
+      "rooms": [
+        {
+          "name": "Tech Talk",
+          "role": "MODERATOR"
+        },
+        {
+          "name": "Developer Room",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Olivia Lee",
+      "affiliations": ["Psychology Major", "Student"],
+      "rooms": [
+        {
+          "name": "PsychPanel",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Wellness Warriors",
+          "role": "MODERATOR"
+        }
+      ]
+    },
+    {
+      "name": "Michael Scott",
+      "affiliations": ["Student"],
+      "rooms": [
+        {
+          "name": "Campus Life",
+          "role": "ADMIN"
+        },
+        {
+          "name": "Study Buddies",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Emma Davis",
+      "affiliations": ["Art Major", "Student"],
+      "rooms": [
+        {
+          "name": "ArtSpace",
+          "role": "MODERATOR"
+        },
+        {
+          "name": "Campus Life",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Sophia Reynolds",
+      "affiliations": ["Language Major", "Student"],
+      "rooms": [
+        {
+          "name": "LangLab",
+          "role": "MEMBER"
+        },
+        {
+          "name": "PoliDebate",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Campus Life",
+          "role": "MODERATOR"
+        }
+      ]
+    },
+    {
+      "name": "Nolan Gomez",
+      "affiliations": ["Science Major", "Student"],
+      "rooms": [
+        {
+          "name": "SciSwap",
+          "role": "MODERATOR"
+        },
+        {
+          "name": "Tech Talk",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Campus Life",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Avery Patel",
+      "affiliations": ["Art Major", "Student"],
+      "rooms": [
+        {
+          "name": "ArtSpace",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Study Buddies",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Campus Life",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Dominic Young",
+      "affiliations": ["Mathematics Major", "Student"],
+      "rooms": [
+        {
+          "name": "NumberCrunch",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Study Buddies",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Campus Life",
+          "role": "MODERATOR"
+        }
+      ]
+    },
+    {
+      "name": "Zoe Kim",
+      "affiliations": ["Psychology Major", "Student"],
+      "rooms": [
+        {
+          "name": "PsychPanel",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Wellness Warriors",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Career Corner",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Olivia Perez",
+      "affiliations": ["Biology Major", "Student"],
+      "rooms": [
+        {
+          "name": "BioTalk",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Ethan Lee",
+      "affiliations": ["Economics Major", "Developer", "Student"],
+      "rooms": [
+        {
+          "name": "EconChat",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Tech Talk",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Sofia Ramirez",
+      "affiliations": ["Political Science Major", "Student"],
+      "rooms": [
+        {
+          "name": "PoliDebate",
+          "role": "MODERATOR"
+        }
+      ]
+    },
+    {
+      "name": "Max Johnson",
+      "affiliations": ["Psychology Major", "Student"],
+      "rooms": [
+        {
+          "name": "PsychPanel",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Wellness Warriors",
+          "role": "MODERATOR"
+        }
+      ]
+    },
+    {
+      "name": "Isabella Kim",
+      "affiliations": ["Mathematics Major", "Literature Major", "Student"],
+      "rooms": [
+        {
+          "name": "NumberCrunch",
+          "role": "MODERATOR"
+        },
+        {
+          "name": "LitLounge",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Jessica Green",
+      "affiliations": ["Biology Major", "Student"],
+      "rooms": [
+        {
+          "name": "BioTalk",
+          "role": "MEMBER"
+        },
+        {
+          "name": "SciSwap",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Hannah Patel",
+      "affiliations": ["History Major", "Student"],
+      "rooms": [
+        {
+          "name": "HistHorizon",
+          "role": "MODERATOR"
+        },
+        {
+          "name": "Campus Life",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Emily Kim",
+      "affiliations": ["Psychology Major", "Student"],
+      "rooms": [
+        {
+          "name": "PsychPanel",
+          "role": "MEMBER"
+        },
+        {
+          "name": "Wellness Warriors",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Daniel Lee",
+      "affiliations": ["Mathematics Major", "Student"],
+      "rooms": [
+        {
+          "name": "NumberCrunch",
+          "role": "MODERATOR"
+        },
+        {
+          "name": "Study Buddies",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "name": "Rita Singh",
+      "affiliations": ["Language Major", "Literature Major", "Student"],
+      "rooms": [
+        {
+          "name": "LitLounge",
+          "role": "MEMBER"
+        },
+        {
+          "name": "LangLab",
+          "role": "MODERATOR"
+        },
+        {
+          "name": "Campus Life",
+          "role": "MEMBER"
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "name": "BioTalk",
+      "description": "for biology majors and anyone interested in life sciences.",
+      "affiliations": {
+        "optional": ["Biology Major"],
+        "required": []
+      }
+    },
+    {
+      "name": "NumberCrunch",
+      "description": "for math majors and enthusiasts to discuss equations and formulas.",
+      "affiliations": {
+        "optional": ["Mathematics Major"],
+        "required": []
+      }
+    },
+    {
+      "name": "PoliDebate",
+      "description": "for political science majors and those interested in current events and government.",
+      "affiliations": {
+        "optional": ["Political Science Major"],
+        "required": []
+      }
+    },
+    {
+      "name": "LitLounge",
+      "description": "for literature majors and book lovers to discuss novels and poetry.",
+      "affiliations": {
+        "optional": ["Literature Major"],
+        "required": []
+      }
+    },
+    {
+      "name": "EconChat",
+      "description": "for economics majors and those interested in finance and business.",
+      "affiliations": {
+        "optional": ["Economics Major"],
+        "required": []
+      }
+    },
+    {
+      "name": "HistHorizon",
+      "description": "for history majors and anyone interested in discussing the past.",
+      "affiliations": {
+        "optional": ["History Major"],
+        "required": []
+      }
+    },
+    {
+      "name": "PsychPanel",
+      "description": "for psychology majors and those interested in human behavior and the mind.",
+      "affiliations": {
+        "optional": ["Psychology Major"],
+        "required": []
+      }
+    },
+    {
+      "name": "SciSwap",
+      "description": "for science majors to exchange ideas and discuss research.",
+      "affiliations": {
+        "optional": ["Science Major"],
+        "required": []
+      }
+    },
+    {
+      "name": "LangLab",
+      "description": "for language majors and enthusiasts to practice speaking and learning new languages.",
+      "affiliations": {
+        "optional": ["Language Major"],
+        "required": []
+      }
+    },
+    {
+      "name": "ArtSpace",
+      "description": "for art majors and anyone interested in visual arts and design.",
+      "affiliations": {
+        "optional": ["Art Major"],
+        "required": []
+      }
+    },
+    {
+      "name": "Campus Life",
+      "description": "A chat room for discussing campus events, organizations, and activities.",
+      "affiliations": {
+        "optional": [],
+        "required": ["Student"]
+      }
+    },
+    {
+      "name": "Study Buddies",
+      "description": "A chat room for finding study partners and discussing course materials.",
+      "affiliations": {
+        "optional": [],
+        "required": ["Student"]
+      }
+    },
+    {
+      "name": "Career Corner",
+      "description": "A chat room for networking and discussing career opportunities and job search strategies.",
+      "affiliations": {
+        "optional": [],
+        "required": ["Student", "Employee"]
+      }
+    },
+    {
+      "name": "Tech Talk",
+      "description": "A chat room for discussing the latest technology trends, gadgets, and software.",
+      "affiliations": {
+        "optional": ["Science Major", "Developer"],
+        "required": []
+      }
+    },
+    {
+      "name": "Wellness Warriors",
+      "description": "A chat room for discussing mental health, wellness, and self-care strategies.",
+      "affiliations": {
+        "optional": ["Student"],
+        "required": []
+      }
+    },
+    {
+      "name": "Admin Room",
+      "description": "Chat room for Admins of the forum.",
+      "affiliations": {
+        "optional": [],
+        "required": ["Admin"]
+      }
+    },
+    {
+      "name": "Developer Room",
+      "description": "Chat room for Developers of the forum.",
+      "affiliations": {
+        "optional": [],
+        "required": ["Developer"]
+      }
+    }
+  ],
+  "threads": [
+    {
+      "name": "Cellular Respiration and ATP Production",
+      "room": "BioTalk"
+    },
+    {
+      "name": "Evolutionary Biology and Natural Selection",
+      "room": "BioTalk"
+    },
+    {
+      "name": "Genetics and Heredity",
+      "room": "BioTalk"
+    },
+    {
+      "name": "Algebraic Expressions and Equations",
+      "room": "NumberCrunch"
+    },
+    {
+      "name": "Geometry and Trigonometry",
+      "room": "NumberCrunch"
+    },
+    {
+      "name": "Debate on Gun Control in the US",
+      "room": "PoliDebate"
+    },
+    {
+      "name": "The Ethics of Political Lobbying",
+      "room": "PoliDebate"
+    },
+    {
+      "name": "International Relations and Diplomacy",
+      "room": "PoliDebate"
+    },
+    {
+      "name": "The Works of Shakespeare",
+      "room": "LitLounge"
+    },
+    {
+      "name": "Postmodernism in Literature",
+      "room": "LitLounge"
+    },
+    {
+      "name": "The American Literary Canon",
+      "room": "LitLounge"
+    },
+    {
+      "name": "Microeconomics and Market Structures",
+      "room": "EconChat"
+    },
+    {
+      "name": "Macroeconomics and Fiscal Policy",
+      "room": "EconChat"
+    },
+    {
+      "name": "The Industrial Revolution and Its Impact",
+      "room": "HistHorizon"
+    },
+    {
+      "name": "World War II and Its Aftermath",
+      "room": "HistHorizon"
+    },
+    {
+      "name": "The Renaissance and Its Legacy",
+      "room": "HistHorizon"
+    },
+    {
+      "name": "Abnormal Psychology and Mental Illness",
+      "room": "PsychPanel"
+    },
+    {
+      "name": "Cognitive Psychology and Memory",
+      "room": "PsychPanel"
+    },
+    {
+      "name": "Climate Change and Global Warming",
+      "room": "SciSwap"
+    },
+    {
+      "name": "Quantum Mechanics and Particle Physics",
+      "room": "SciSwap"
+    },
+    {
+      "name": "French Conversation and Pronunciation Practice",
+      "room": "LangLab"
+    },
+    {
+      "name": "Modern Art and Its Critics",
+      "room": "ArtSpace"
+    },
+    {
+      "name": "Graphic Design and Visual Communication",
+      "room": "ArtSpace"
+    },
+    {
+      "name": "Upcoming Music Festivals on Campus",
+      "room": "Campus Life"
+    },
+    {
+      "name": "Volunteer Opportunities for Community Service",
+      "room": "Campus Life"
+    },
+    {
+      "name": "Chemistry Exam Preparation",
+      "room": "Study Buddies"
+    },
+    {
+      "name": "Essay Writing Techniques for Humanities Courses",
+      "room": "Study Buddies"
+    },
+    {
+      "name": "Networking Strategies for Business Majors",
+      "room": "Career Corner"
+    },
+    {
+      "name": "Internship Opportunities in the Tech Industry",
+      "room": "Career Corner"
+    },
+    {
+      "name": "Artificial Intelligence and Machine Learning",
+      "room": "Tech Talk"
+    },
+    {
+      "name": "Artificial Intelligence: Friend or Foe?",
+      "room": "Tech Talk"
+    },
+    {
+      "name": "The Future of Robotics in Industry",
+      "room": "Tech Talk"
+    },
+    {
+      "name": "Mindful Meditation Practices",
+      "room": "Wellness Warriors"
+    },
+    {
+      "name": "Overcoming Burnout in the Workplace",
+      "room": "Wellness Warriors"
+    },
+    {
+      "name": "Best Practices for Forum Moderation",
+      "room": "Admin Room"
+    },
+    {
+      "name": "Effective Communication with Users",
+      "room": "Admin Room"
+    },
+    {
+      "name": "Tips and Tricks for JavaScript Development",
+      "room": "Developer Room"
+    },
+    {
+      "name": "Building Scalable Web Applications with React",
+      "room": "Developer Room"
+    }
+  ],
+  "affiliations": [
+    {
+      "name": "Biology Major",
+      "description": "A student pursuing a degree in Biology, studying living organisms and their interactions with each other and the environment."
+    },
+    {
+      "name": "Mathematics Major",
+      "description": "A student pursuing a degree in Mathematics, studying numbers, quantities, and shapes."
+    },
+    {
+      "name": "Political Science Major",
+      "description": "A student pursuing a degree in Political Science, studying government, political behavior, and public policies."
+    },
+    {
+      "name": "Literature Major",
+      "description": "A student pursuing a degree in Literature, studying written works of fiction, non-fiction, poetry, and drama."
+    },
+    {
+      "name": "Economics Major",
+      "description": "A student pursuing a degree in Economics, studying the production, distribution, and consumption of goods and services."
+    },
+    {
+      "name": "History Major",
+      "description": "A student pursuing a degree in History, studying past events, people, and cultures."
+    },
+    {
+      "name": "Psychology Major",
+      "description": "A student pursuing a degree in Psychology, studying human behavior, emotions, and mental processes."
+    },
+    {
+      "name": "Science Major",
+      "description": "A student pursuing a degree in a scientific field such as Biology, Chemistry, Physics, or Environmental Science."
+    },
+    {
+      "name": "Language Major",
+      "description": "A student pursuing a degree in a language, studying the structure, grammar, and vocabulary of the language as well as its cultural context."
+    },
+    {
+      "name": "Art Major",
+      "description": "A student pursuing a degree in an art-related field such as Fine Arts, Graphic Design, or Art History."
+    },
+    {
+      "name": "Student",
+      "description": "An individual who is currently enrolled in a university or college program."
+    },
+    {
+      "name": "Applicant",
+      "description": "An individual who has applied to a university or college program but is not yet enrolled."
+    },
+    {
+      "name": "Employee",
+      "description": "An individual who is employed by a university or college, either as faculty or staff."
+    },
+    {
+      "name": "Admin",
+      "description": "An individual who works in an administrative role at the forum."
+    },
+    {
+      "name": "Developer",
+      "description": "An individual who develops the forum."
+    },
+    {
+      "name": "Guest",
+      "description": "An individual who is not a student, applicant or employee."
+    }
+  ]
+}
