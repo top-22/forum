@@ -438,155 +438,193 @@
   "threads": [
     {
       "name": "Cellular Respiration and ATP Production",
-      "room": "BioTalk"
+      "room": "BioTalk",
+      "tags": ["Science"]
     },
     {
       "name": "Evolutionary Biology and Natural Selection",
-      "room": "BioTalk"
+      "room": "BioTalk",
+      "tags": []
     },
     {
       "name": "Genetics and Heredity",
-      "room": "BioTalk"
+      "room": "BioTalk",
+      "tags": []
     },
     {
       "name": "Algebraic Expressions and Equations",
-      "room": "NumberCrunch"
+      "room": "NumberCrunch",
+      "tags": ["Mathematics", "Logic"]
     },
     {
       "name": "Geometry and Trigonometry",
-      "room": "NumberCrunch"
+      "room": "NumberCrunch",
+      "tags": ["Mathematics", "Shapes"]
     },
     {
       "name": "Debate on Gun Control in the US",
-      "room": "PoliDebate"
+      "room": "PoliDebate",
+      "tags": ["Politics", "Controversy"]
     },
     {
       "name": "The Ethics of Political Lobbying",
-      "room": "PoliDebate"
+      "room": "PoliDebate",
+      "tags": ["Politics", "Morality"]
     },
     {
       "name": "International Relations and Diplomacy",
-      "room": "PoliDebate"
+      "room": "PoliDebate",
+      "tags": ["Politics", "Foreign Affairs"]
     },
     {
       "name": "The Works of Shakespeare",
-      "room": "LitLounge"
+      "room": "LitLounge",
+      "tags": ["Drama"]
     },
     {
       "name": "Postmodernism in Literature",
-      "room": "LitLounge"
+      "room": "LitLounge",
+      "tags": ["Literature", "Philosophy"]
     },
     {
       "name": "The American Literary Canon",
-      "room": "LitLounge"
+      "room": "LitLounge",
+      "tags": ["Literature", "Culture"]
     },
     {
       "name": "Microeconomics and Market Structures",
-      "room": "EconChat"
+      "room": "EconChat",
+      "tags": ["Markets"]
     },
     {
       "name": "Macroeconomics and Fiscal Policy",
-      "room": "EconChat"
+      "room": "EconChat",
+      "tags": ["Policy"]
     },
     {
       "name": "The Industrial Revolution and Its Impact",
-      "room": "HistHorizon"
+      "room": "HistHorizon",
+      "tags": []
     },
     {
       "name": "World War II and Its Aftermath",
-      "room": "HistHorizon"
+      "room": "HistHorizon",
+      "tags": ["History", "War"]
     },
     {
       "name": "The Renaissance and Its Legacy",
-      "room": "HistHorizon"
+      "room": "HistHorizon",
+      "tags": ["History", "Art"]
     },
     {
       "name": "Abnormal Psychology and Mental Illness",
-      "room": "PsychPanel"
+      "room": "PsychPanel",
+      "tags": ["Mental Health"]
     },
     {
       "name": "Cognitive Psychology and Memory",
-      "room": "PsychPanel"
+      "room": "PsychPanel",
+      "tags": []
     },
     {
       "name": "Climate Change and Global Warming",
-      "room": "SciSwap"
+      "room": "SciSwap",
+      "tags": ["Science", "Environment"]
     },
     {
       "name": "Quantum Mechanics and Particle Physics",
-      "room": "SciSwap"
+      "room": "SciSwap",
+      "tags": ["Physics", "Theory"]
     },
     {
       "name": "French Conversation and Pronunciation Practice",
-      "room": "LangLab"
+      "room": "LangLab",
+      "tags": ["Language", "French"]
     },
     {
       "name": "Modern Art and Its Critics",
-      "room": "ArtSpace"
+      "room": "ArtSpace",
+      "tags": ["art"]
     },
     {
       "name": "Graphic Design and Visual Communication",
-      "room": "ArtSpace"
+      "room": "ArtSpace",
+      "tags": ["art", "design"]
     },
     {
       "name": "Upcoming Music Festivals on Campus",
-      "room": "Campus Life"
+      "room": "Campus Life",
+      "tags": ["music"]
     },
     {
       "name": "Volunteer Opportunities for Community Service",
-      "room": "Campus Life"
+      "room": "Campus Life",
+      "tags": ["volunteering"]
     },
     {
       "name": "Chemistry Exam Preparation",
-      "room": "Study Buddies"
+      "room": "Study Buddies",
+      "tags": ["chemistry"]
     },
     {
       "name": "Essay Writing Techniques for Humanities Courses",
-      "room": "Study Buddies"
+      "room": "Study Buddies",
+      "tags": ["writing"]
     },
     {
       "name": "Networking Strategies for Business Majors",
-      "room": "Career Corner"
+      "room": "Career Corner",
+      "tags": ["business"]
     },
     {
       "name": "Internship Opportunities in the Tech Industry",
-      "room": "Career Corner"
+      "room": "Career Corner",
+      "tags": ["tech"]
     },
     {
       "name": "Artificial Intelligence and Machine Learning",
-      "room": "Tech Talk"
+      "room": "Tech Talk",
+      "tags": ["AI"]
     },
     {
       "name": "Artificial Intelligence: Friend or Foe?",
-      "room": "Tech Talk"
+      "room": "Tech Talk",
+      "tags": ["AI"]
     },
     {
       "name": "The Future of Robotics in Industry",
-      "room": "Tech Talk"
+      "room": "Tech Talk",
+      "tags": ["robotics"]
     },
     {
       "name": "Mindful Meditation Practices",
-      "room": "Wellness Warriors"
+      "room": "Wellness Warriors",
+      "tags": ["mindfulness"]
     },
     {
       "name": "Overcoming Burnout in the Workplace",
-      "room": "Wellness Warriors"
+      "room": "Wellness Warriors",
+      "tags": ["wellness"]
     },
     {
       "name": "Best Practices for Forum Moderation",
-      "room": "Admin Room"
+      "room": "Admin Room",
+      "tags": ["forum"]
     },
     {
       "name": "Effective Communication with Users",
-      "room": "Admin Room"
+      "room": "Admin Room",
+      "tags": ["communication"]
     },
     {
       "name": "Tips and Tricks for JavaScript Development",
-      "room": "Developer Room"
+      "room": "Developer Room",
+      "tags": ["javascript"]
     },
     {
       "name": "Building Scalable Web Applications with React",
-      "room": "Developer Room"
+      "room": "Developer Room",
+      "tags": ["web"]
     }
   ],
   "affiliations": [

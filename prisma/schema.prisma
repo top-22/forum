@@ -34,6 +34,7 @@ model Thread {
   description String?
   room        Room      @relation(fields: [roomId], references: [id])
   roomId      Int       @map("room_id")
+  tags        Tag[]
   messages    Message[]
 
   @@map("threads")
@@ -48,15 +49,13 @@ model Message {
   thread      Thread       @relation(fields: [threadId], references: [id])
   threadId    Int          @map("thread_id")
   attachments Attachment[]
-  tags        Tag[]
 
   @@map("messages")
 }
 
 model Tag {
-  id       Int       @id @default(autoincrement())
-  name     String
-  messages Message[]
+  name     String    @id
+  threads  Thread[]
 
   @@map("tags")
 }

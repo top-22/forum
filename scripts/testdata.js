@@ -1,4 +1,4 @@
-const { PrismaClient, dmmf } = require("@prisma/client");
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const data = require("./testdata.json");
 
@@ -9,6 +9,8 @@ async function main() {
   await prisma.user.deleteMany();
   console.log("deleting threads...");
   await prisma.thread.deleteMany();
+  console.log("deleting tags...");
+  await prisma.tag.deleteMany();
   console.log("deleting rooms...");
   await prisma.roomAffiliation.deleteMany();
   await prisma.room.deleteMany();
@@ -79,6 +81,12 @@ async function main() {
               })
             ).id,
           },
+        },
+        tags: {
+          connectOrCreate: threadData.tags.map((tag) => ({
+            where: { name: tag },
+            create: { name: tag },
+          })),
         },
       },
     });
