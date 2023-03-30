@@ -36,9 +36,9 @@ jobs:
         id: set_image_tag
         run: |
           if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/main" ]; then
-            echo "::set-output name=IMAGE_TAG::main"
+            echo "IMAGE_TAG=main" >> $GITHUB_ENV
           else
-            echo "::set-output name=IMAGE_TAG::pr-${{ github.head_ref }}"
+            echo "IMAGE_TAG=pr-${{ github.head_ref }}" >> $GITHUB_ENV
           fi
 
       - name: Build and push Docker image 🏗️
@@ -47,7 +47,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ steps.set_image_tag.outputs.IMAGE_TAG }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -65,33 +65,33 @@ jobs:
         id: set_image_tag
         run: |
           if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/main" ]; then
-            echo "::set-output name=IMAGE_TAG::main"
+            echo "IMAGE_TAG=main" >> $GITHUB_ENV
           else
-            echo "::set-output name=IMAGE_TAG::pr-${{ github.head_ref }}"
+            echo "IMAGE_TAG=pr-${{ github.head_ref }}" >> $GITHUB_ENV
           fi
 
       - name: Set PORT ⚙️
         id: set_port
         run: |
           if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/main" ]; then
-            echo "::set-output name=PORT::3000"
+            echo "PORT=3000" >> $GITHUB_ENV
           else
-            echo "::set-output name=PORT::$(expr 10000 + ${{ github.event.number }})"
+            echo "PORT=$(expr 10000 + ${{ github.event.number }})" >> $GITHUB_ENV
           fi
 
       - name: Deploy to VPS 🚀
         run: |
-          CONTAINER_NAME=forum-${{ steps.set_image_tag.outputs.IMAGE_TAG }}
+          CONTAINER_NAME=forum-${{ env.IMAGE_TAG }}
           ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ steps.set_image_tag.outputs.IMAGE_TAG }} && \
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
             docker stop $CONTAINER_NAME || true && \
             docker rm $CONTAINER_NAME || true && \
             docker run -d \
               --name $CONTAINER_NAME \
               --restart always \
-              -p ${{ steps.set_port.outputs.PORT }}:3000 \
+              -p ${{ env.PORT }}:3000 \
               -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ steps.set_image_tag.outputs.IMAGE_TAG }}"
+              ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }}"
 
   remove_container:
     runs-on: ubuntu-latest
