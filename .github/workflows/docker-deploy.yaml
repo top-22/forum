@@ -1,13 +1,22 @@
 name: Build and Deploy Docker Image
 
 on:
+  pull_request:
+    types: [opened, synchronize, closed]
+    branches:
+      - main
   push:
     branches:
       - main
 
+concurrency:
+  group: deploy-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
+    if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     environment: build_and_push
 
     steps:
@@ -29,28 +38,49 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/forum:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && 'main' || format('pr-{0}', github.head_ref) }}
 
   deploy:
     runs-on: ubuntu-latest
+    if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     needs: build_and_push
     environment: deploy
 
     steps:
-      - name: Setup SSH key
+      - name: Setup SSH key 🔑
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Deploy to VPS
+      - name: Deploy to VPS 🚀
         run: |
-          ssh -o StrictHostKeyChecking=no -p {{ secrets.SSH_PORT }} {{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} << 'ENDSSH'
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:latest
-            docker stop forum || true
-            docker rm forum || true
+          IMAGE_TAG=${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && 'main' || format('pr-{0}', github.head_ref) }}
+          CONTAINER_NAME=forum-$IMAGE_TAG
+          PORT=${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && '3000' || format('{0}', 10000 + github.event.number) }}
+          ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:$IMAGE_TAG && \
+            docker stop $CONTAINER_NAME || true && \
+            docker rm $CONTAINER_NAME || true && \
             docker run -d \
-              --name forum \
+              --name $CONTAINER_NAME \
               --restart always \
-              -p 3000:3000 \
+              -p $PORT:3000 \
               -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/forum:latest
+              ${{ secrets.DOCKERHUB_USERNAME }}/forum:$IMAGE_TAG"
+
+  remove_container:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    environment: remove_container
+
+    steps:
+      - name: Setup SSH key 🔑
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Remove container from VPS 🗑️
+        run: |
+          ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
+            docker stop forum-pr-${{ github.head_ref }} || true && \
+            docker rm forum-pr-${{ github.head_ref }} || true"
