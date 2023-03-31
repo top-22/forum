@@ -93,6 +93,7 @@ jobs:
               --name $CONTAINER_NAME \
               --restart always \
               --network=proxy_default \
+              -p ${{ env.PORT }}:3000 \
               -e DATABASE_URL=$DATABASE_URL \
               -e VIRTUAL_HOST=${{ env.HOST }} \
               -e LETSENCRYPT_HOST=${{ env.HOST }} \
