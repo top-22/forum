@@ -16,7 +16,7 @@ concurrency:
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
-    if: false && ((github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main'))
+    if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     environment: dockerhub
 
     steps:
@@ -51,7 +51,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    if: false && ((github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main'))
+    if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     needs: build_and_push
     environment: testing
 
@@ -137,11 +137,6 @@ jobs:
             sudo docker stop forum-pr-${{ github.head_ref }} || true && \
             sudo docker rm forum-pr-${{ github.head_ref }} || true"
 
-  remove_image_test:
-    runs-on: ubuntu-latest
-    # needs: build_and_push
-    steps:
-
       - name: Remove image from Docker Hub 🗑️
         run: |
           TOKEN=$(
@@ -153,4 +148,3 @@ jobs:
           curl "https://hub.docker.com/v2/repositories/${{ secrets.DOCKERHUB_USERNAME }}/forum/tags/$IMAGE_TAG/" \
                   -X DELETE \
                   -H "Authorization: JWT ${TOKEN}"
-          docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/forum:$IMAGE_TAG
