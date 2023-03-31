@@ -75,7 +75,6 @@ jobs:
             DATABASE_SCHEMA="$(echo "$username" | tr -dc '[:alpha:]' | tr '[:upper:]' '[:lower:]')"
             echo "DATABASE_SCHEMA=$DATABASE_SCHEMA" >> $GITHUB_ENV
           fi
-
       - name: Deploy to VPS 🚀
         run: |
           CONTAINER_NAME=forum-${{ env.IMAGE_TAG }}
@@ -98,7 +97,6 @@ jobs:
               -e LETSENCRYPT_HOST=${{ env.HOST }} \
               -e LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }} \
               ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }}"
-              # -p ${{ env.PORT }}:3000 \
 
         - name: Update Pull Request Description 📝
           uses: tzkhan/pr-update-action@v2
