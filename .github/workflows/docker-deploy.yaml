@@ -76,7 +76,7 @@ jobs:
           if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "PORT=3000" >> $GITHUB_ENV
           else
-            echo "PORT=$(expr 10000 + ${{ github.event.number }})" >> $GITHUB_ENV
+            echo "PORT=$((10000 + (${{ github.event.number }} % 100)))" >> $GITHUB_ENV
           fi
 
       - name: Deploy to VPS 🚀
