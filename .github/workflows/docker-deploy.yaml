@@ -97,11 +97,18 @@ jobs:
               ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
             sudo docker network connect db_default $CONTAINER_NAME"
 
+
+  update_pr:
+    runs-on: ubuntu-latest
+    if: (github.event_name == 'pull_request' && github.event.action != 'closed')
+    needs: deploy
+    steps:
       - name: Update Pull Request Description 📝
         uses: tzkhan/pr-update-action@v2
         with:
+          head-branch-regex: ${{ github.head_ref }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          body: "[![.github/workflows/docker-deploy.yaml](https://github.com/top-22/forum/actions/workflows/docker-deploy.yaml/badge.svg)](https://${{ env.HOST }})"
+          body-template: "[![.github/workflows/docker-deploy.yaml](https://github.com/top-22/forum/actions/workflows/docker-deploy.yaml/badge.svg)](https://${{ env.HOST }})"
           body-update-action: prefix
 
   update_database:
