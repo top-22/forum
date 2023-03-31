@@ -1,8 +1,5 @@
 # Use the official Node.js image as a base
-FROM node:16-alpine
-
-# Needed by prisma
-RUN apk update && apk add --no-cache openssl
+FROM node:16-bullseye-slim
 
 # Set the working directory
 WORKDIR /app
