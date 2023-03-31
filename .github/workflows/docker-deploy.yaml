@@ -52,7 +52,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
-    needs: build_and_push
+    # needs: build_and_push
     environment: testing
     outputs:
       host: ${{ steps.set_vars.outputs.host }}
@@ -70,16 +70,16 @@ jobs:
             echo "IMAGE_TAG=main" >> $GITHUB_ENV
             echo "PORT=3000" >> $GITHUB_ENV
             echo "DATA_SCHEMA=main" >> $GITHUB_ENV
+            echo "HOST=forum.${{ secrets.HOSTNAME }}" >> $GITHUB_ENV
           else
-            echo "IMAGE_TAG=pr-${{ github.head_ref }}" >> $GITHUB_ENV
+            SANITIZED_TAG=$(echo "${{ github.head_ref }}" | sed 's/ä/ae/g; s/ü/ue/g; s/ö/oe/g')
+            echo "IMAGE_TAG=pr-$SANITIZED_TAG" >> $GITHUB_ENV
             echo "PORT=$((10000 + (${{ github.event.number }} % 100)))" >> $GITHUB_ENV
             username="${{ github.event.pull_request.user.login }}"
             DATABASE_SCHEMA="$(echo "$username" | tr -dc '[:alpha:]' | tr '[:upper:]' '[:lower:]')"
             echo "DATABASE_SCHEMA=$DATABASE_SCHEMA" >> $GITHUB_ENV
+            echo "HOST=$SANITIZED_TAG.top22.${{ secrets.HOSTNAME }}" >> $GITHUB_ENV
           fi
-          SANITIZED_TAG=$(echo "${{ env.IMAGE_TAG }}" | sed 's/ä/ae/g; s/ü/ue/g; s/ö/oe/g')
-          echo "HOST=${{ env.IMAGE_TAG }}.top22.${{ secrets.HOSTNAME }}" >> $GITHUB_ENV
-          echo "host=${{ env.IMAGE_TAG }}.top22.${{ secrets.HOSTNAME }}" >> $GITHUB_OUTPUT
 
       - name: Deploy to VPS 🚀
         run: |
@@ -100,11 +100,6 @@ jobs:
               ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
             sudo docker network connect db_default $CONTAINER_NAME"
 
-  update_pr:
-    runs-on: ubuntu-latest
-    if: (github.event_name == 'pull_request' && github.event.action != 'closed')
-    needs: deploy
-    steps:
       - name: Update Pull Request Description 📝
         uses: tzkhan/pr-update-action@v2
         with:
@@ -113,7 +108,7 @@ jobs:
           body-template: |
             [![.github/workflows/docker-deploy.yaml]
               (https://github.com/top-22/forum/actions/workflows/docker-deploy.yaml/badge.svg)]
-            (https://${{ needs.deploy.outputs.host }})"
+            (https://${{ env.HOST }})"
           body-update-action: prefix
 
   update_database:
