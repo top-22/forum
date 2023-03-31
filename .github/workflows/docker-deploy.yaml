@@ -16,7 +16,7 @@ concurrency:
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
-    if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    if: false && ((github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main'))
     environment: dockerhub
 
     steps:
@@ -139,7 +139,7 @@ jobs:
 
   remove_image_test:
     runs-on: ubuntu-latest
-    needs: build_and_push
+    # needs: build_and_push
     steps:
       - name: Login to docker hub 🔐
         uses: actions-hub/docker/login@master
@@ -147,7 +147,17 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Set image tag ⚙️
+        id: set_image_tag
+        run: |
+            echo "IMAGE_TAG=pr-${{ github.head_ref }}" >> $GITHUB_ENV
+
+      - name: Pull docker image 📝
+        run: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }}
+          docker images
+
       - name: Remove image from Docker Hub 🗑️
         run: |
-          sleep 10
-          docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/forum:pr-${{ github.head_ref }}
+          IMAGE_TAG=pr-${{ github.head_ref }}
+          docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }}
