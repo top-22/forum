@@ -78,8 +78,8 @@ jobs:
             echo "DATABASE_SCHEMA=$DATABASE_SCHEMA" >> $GITHUB_ENV
           fi
           SANITIZED_TAG=$(echo "${{ env.IMAGE_TAG }}" | sed 's/ä/ae/g; s/ü/ue/g; s/ö/oe/g')
-          echo "HOST=$SANITIZED_TAG.top22.${{ secrets.HOSTNAME }}" >> $GITHUB_ENV
-          echo "host=$SANITIZED_TAG.top22.${{ secrets.HOSTNAME }}" >> $GITHUB_OUTPUT
+          echo "HOST=${{ env.IMAGE_TAG }}.top22.${{ secrets.HOSTNAME }}" >> $GITHUB_ENV
+          echo "host=${{ env.IMAGE_TAG }}.top22.${{ secrets.HOSTNAME }}" >> $GITHUB_OUTPUT
 
       - name: Deploy to VPS 🚀
         run: |
