@@ -86,6 +86,7 @@ jobs:
           CONTAINER_NAME=forum-${{ env.IMAGE_TAG }}
           DATABASE_URL=postgresql://top22:${{ secrets.DATABASE_PASSWORD }}@postgres:5432/top22?schema=${{ env.DATABASE_SCHEMA }} && \
           ssh -o StrictHostKeyChecking=no -p 22 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
+            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} || true && \
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
             sudo docker stop $CONTAINER_NAME || true && \
             sudo docker rm $CONTAINER_NAME || true && \
