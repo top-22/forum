@@ -80,6 +80,9 @@ jobs:
         run: |
           CONTAINER_NAME=forum-${{ env.IMAGE_TAG }}
           DATABASE_URL=postgresql://${{ secrets.DATABASE_USER }}:${{ secrets.DATABASE_PASSWORD }}@localhost:5432/top22?schema=${{ env.DATABASE_SCHEMA }}
+          SANITIZED_TAG=$(echo "${{ env.IMAGE_TAG }}" | sed 's/ä/ae/g; s/ü/ue/g; s/ö/oe/g')
+          echo "HOST=$SANITIZED_TAG.top22.${{ secrets.HOSTNAME }}" >> $GITHUB_ENV"
+          echo $HOST
           ssh -o StrictHostKeyChecking=no -p 22 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
             sudo docker stop $CONTAINER_NAME || true && \
@@ -87,9 +90,23 @@ jobs:
             sudo docker run -d \
               --name $CONTAINER_NAME \
               --restart always \
-              -p ${{ env.PORT }}:3000 \
+              --network db_default\
+              --network proxy_default \
+              --network default \
               -e DATABASE_URL=$DATABASE_URL \
+              -e VIRTUAL_HOST=${{ env.HOST }} \
+              -e LETSENCRYPT_HOST=${{ env.HOST }} \
+              -e LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }} \
               ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }}"
+              # -p ${{ env.PORT }}:3000 \
+
+        - name: Update Pull Request Description 📝
+          uses: tzkhan/pr-update-action@v2
+          with:
+            repo-token: ${{ secrets.GITHUB_TOKEN }}
+            body: |
+              [![.github/workflows/docker-deploy.yaml](https://github.com/top-22/forum/actions/workflows/docker-deploy.yaml/badge.svg)](https://${{ env.HOST }})
+            body-update-action: prefix
 
   update_database:
     runs-on: ubuntu-latest
