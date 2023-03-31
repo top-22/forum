@@ -85,7 +85,7 @@ jobs:
           username="${{ github.event.pull_request.user.login }}"
           DATABASE_SCHEMA="$(echo "$username" | tr -dc '[:alpha:]' | tr '[:upper:]' '[:lower:]')"
           DATABASE_URL=postgresql://${{ secrets.DATABASE_USER }}:{{ secrets.DATABASE_PASSWORD }}@localhost:5432/top22?schema=$DATABASE_SCHEMA
-          ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
+          ssh -o StrictHostKeyChecking=no -p 22 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
             docker stop $CONTAINER_NAME || true && \
             docker rm $CONTAINER_NAME || true && \
@@ -108,6 +108,6 @@ jobs:
 
       - name: Remove container from VPS 🗑️
         run: |
-          ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
+          ssh -o StrictHostKeyChecking=no -p 22 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
             docker stop forum-pr-${{ github.head_ref }} || true && \
             docker rm forum-pr-${{ github.head_ref }} || true"
