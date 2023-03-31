@@ -75,13 +75,13 @@ jobs:
             DATABASE_SCHEMA="$(echo "$username" | tr -dc '[:alpha:]' | tr '[:upper:]' '[:lower:]')"
             echo "DATABASE_SCHEMA=$DATABASE_SCHEMA" >> $GITHUB_ENV
           fi
+
       - name: Deploy to VPS 🚀
         run: |
           CONTAINER_NAME=forum-${{ env.IMAGE_TAG }}
           DATABASE_URL=postgresql://${{ secrets.DATABASE_USER }}:${{ secrets.DATABASE_PASSWORD }}@localhost:5432/top22?schema=${{ env.DATABASE_SCHEMA }}
           SANITIZED_TAG=$(echo "${{ env.IMAGE_TAG }}" | sed 's/ä/ae/g; s/ü/ue/g; s/ö/oe/g')
-          echo "HOST=$SANITIZED_TAG.top22.${{ secrets.HOSTNAME }}" >> $GITHUB_ENV"
-          echo $HOST
+          echo "HOST=$SANITIZED_TAG.top22.${{ secrets.HOSTNAME }}" >> $GITHUB_ENV
           ssh -o StrictHostKeyChecking=no -p 22 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
             sudo docker stop $CONTAINER_NAME || true && \
