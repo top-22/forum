@@ -145,7 +145,7 @@ jobs:
         uses: actions-hub/docker/login@master
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Remove image from Docker Hub 🗑️
         run: |
