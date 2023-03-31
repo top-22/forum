@@ -61,7 +61,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Set IMAGE TAG, PORT and Database Schema⚙️
+      - name: Set IMAGE TAG, PORT and Database
         id: set_port
         run: |
           if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/main" ]; then
@@ -98,13 +98,12 @@ jobs:
               -e LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }} \
               ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }}"
 
-        - name: Update Pull Request Description 📝
-          uses: tzkhan/pr-update-action@v2
-          with:
-            repo-token: ${{ secrets.GITHUB_TOKEN }}
-            body: |
-              [![.github/workflows/docker-deploy.yaml](https://github.com/top-22/forum/actions/workflows/docker-deploy.yaml/badge.svg)](https://${{ env.HOST }})
-            body-update-action: prefix
+      - name: Update Pull Request Description 📝
+        uses: tzkhan/pr-update-action@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          body: "[![.github/workflows/docker-deploy.yaml](https://github.com/top-22/forum/actions/workflows/docker-deploy.yaml/badge.svg)](https://${{ env.HOST }})"
+          body-update-action: prefix
 
   update_database:
     runs-on: ubuntu-latest
