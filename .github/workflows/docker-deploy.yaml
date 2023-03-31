@@ -17,7 +17,7 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
-    environment: build_and_push
+    environment: deploy
 
     steps:
       - name: Checkout repository 🛒
@@ -96,7 +96,7 @@ jobs:
   remove_container:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    environment: remove_container
+    environment: deploy
 
     steps:
       - name: Setup SSH key 🔑
