@@ -95,7 +95,7 @@ jobs:
               -e LETSENCRYPT_HOST=${{ env.HOST }} \
               -e LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }} \
               ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
-            sudo docker connect db_default $CONTAINER_NAME"
+            sudo docker network connect db_default $CONTAINER_NAME"
 
       - name: Update Pull Request Description 📝
         uses: tzkhan/pr-update-action@v2
