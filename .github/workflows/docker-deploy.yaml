@@ -61,7 +61,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Set IMAGE TAG, PORT and Database
+      - name: Set IMAGE TAG, PORT and Database Schema ⚙️
         id: set_port
         run: |
           if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/main" ]; then
@@ -91,7 +91,6 @@ jobs:
               --restart always \
               --network db_default\
               --network proxy_default \
-              --network default \
               -e DATABASE_URL=$DATABASE_URL \
               -e VIRTUAL_HOST=${{ env.HOST }} \
               -e LETSENCRYPT_HOST=${{ env.HOST }} \
