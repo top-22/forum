@@ -52,7 +52,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
-    # needs: build_and_push
+    needs: build_and_push
     environment: testing
     outputs:
       host: ${{ steps.set_vars.outputs.host }}
