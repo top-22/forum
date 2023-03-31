@@ -17,7 +17,7 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
-    environment: deploy
+    environment: dockerhub
 
     steps:
       - name: Checkout repository 🛒
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     needs: build_and_push
-    environment: deploy
+    environment: testing
 
     steps:
       - name: Setup SSH key 🔑
@@ -99,7 +99,6 @@ jobs:
   remove_container:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    environment: deploy
 
     steps:
       - name: Setup SSH key 🔑
