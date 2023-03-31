@@ -97,7 +97,7 @@ jobs:
               -p ${{ env.PORT }}:3000 \
               -e DATABASE_URL=$DATABASE_URL \
               -e VIRTUAL_HOST=${{ steps.set_vars.outputs.host }} \
-              -e LETSENCRYPT_HOST=${{ env.HOST }} \
+              -e LETSENCRYPT_HOST=${{ steps.set_vars.outputs.host }} \
               -e LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }} \
               ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
             sudo docker network connect db_default $CONTAINER_NAME"
