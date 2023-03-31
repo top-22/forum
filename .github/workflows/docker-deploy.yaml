@@ -51,7 +51,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    if: false && ((github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main'))
     needs: build_and_push
     environment: testing
 
@@ -136,3 +136,18 @@ jobs:
           ssh -o StrictHostKeyChecking=no -p 22 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
             sudo docker stop forum-pr-${{ github.head_ref }} || true && \
             sudo docker rm forum-pr-${{ github.head_ref }} || true"
+
+  remove_image_test:
+    runs-on: ubuntu-latest
+    needs: build_and_push
+    steps:
+      - name: Login to docker hub 🔐
+        uses: actions-hub/docker/login@master
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Remove image from Docker Hub 🗑️
+        run: |
+          sleep 10
+          docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/forum:pr-${{ github.head_ref }}
