@@ -84,10 +84,8 @@ jobs:
       - name: Deploy to VPS 🚀
         run: |
           CONTAINER_NAME=forum-${{ env.IMAGE_TAG }}
+          DATABASE_URL=postgresql://${{ secrets.DATABASE_USER }}:${{ secrets.DATABASE_PASSWORD }}@postgres:5432/top22?schema=${{ env.DATABASE_SCHEMA }} && \
           ssh -o StrictHostKeyChecking=no -p 22 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
-            DATABASE_IP=$(sudo docker container inspect postgres | jq -r '.[].NetworkSettings.Networks.db_default.IPAddress') && \
-            DATABASE_URL=postgresql://${{ secrets.DATABASE_USER }}:${{ secrets.DATABASE_PASSWORD }}@$DATABASE_IP:5432/top22?schema=${{ env.DATABASE_SCHEMA }} && \
-            echo $DATABASE_URL && \
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
             sudo docker stop $CONTAINER_NAME || true && \
             sudo docker rm $CONTAINER_NAME || true && \
