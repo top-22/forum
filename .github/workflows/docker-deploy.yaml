@@ -104,9 +104,11 @@ jobs:
 
       - name: Update Database 📝
         run: |
-          ssh -o StrictHostKeyChecking=no -p 22 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
-            (sudo docker exec forum-${{ env.IMAGE_TAG }} npx prisma db push --force-reset && \
-            sudo docker exec forum-${{ env.IMAGE_TAG }} yarn testdata) || true"
+          if [ "${{ env.IMAGE_TAG }}" == "main" ]; then
+            ssh -o StrictHostKeyChecking=no -p 22 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
+              (sudo docker exec forum-${{ env.IMAGE_TAG }} npx prisma db push --force-reset && \
+              sudo docker exec forum-${{ env.IMAGE_TAG }} yarn testdata) || true"
+          fi
 
   udpate_pr:
     runs-on: ubuntu-latest
