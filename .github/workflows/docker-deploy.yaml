@@ -110,7 +110,7 @@ jobs:
               sudo docker exec forum-${{ env.IMAGE_TAG }} yarn testdata) || true"
           fi
 
-  udpate_pr:
+  update_pr:
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && github.event.action != 'closed')
     needs: deploy
