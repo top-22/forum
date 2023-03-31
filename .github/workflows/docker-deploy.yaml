@@ -82,6 +82,9 @@ jobs:
       - name: Deploy to VPS 🚀
         run: |
           CONTAINER_NAME=forum-${{ env.IMAGE_TAG }}
+          username="${{ github.event.pull_request.user.login }}"
+          DATABASE_SCHEMA="$(echo "$username" | tr -dc '[:alpha:]' | tr '[:upper:]' '[:lower:]')"
+          DATABASE_URL=postgresql://${{ secrets.DATABASE_USER }}:{{ secrets.DATABASE_PASSWORD }}@localhost:5432/top22?schema=$DATABASE_SCHEMA
           ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
             docker stop $CONTAINER_NAME || true && \
@@ -90,7 +93,7 @@ jobs:
               --name $CONTAINER_NAME \
               --restart always \
               -p ${{ env.PORT }}:3000 \
-              -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+              -e DATABASE_URL=$DATABASE_URL \
               ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }}"
 
   remove_container:
