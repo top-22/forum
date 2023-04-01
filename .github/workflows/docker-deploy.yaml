@@ -163,6 +163,11 @@ jobs:
       VPS_HOST: ${{ secrets.VPS_HOST }}
 
     steps:
+      - name: Setup SSH key 🔑
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Update Database 📝
         run: |
           ssh -o StrictHostKeyChecking=no -p 22 $VPS_USER@$VPS_HOST "\
