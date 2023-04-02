@@ -13,10 +13,67 @@ concurrency:
   group: deploy-${{ github.head_ref }}
   cancel-in-progress: true
 
+env:
+  VPS_USER: top22
+  DATABASE_USER: deploy
+  DATABASE: top22
+  DATABASE_HOST: postgres:5432
+
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      type: ${{ steps.set_type.outputs.type }}
+      image_tag: ${{ steps.set_image_tag.outputs.image_tag }}
+      container_name: ${{ steps.set_container_name.outputs.container_name }}
+      host: ${{ steps.set_host.outputs.host }}
+
+    steps:
+      - name: Set Type ⚙️
+        id: set_type
+        run: |
+          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            echo "type=main_push" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" == "pull_request" ] && [ "${{github.event.action}}" != "closed" ]; then
+            echo "type=pr_update" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" == "pull_request" ] && [ "${{github.event.action}}" == "closed" ]; then
+            echo "type=pr_close" >> $GITHUB_OUTPUT
+          else
+            exit 69
+          fi
+
+      - name: Set IMAGE_TAG ⚙️
+        id: set_image_tag
+        run: |
+          if [ "${{ steps.set_type.outputs.type }}" == "main_push" ]; then
+            echo "IMAGE_TAG=main" >> $GITHUB_OUTPUT
+          else
+            echo "IMAGE_TAG=pr-${{ github.head_ref }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set CONTAINER_NAME ⚙️
+        id: set_container_name
+        run: |
+          if [ "${{ steps.set_type.outputs.type }}" == "main_push" ]; then
+            echo "CONTAINER_NAME=forum" >> $GITHUB_OUTPUT
+          else
+            echo "CONTAINER_NAME=forum-pr-${{ github.head_ref }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set Host ⚙️
+        id: set_host
+        run: |
+          if [ "${{ steps.set_type.outputs.type }}" == "main_push" ]; then
+            echo "HOST=forum.jeschek.eu" >> $GITHUB_OUTPUT
+          else
+            SANITIZED_TAG=$(echo "${{ github.head_ref }}" | sed 's/ä/ae/g; s/ü/ue/g; s/ö/oe/g')
+            echo "HOST=top22-$SANITIZED_TAG.jeschek.eu" >> $GITHUB_OUTPUT
+          fi
+
   build_and_push:
     runs-on: ubuntu-latest
-    if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    needs: prepare
+    if: needs.prepare.outputs.type == 'pr_update' || needs.prepare.outputs.type == 'main_push'
     environment: dockerhub
 
     steps:
@@ -32,30 +89,32 @@ jobs:
       - name: Set up Docker Buildx ⚙️
         uses: docker/setup-buildx-action@v2
 
-      - name: Set IMAGE_TAG ⚙️
-        id: set_image_tag
-        run: |
-          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/main" ]; then
-            echo "IMAGE_TAG=main" >> $GITHUB_ENV
-          else
-            echo "IMAGE_TAG=pr-${{ github.head_ref }}" >> $GITHUB_ENV
-          fi
-
       - name: Build and push Docker image 🏗️
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ needs.prepare.outputs.image_tag }}
 
   deploy:
     runs-on: ubuntu-latest
-    if: (github.event_name == 'pull_request' && github.event.action != 'closed') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
-    needs: build_and_push
     environment: testing
-    outputs:
-      host: ${{ steps.set_vars.outputs.host }}
+    if: needs.prepare.outputs.type == 'pr_update' || needs.prepare.outputs.type == 'main_push'
+
+    needs:
+      - prepare
+      - build_and_push
+
+    env:
+      TYPE: ${{ needs.prepare.outputs.type }}
+      IMAGE_TAG: ${{ needs.prepare.outputs.image_tag }}
+      HOST: ${{ needs.prepare.outputs.host }}
+      CONTAINER_NAME: ${{ needs.prepare.outputs.container_name }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      LETSENCRYPT_EMAIL: ${{ secrets.LETSENCRYPT_EMAIL }}
+      VPS_HOST: ${{ secrets.VPS_HOST }}
 
     steps:
       - name: Setup SSH key 🔑
@@ -63,70 +122,95 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Set IMAGE TAG, PORT, Database Schema and Hostname ⚙️
-        id: set_vars
+      - name: Set DATABASE_URL ⚙️
         run: |
-          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/main" ]; then
-            echo "IMAGE_TAG=main" >> $GITHUB_ENV
-            echo "PORT=3000" >> $GITHUB_ENV
-            echo "DATA_SCHEMA=main" >> $GITHUB_ENV
-            echo "host=forum.jeschek.eu" >> $GITHUB_OUTPUT
+          if [ $TYPE == "main_push" ]; then
+            DATABASE_SCHEMA="main"
           else
-            SANITIZED_TAG=$(echo "${{ github.head_ref }}" | sed 's/ä/ae/g; s/ü/ue/g; s/ö/oe/g')
-            echo "IMAGE_TAG=pr-$SANITIZED_TAG" >> $GITHUB_ENV
-            echo "PORT=$((10000 + (${{ github.event.number }} % 100)))" >> $GITHUB_ENV
             username="${{ github.event.pull_request.user.login }}"
             DATABASE_SCHEMA="$(echo "$username" | tr -dc '[:alpha:]' | tr '[:upper:]' '[:lower:]')"
-            echo "DATABASE_SCHEMA=$DATABASE_SCHEMA" >> $GITHUB_ENV
-            echo "host=top22-$SANITIZED_TAG.jeschek.eu" >> $GITHUB_OUTPUT
           fi
+          echo "DATABASE_URL=postgresql://$DATABASE_USER:$DATABASE_PASSWORD@$DATABASE_HOST/$DATABASE?schema=$DATABASE_SCHEMA" >> $GITHUB_ENV
 
       - name: Deploy to VPS 🚀
         run: |
-          CONTAINER_NAME=forum-${{ env.IMAGE_TAG }}
-          DATABASE_URL=postgresql://deploy:${{ secrets.DATABASE_PASSWORD }}@postgres:5432/top22?schema=${{ env.DATABASE_SCHEMA }} && \
-          ssh -o StrictHostKeyChecking=no -p 22 top22@${{ secrets.VPS_HOST }} "\
+          ssh -o StrictHostKeyChecking=no -p 22 $VPS_USER@$VPS_HOST "\
             sudo docker stop $CONTAINER_NAME || true && \
             sudo docker rm $CONTAINER_NAME || true && \
-            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} || true && \
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
+            sudo docker rmi $DOCKERHUB_USERNAME/forum:$IMAGE_TAG || true && \
+            sudo docker pull $DOCKERHUB_USERNAME/forum:$IMAGE_TAG && \
             sudo docker run -d \
               --name $CONTAINER_NAME \
               --restart always \
               --network=proxy_default \
-              -p ${{ env.PORT }}:3000 \
               -e DATABASE_URL=$DATABASE_URL \
-              -e VIRTUAL_HOST=${{ steps.set_vars.outputs.host }} \
-              -e LETSENCRYPT_HOST=${{ steps.set_vars.outputs.host }} \
-              -e LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/forum:${{ env.IMAGE_TAG }} && \
+              -e VIRTUAL_HOST=$HOST \
+              -e LETSENCRYPT_HOST=$HOST \
+              -e LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL \
+              $DOCKERHUB_USERNAME/forum:$IMAGE_TAG && \
             sudo docker network connect db_default $CONTAINER_NAME"
+
+  udpate_db:
+    runs-on: ubuntu-latest
+    if: needs.prepare.outputs.type == 'main_push'
+
+    needs:
+      - prepare
+      - deploy
+
+    env:
+      CONTAINER_NAME: ${{ needs.prepare.outputs.container_name }}
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+
+    steps:
+      - name: Setup SSH key 🔑
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Update Database 📝
         run: |
-          if [ "${{ env.IMAGE_TAG }}" == "main" ]; then
-            ssh -o StrictHostKeyChecking=no -p 22 top22@${{ secrets.VPS_HOST }} "\
-              (sudo docker exec forum-${{ env.IMAGE_TAG }} npx prisma db push --force-reset && \
-              sudo docker exec forum-${{ env.IMAGE_TAG }} yarn testdata) || true"
-          fi
+          ssh -o StrictHostKeyChecking=no -p 22 $VPS_USER@$VPS_HOST "\
+            (sudo docker exec $CONTAINER_NAME npx prisma db push --force-reset && \
+            sudo docker exec $CONTAINER_NAME yarn testdata) || true"
 
   update_pr:
     runs-on: ubuntu-latest
-    if: (github.event_name == 'pull_request' && github.event.action != 'closed')
-    needs: deploy
+    if: needs.prepare.outputs.type == 'pr_update'
+
+    permissions:
+      pull-requests: write
+
+    needs:
+      - prepare
 
     steps:
       - name: Update Pull Request Description 📝
         uses: tzkhan/pr-update-action@v2
+        continue-on-error: true
         with:
           head-branch-regex: ${{ github.head_ref }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          body-template: "[![.github/workflows/docker-deploy.yaml](https://github.com/top-22/forum/actions/workflows/docker-deploy.yaml/badge.svg)](https://${{ needs.deploy.outputs.host }})"
+          body-template: |
+            <a href="https://github.com/${{ github.repository }}/actions/workflows/docker-deploy.yaml">
+              <img alt="Docker Deploy workflow status"
+               src="https://github.com/${{ github.repository }}/actions/workflows/docker-deploy.yaml/badge.svg?branch=${{ github.head_ref }}"/>
+            </a>
+
+            [![](https://img.shields.io/static/v1?label=🌐&message=${{ needs.prepare.outputs.host }}&color=informational)](https://${{ needs.prepare.outputs.host }})
           body-update-action: prefix
 
   remove_container:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    needs: prepare
+    if: needs.prepare.outputs.type == 'pr_close'
+
+    env:
+      IMAGE_TAG: ${{ needs.prepare.outputs.image_tag }}
+      CONTAINER_NAME: ${{ needs.prepare.outputs.container_name }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      VPS_HOST: ${{ secrets.VPS_HOST }}
 
     steps:
       - name: Setup SSH key 🔑
@@ -136,19 +220,18 @@ jobs:
 
       - name: Remove container from VPS 🗑️
         run: |
-          ssh -o StrictHostKeyChecking=no -p 22 top22@${{ secrets.VPS_HOST }} "\
-            sudo docker stop forum-pr-${{ github.head_ref }} || true && \
-            sudo docker rm forum-pr-${{ github.head_ref }} || true && \
-            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/forum:pr-${{ github.head_ref }} || true"
+          ssh -o StrictHostKeyChecking=no -p 22 $VPS_USER@$VPS_HOST "\
+            sudo docker stop $CONTAINER_NAME || true && \
+            sudo docker rm $CONTAINER_NAME || true && \
+            sudo docker rmi $DOCKERHUB_USERNAME/forum:$IMAGE_TAG || true"
 
       - name: Remove image from Docker Hub 🗑️
         run: |
           TOKEN=$(
                   curl -s -H "Content-Type: application/json" -X POST \
-                  -d "{\"username\": \"${{ secrets.DOCKERHUB_USERNAME }}\", \"password\": \"${{ secrets.DOCKERHUB_TOKEN }}\"}" \
+                  -d "{\"username\": \"$DOCKERHUB_USERNAME\", \"password\": \"$DOCKERHUB_TOKEN\"}" \
                   https://hub.docker.com/v2/users/login/ | jq -r .token
                   )
-          IMAGE_TAG=pr-${{ github.head_ref }}
-          curl "https://hub.docker.com/v2/repositories/${{ secrets.DOCKERHUB_USERNAME }}/forum/tags/$IMAGE_TAG/" \
+          curl "https://hub.docker.com/v2/repositories/$DOCKERHUB_USERNAME/forum/tags/$IMAGE_TAG/" \
                   -X DELETE \
                   -H "Authorization: JWT ${TOKEN}"
