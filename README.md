@@ -1,7 +1,5 @@
 # TUC Forum
 
-[![](https://img.shields.io/static/v1?label=🌐&message=forum.jeschek.eu&color=informational)](https://forum.jeschek.eu)
-
 ## Skripte
 
 - `yarn dev`: Run a local development server
@@ -10,6 +8,9 @@
 - `yarn testdata <user>`: Generiert SQL-Befehle um Testdaten in persönliches Schema zu kopieren
   - Befehle können im Anschluss optional ausgeführt werden
   - psql must be installed
+- `yarn format`: Passt den Code dem vorgegebenem Codestyle an
+- `yarn checkformat`: Überprüft den Code auf den vorgegebenen Codestyle
+- `yarn lint`: Zeigt Compilerwarnungen an
 
 ## Testdaten
 
