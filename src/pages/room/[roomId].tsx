@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Room, User, PrismaClient } from "@prisma/client";
+import { Room, PrismaClient, RoomUser } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import Layout from "../../components/layout";
 
 interface RoomProps {
-  room: Room & { users: User[] };
+  room: Room & { users: RoomUser[] };
 }
 
 const Room: NextPage<RoomProps> = ({ room }) => {
@@ -26,7 +26,7 @@ const Room: NextPage<RoomProps> = ({ room }) => {
           <Link href={`${room.id}/4`}>Thread 4</Link>
           <Link href={`${room.id}/5`}>Thread 5</Link>
         </div>
-        <span>{room.dsc}</span>
+        <span>{room.description}</span>
       </main>
     </Layout>
   );

@@ -1,10 +1,10 @@
 import Head from "next/head";
-import { Room, User, PrismaClient } from "@prisma/client";
+import { Room, PrismaClient, RoomUser } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import Layout from "../../../components/layout";
 
 interface ThreadProps {
-  room: Room & { users: User[] };
+  room: Room & { users: RoomUser[] };
   thread: Number;
 }
 
@@ -19,7 +19,7 @@ const Thread: NextPage<ThreadProps> = ({ room, thread }) => {
       <main>
         <h1 className="text-primary">{room.name}</h1>
         <h2 className="text-primary">{`Thread: ${thread}`}</h2>
-        <span>{room.dsc}</span>
+        <span>{room.description}</span>
       </main>
     </Layout>
   );

@@ -26,7 +26,9 @@ const RoomPreview: FunctionComponent<RoomPreviewProps> = ({ rooms, title }) => {
                         {room.name}
                       </Link>
                     </h5>
-                    <p className="card-text text-secondary">{room.dsc}</p>
+                    <p className="card-text text-secondary">
+                      {room.description}
+                    </p>
                   </div>
                 </div>
               </div>
