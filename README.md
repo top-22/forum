@@ -1,5 +1,7 @@
 # TUC Forum
 
+[![](https://img.shields.io/static/v1?label=🌐&message=forum.jeschek.eu&color=informational)](https://forum.jeschek.eu)
+
 ## Skripte
 
 - `yarn dev`: Run a local development server
