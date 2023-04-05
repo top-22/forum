@@ -65,14 +65,16 @@ const LoginPage: NextPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button className="btn btn-primary align-self-start" type="submit">Login</button>
+            <button className="btn btn-primary align-self-start" type="submit">
+              Login
+            </button>
           </form>
           <a
-              href=""
-              className="text-light d-block mb-3 d-flex justify-content-end"
-            >
-              Passwort vergessen?
-            </a>
+            href=""
+            className="text-light d-block mb-3 d-flex justify-content-end"
+          >
+            Passwort vergessen?
+          </a>
         </div>
       </div>
     </div>

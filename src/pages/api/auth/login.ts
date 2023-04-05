@@ -32,9 +32,13 @@ export default async function handler(
     return res.status(500).json({ message: "JWT secret not configured" });
   }
 
-  const token = jwt.sign({ id: user.id, email: user.email }, jwtSecret as Secret, {
-    expiresIn: "1d",
-  });
+  const token = jwt.sign(
+    { id: user.id, email: user.email },
+    jwtSecret as Secret,
+    {
+      expiresIn: "1d",
+    }
+  );
 
   res.status(200).json({ message: "Logged in successfully", token });
 }
