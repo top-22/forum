@@ -23,6 +23,7 @@ const LoginPage: NextPage = () => {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem("authToken", data.token);
+      localStorage.setItem("username", data.username);
       router.push("/");
     } else {
       // Handle error (e.g., show an error message)
