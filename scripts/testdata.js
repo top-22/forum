@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const data = require("./testdata.json");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 const SUBCOMMANDS = ["delete"];
 
@@ -98,7 +98,7 @@ async function main() {
       data: {
         name: userData.name,
         email: userData.email,
-        username: userData.userName,
+        username: userData.username,
         password: hashedPassword,
         affiliations: {
           create: userData.affiliations.map((affiliation) => ({
