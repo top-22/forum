@@ -10,6 +10,9 @@ datasource db {
 model User {
   id           Int           @id @default(autoincrement())
   name         String
+  email        String        @unique
+  userName     String        @unique
+  password     String
   messages     Message[]
   rooms        RoomUser[]
   threads      Thread[]

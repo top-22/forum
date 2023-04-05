@@ -1,6 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const data = require("./testdata.json");
+const bcrypt = require('bcrypt');
 
 const SUBCOMMANDS = ["delete"];
 
@@ -90,9 +91,15 @@ async function main() {
       ).id;
       roomUsers.push({ role: room.role, room: { connect: { id: roomId } } });
     }
+
+    const hashedPassword = bcrypt.hashSync(userData.password, 10);
+
     await prisma.user.create({
       data: {
         name: userData.name,
+        email: userData.email,
+        username: userData.userName,
+        password: hashedPassword,
         affiliations: {
           create: userData.affiliations.map((affiliation) => ({
             name: affiliation,
