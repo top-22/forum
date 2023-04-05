@@ -92,7 +92,7 @@ async function main() {
       roomUsers.push({ role: room.role, room: { connect: { id: roomId } } });
     }
 
-    const hashedPassword = bcrypt.hashSync(userData.password, 10);
+    const hashedPassword = bcrypt.hashSync(userData.password, Number(process.env.SALT_VALUE));
 
     await prisma.user.create({
       data: {
