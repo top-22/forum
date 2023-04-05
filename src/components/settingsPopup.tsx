@@ -17,13 +17,13 @@ const SettingsPopup: FunctionComponent<SettingsPopupProps> = ({
   // TODO: non full screen popup - what happens if user does not click on X but somewhere else?
   const router = useRouter();
 
-  const handleClose = () => setShow(false); 
+  const handleClose = () => setShow(false);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("username");
     router.push("/login"); // Redirect to the login page
-  }; 
+  };
 
   return (
     <>

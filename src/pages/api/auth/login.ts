@@ -40,5 +40,11 @@ export default async function handler(
     }
   );
 
-  res.status(200).json({ message: "Logged in successfully", username: user.username, token });
+  res
+    .status(200)
+    .json({
+      message: "Logged in successfully",
+      username: user.username,
+      token,
+    });
 }
