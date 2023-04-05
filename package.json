@@ -20,6 +20,7 @@
     "@prisma/client": "^4.12.0",
     "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.3",
+    "email-validator": "^2.0.4",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
     "jsonwebtoken": "^9.0.0",
