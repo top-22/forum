@@ -30,17 +30,19 @@ export default async function handler(
       username: username,
     },
   });
-  
+
   const existingUserByEmail = await prisma.user.findFirst({
     where: {
       email: email,
     },
   });
-  
+
   if (existingUserByUsername || existingUserByEmail) {
-    return res.status(400).json({ message: "User (username and/or email) already exists" });
+    return res
+      .status(400)
+      .json({ message: "User (username and/or email) already exists" });
   }
-  
+
   const hashedPassword = await bcrypt.hash(
     password,
     Number(process.env.SALT_ROUNDS)

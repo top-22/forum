@@ -8,7 +8,7 @@ interface JoinProps {}
 
 const Join: NextPage<JoinProps> = () => {
   useAuth();
-  
+
   return (
     <Layout>
       <div className="bg-dark vh-100">

@@ -12,7 +12,7 @@ const LoginPage: NextPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     if (!email) {
       setError("Please fill out the email field.");
       return;
@@ -47,8 +47,8 @@ const LoginPage: NextPage = () => {
   return (
     <div className="bg-dark vh-100 overflow-hidden d-flex align-items-center">
       <div
-        className="col-6 d-flex flex-column justify-content-end mx-auto" 
-        style={{width: "400px"}}
+        className="col-6 d-flex flex-column justify-content-end mx-auto"
+        style={{ width: "400px" }}
       >
         <Image
           src={Logo}
@@ -82,10 +82,14 @@ const LoginPage: NextPage = () => {
           </div>
           <div className="mb-3 d-flex align-items-center justify-content-between">
             <button className="btn btn-primary align-self-start" type="submit">
-            Anmelden
+              Anmelden
             </button>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              {error && <p className="text-light d-flex align-self-center mb-0 ml-auto">{error}</p>}
+            <div style={{ display: "flex", alignItems: "center" }}>
+              {error && (
+                <p className="text-light d-flex align-self-center mb-0 ml-auto">
+                  {error}
+                </p>
+              )}
             </div>
           </div>
         </form>

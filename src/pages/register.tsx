@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 const RegisterPage = () => {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
-  const [error, setError] = useState('');
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,34 +17,34 @@ const RegisterPage = () => {
     setError("");
 
     if (!name) {
-      setError('Please fill out the name field.');
+      setError("Please fill out the name field.");
       return;
     }
 
     if (!username) {
-      setError('Please fill out the username field.');
+      setError("Please fill out the username field.");
       return;
     }
 
     if (!email) {
-      setError('Please fill out the email field.');
+      setError("Please fill out the email field.");
       return;
     }
 
     if (!password) {
-      setError('Please fill out the password field.');
+      setError("Please fill out the password field.");
       return;
     }
 
     if (password !== repeatPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
 
-    const response = await fetch('/api/auth/register', {
-      method: 'POST',
+    const response = await fetch("/api/auth/register", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name,
@@ -57,9 +57,9 @@ const RegisterPage = () => {
 
     if (response.ok) {
       const data = await response.json();
-      localStorage.setItem('authToken', data.token);
-      localStorage.setItem('username', data.username);
-      router.push('/');
+      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("username", data.username);
+      router.push("/");
     } else {
       const data = await response.json();
       setError(data.message);
@@ -70,7 +70,7 @@ const RegisterPage = () => {
     <div className="bg-dark vh-100 overflow-hidden d-flex align-items-center">
       <div
         className="col-6 d-flex flex-column justify-content-end mx-auto"
-        style={{width: "400px"}}
+        style={{ width: "400px" }}
       >
         <Image
           src={Logo}
@@ -78,9 +78,7 @@ const RegisterPage = () => {
           width={250}
           className="mx-auto d-block mb-4"
         />
-        <h1 className="text-light mb-3">
-          Registierung
-        </h1>
+        <h1 className="text-light mb-3">Registierung</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-3 d-flex align-items-center">
             <label htmlFor="name"></label>
@@ -138,14 +136,15 @@ const RegisterPage = () => {
             />
           </div>
           <div className="d-flex align-items-center justify-content-between">
-            <button
-              className="btn btn-primary"
-              type="submit"
-            >
+            <button className="btn btn-primary" type="submit">
               Registrieren
             </button>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              {error && <p className="text-light d-flex align-self-center mb-0 ml-auto">{error}</p>}
+            <div style={{ display: "flex", alignItems: "center" }}>
+              {error && (
+                <p className="text-light d-flex align-self-center mb-0 ml-auto">
+                  {error}
+                </p>
+              )}
             </div>
           </div>
         </form>
