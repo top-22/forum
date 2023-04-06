@@ -78,7 +78,7 @@ const RegisterPage = () => {
           width={250}
           className="mx-auto d-block mb-4"
         />
-        <h1 className="text-light mb-3">Registierung</h1>
+        <h1 className="text-light mb-3">Registrierung</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-3 d-flex align-items-center">
             <label htmlFor="name"></label>
