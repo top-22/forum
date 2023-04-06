@@ -2,8 +2,11 @@ import Image from "next/image";
 import Logo from "../public/TUC-einfarbig.png";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import useRedirectIfLoggedIn from "../hooks/useRedirectIfLoggedIn";
 
 const RegisterPage = () => {
+  useRedirectIfLoggedIn();
+
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");

@@ -3,8 +3,11 @@ import Image from "next/image";
 import Logo from "../public/TUC-einfarbig.png";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import useRedirectIfLoggedIn from "../hooks/useRedirectIfLoggedIn";
 
 const LoginPage: NextPage = () => {
+  useRedirectIfLoggedIn();
+
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +40,9 @@ const LoginPage: NextPage = () => {
       const data = await response.json();
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("username", data.username);
-      router.push("/");
+
+      const nextPath = (router.query.next as string) || "/";
+      router.push(nextPath);
     } else {
       const data = await response.json();
       setError(data.message);
