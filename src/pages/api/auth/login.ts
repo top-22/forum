@@ -15,9 +15,11 @@ export default async function handler(
 
   const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
+  // ? Do we need to check for empty fields
+  // ? Client-side validation should be enough
+  // if (!email || !password) {
+  //   return res.status(400).json({ message: "All fields are required" });
+  // }
 
   const user = await prisma.user.findUnique({ where: { email } });
 
