@@ -2,10 +2,13 @@ import { NextPage } from "next";
 import Head from "next/head";
 import Layout from "../../components/layout";
 import SearchBar from "../../components/searchBar";
+import useAuth from "../../hooks/useAuth";
 
 interface JoinProps {}
 
 const Join: NextPage<JoinProps> = () => {
+  useAuth();
+  
   return (
     <Layout>
       <div className="bg-dark vh-100">
