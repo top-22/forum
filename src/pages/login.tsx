@@ -26,18 +26,6 @@ const LoginPage: NextPage = () => {
 
     setError("");
 
-    if (!email) {
-      setError("Please fill out the email field.");
-      return;
-    }
-
-    if (!password) {
-      setError("Please fill out the password field.");
-      return;
-    }
-
-    setError("");
-
     const response = await fetch("/api/auth/login", {
       method: "POST",
       headers: {
