@@ -57,7 +57,7 @@ const RegisterPage = () => {
 
     if (response.ok) {
       const data = await response.json();
-      localStorage.setItem("authToken", data.token);
+      // localStorage.setItem("authToken", data.token);
       localStorage.setItem("username", data.username);
       router.push("/");
     } else {
