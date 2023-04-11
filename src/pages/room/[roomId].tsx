@@ -23,24 +23,25 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
         <button>CREATE POST</button>
         <div className="d-flex flex-column">
           {threads.length > 0 ? (
-            threads.map(thread => (
+            threads.map((thread) => (
               <div>
                 <Link key={thread.id} href={`${room.id}/${thread.id}`}>
-                  {`${thread.name} ${thread.description ?? "Dieser Thread hat keine genauere Beschreibung."}`} 
+                  {`${thread.name} ${
+                    thread.description ??
+                    "Dieser Thread hat keine genauere Beschreibung."
+                  }`}
                 </Link>
               </div>
             ))
           ) : (
-            <div>
-              Es gibt keine Threads.
-            </div>
+            <div>Es gibt keine Threads.</div>
           )}
         </div>
         <span>{room.description}</span>
         <div>
           <h2>Benutzer im Raum:</h2>
           <ul>
-            {users.map(user => (
+            {users.map((user) => (
               <li key={user.id}>{user.name}</li>
             ))}
           </ul>
