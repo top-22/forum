@@ -10,7 +10,7 @@ interface RoomProps {
   threads: Thread[];
 }
 
-const Room: NextPage<RoomProps> = ({ room, users, threads}) => {
+const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
   return (
     <Layout>
       <Head>
@@ -23,24 +23,25 @@ const Room: NextPage<RoomProps> = ({ room, users, threads}) => {
         <button>CREATE POST</button>
         <div className="d-flex flex-column">
           {threads.length > 0 ? (
-            threads.map(thread => (
+            threads.map((thread) => (
               <div>
                 <Link key={thread.id} href={`${room.id}/${thread.id}`}>
-                  {`${thread.name} ${thread.description ?? "Dieser Thread hat keine genauere Beschreibung."}`} 
+                  {`${thread.name} ${
+                    thread.description ??
+                    "Dieser Thread hat keine genauere Beschreibung."
+                  }`}
                 </Link>
               </div>
             ))
           ) : (
-            <div>
-              Es gibt keine Threads.
-            </div>
+            <div>Es gibt keine Threads.</div>
           )}
         </div>
         <span>{room.description}</span>
         <div>
           <h2>Benutzer im Raum:</h2>
           <ul>
-            {users.map(user => (
+            {users.map((user) => (
               <li key={user.id}>{user.name}</li>
             ))}
           </ul>
@@ -56,15 +57,14 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
   const roomId = Number(context.params?.roomId);
   const prisma = new PrismaClient();
   let room = await prisma.room
-    .findFirst({ where: { id: roomId }})
+    .findFirst({ where: { id: roomId } })
     .catch(() => null);
   if (!room) return { redirect: { destination: "/", permanent: false } };
   console.dir(room, { depth: null });
   let users = await prisma.roomUser
     .findMany({ where: { roomId }, include: { user: true } })
-    .then(roomUsers => roomUsers.map(roomUser => roomUser.user));
-  let threads = await prisma.thread
-    .findMany({ where: { roomId } });
+    .then((roomUsers) => roomUsers.map((roomUser) => roomUser.user));
+  let threads = await prisma.thread.findMany({ where: { roomId } });
   return { props: { room, users, threads } };
 };
 
