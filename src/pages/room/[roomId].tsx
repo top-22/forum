@@ -24,7 +24,7 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
         <div className="d-flex flex-column">
           {threads.length > 0 ? (
             threads.map((thread) => (
-              <div>
+              <div key={thread.id}>
                 <Link key={thread.id} href={`${room.id}/${thread.id}`}>
                   {`${thread.name} ${
                     thread.description ??
