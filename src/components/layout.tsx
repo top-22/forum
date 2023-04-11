@@ -10,14 +10,14 @@ interface LayoutProps {
 const Layout: NextPage<LayoutProps> = ({ children }) => {
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
   return (
-    <>
+    <div className="d-flex">
       <Navbar setShowSettings={setShowSettingsPopup}></Navbar>
-      {children}
+      <main className="flex-grow-1">{children}</main>
       <SettingsPopup
         setShow={setShowSettingsPopup}
         show={showSettingsPopup}
       ></SettingsPopup>
-    </>
+    </div>
   );
 };
 
