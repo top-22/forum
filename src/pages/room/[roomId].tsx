@@ -19,8 +19,11 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
       </Head>
 
       <main>
-        <h1 className="text-primary">{room.name}</h1>
-        <button>CREATE POST</button>
+        <div className="d-flex justify-content-between">
+          <h1 className="text-primary p-1">{room.name}</h1>
+          <h1 className="text-secondary p-1">Raumoptionen</h1>{" "}
+          {/*Popup für Raumoptionen hinzufügen */}
+        </div>
         <div className="p-2">
           <div className="container-fluid m-0 p-0 w-100">
             <div className="overflow-auto">
@@ -59,15 +62,18 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
             </div>
           </div>
         </div>
-        <span>{room.description}</span>
-        <div>
-          <h2>Benutzer im Raum:</h2>
-          <ul>
-            {users.map((user) => (
-              <li key={user.id}>{user.name}</li>
-            ))}
-          </ul>
+        <div className="text-white">
+          <span>{room.description}</span>
+          <div>
+            <h2>Benutzer im Raum:</h2>
+            <ul>
+              {users.map((user) => (
+                <li key={user.id}>{user.name}</li>
+              ))}
+            </ul>
+          </div>
         </div>
+        <button>CREATE POST</button>
       </main>
     </Layout>
   );
