@@ -12,7 +12,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
   return (
     <div className="d-flex">
       <Navbar setShowSettings={setShowSettingsPopup}></Navbar>
-      <main className="flex-grow-1">{children}</main>
+      <main className="overflow-hidden">{children}</main>
       <SettingsPopup
         setShow={setShowSettingsPopup}
         show={showSettingsPopup}
