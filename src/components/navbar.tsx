@@ -29,13 +29,13 @@ const VerticalNavbar: FunctionComponent<NavbarProps> = ({
           className="rounded"
         />
       </Navbar.Brand>
-      <Nav className="flex-column d-flex flex-column flex-grow-1">
+      <Nav className="flex-column d-flex flex-grow-1">
         {/* nav items */}
         <Nav.Link onClick={() => router.push("/")} className="mx-auto">
           Home
         </Nav.Link>
-        <hr className="mx-auto w-75" /> {/* Divider after Home */}
-        <div className="flex-grow-1">
+        <hr className="mx-auto w-75" /> {/* Trenner nach Home */}
+        <div className="flex-grow-1"> {/* sorgt dafür dass Settings ganz unten ist*/}
           <Nav.Link onClick={() => router.push("room/1")} className="mx-auto">
             Raum 1
           </Nav.Link>
@@ -43,7 +43,7 @@ const VerticalNavbar: FunctionComponent<NavbarProps> = ({
             Raum 2
           </Nav.Link>
         </div>
-        <hr className="mx-auto w-75" /> {/* Divider before Settings */}
+        <hr className="mx-auto w-75" /> {/* Trenner vor Settings */}
         <Nav.Link onClick={() => setShowSettings(true)} className="mx-auto">
           Settings
         </Nav.Link>
