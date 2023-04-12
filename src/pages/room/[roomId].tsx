@@ -19,9 +19,9 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
       </Head>
 
       <main>
-        <div className="d-flex justify-content-between">
-          <h1 className="text-primary p-1">{room.name}</h1>
-          <h1 className="text-secondary p-1">Raumoptionen</h1>{" "}
+        <div className="d-flex justify-content-between p-2">
+          <h1 className="text-primary">{room.name}</h1>
+          <h1 className="text-secondary">Raumoptionen</h1>{" "}
           {/*Popup für Raumoptionen hinzufügen */}
         </div>
         <div className="p-2">
@@ -73,7 +73,9 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
             </ul>
           </div>
         </div>
-        <button>CREATE POST</button>
+        <div className="d-flex justify-content-end p-2">
+          <button className="btn btn-primary">CREATE POST</button>
+        </div>
       </main>
     </Layout>
   );
