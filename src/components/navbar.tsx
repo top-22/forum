@@ -30,7 +30,7 @@ const VerticalNavbar: FunctionComponent<NavbarProps> = ({
         />
       </Navbar.Brand>
       <Nav className="flex-column d-flex flex-column flex-grow-1">
-        {/* Add your nav items here */}
+        {/* nav items */}
         <Nav.Link onClick={() => router.push("/")} className="mx-auto">
           Home
         </Nav.Link>
