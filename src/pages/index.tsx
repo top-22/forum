@@ -3,13 +3,14 @@ import Link from "next/link";
 import { Room, PrismaClient } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import Layout from "../components/layout";
+import RoomPreview from "../components/roomPreview";
 import { useState } from "react";
 
 interface HomeProps {
   rooms: Room[];
 }
 
-const Home: NextPage<HomeProps> = () => {
+const Home: NextPage<HomeProps> = ({ rooms }) => {
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [showHome, setShowHome] = useState(false);
 
@@ -30,13 +31,7 @@ const Home: NextPage<HomeProps> = () => {
           <title>TUC Forum</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div className="d-flex flex-column">
-          <Link href="room/1">Room 1</Link>
-          <Link href="room/2">Room 2</Link>
-          <Link href="room/3">Room 3</Link>
-          <Link href="room/4">Room 4</Link>
-          <Link href="room/5">Room 5</Link>
-        </div>
+        <RoomPreview rooms={rooms} title="Räume1" />
       </div>
     </Layout>
   );
