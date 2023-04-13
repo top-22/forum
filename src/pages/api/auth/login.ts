@@ -41,7 +41,7 @@ export default async function handler(
   );
 
   const tokenCookie = serialize("authToken", token, {
-    httpOnly: true,
+    httpOnly: false,
     secure: process.env.NODE_ENV !== "development",
     sameSite: "strict",
     maxAge: 60 * 60 * 24, // 1 day in seconds
