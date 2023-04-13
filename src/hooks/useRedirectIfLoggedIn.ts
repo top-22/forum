@@ -7,7 +7,8 @@ const useRedirectIfLoggedIn = () => {
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
     if (authToken) {
-      router.replace("/");
+      const nextPath = (router.query.next as string) || "/";
+      router.replace(nextPath);
     }
   }, [router]);
 };
