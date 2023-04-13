@@ -169,7 +169,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  return { props: { } };
+  return { props: {} };
 };
 
 export default RegisterPage;

@@ -54,7 +54,7 @@ export default async function handler(
     sameSite: "strict",
     maxAge: 60 * 60 * 24, // 1 day in seconds
     path: "/",
-  });  
+  });
 
   res.setHeader("Set-Cookie", [tokenCookie, usernameCookie]);
   res.status(200).json({

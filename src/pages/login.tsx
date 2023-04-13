@@ -122,7 +122,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ? parse(context.req.headers.cookie)
     : {};
   const isAuthenticated = !!cookies.authToken;
-  const nextPath = context.query.next as string || "/";
+  const nextPath = (context.query.next as string) || "/";
 
   if (isAuthenticated) {
     return {
@@ -133,8 +133,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  return { props: { } };
+  return { props: {} };
 };
-
 
 export default LoginPage;
