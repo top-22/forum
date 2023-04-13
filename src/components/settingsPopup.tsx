@@ -2,6 +2,7 @@ import Image from "next/image";
 import { FunctionComponent } from "react";
 import Avatar from "../public/avatar.png";
 import { useRouter } from "next/router";
+import { serialize } from "cookie";
 
 interface SettingsPopupProps {
   setShow: (show: boolean) => void;
@@ -20,9 +21,15 @@ const SettingsPopup: FunctionComponent<SettingsPopupProps> = ({
   const handleClose = () => setShow(false);
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("username");
-    router.push("/login"); // Redirect to the login page
+    document.cookie = serialize("authToken", "", {
+      maxAge: -1,
+      path: "/",
+    });
+    document.cookie = serialize("username", "", {
+      maxAge: -1,
+      path: "/",
+    });
+    router.push("/login");
   };
 
   return (

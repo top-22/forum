@@ -10,6 +10,7 @@ import {
 import { GetServerSideProps, NextPage } from "next";
 import dynamic from "next/dynamic";
 import Button from "react-bootstrap/Button";
+import { parse } from "cookie";
 
 const RoomPage = dynamic(() => import("../[roomId]"));
 
@@ -91,9 +92,24 @@ const Thread: NextPage<ThreadProps> = ({ room, thread, messages }) => {
 export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
   context
 ) => {
+  const cookies = context.req.headers.cookie
+    ? parse(context.req.headers.cookie)
+    : {};
+  const isAuthenticated = !!cookies.authToken;
+
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
+  const prisma = new PrismaClient();
   const roomId = Number(context.params?.roomId);
   const threadId = Number(context.params?.threadId);
-  const prisma = new PrismaClient();
+
   let room = await prisma.room
     .findFirst({
       where: { id: roomId },

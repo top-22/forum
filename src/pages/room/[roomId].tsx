@@ -6,6 +6,7 @@ import { Modal, Button } from "react-bootstrap";
 import Layout from "../../components/layout";
 import CreatePost from "../../components/createPostPopup";
 import { useState } from "react";
+import { parse } from "cookie";
 
 interface RoomProps {
   room: Room & {
@@ -102,8 +103,22 @@ const Room: NextPage<RoomProps> = ({ room }) => {
 export const getServerSideProps: GetServerSideProps<RoomProps> = async (
   context
 ) => {
-  const roomId = Number(context.params?.roomId);
+  const cookies = context.req.headers.cookie
+    ? parse(context.req.headers.cookie)
+    : {};
+  const isAuthenticated = !!cookies.authToken;
+
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
   const prisma = new PrismaClient();
+  const roomId = Number(context.params?.roomId);
   const room = await prisma.room
     .findFirst({
       where: { id: roomId },

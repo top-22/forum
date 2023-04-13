@@ -1,13 +1,11 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Image from "next/image";
 import Logo from "../public/TUC-einfarbig.png";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import useRedirectIfLoggedIn from "../hooks/useRedirectIfLoggedIn";
+import { parse } from "cookie";
 
 const LoginPage: NextPage = () => {
-  useRedirectIfLoggedIn();
-
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,10 +35,6 @@ const LoginPage: NextPage = () => {
     });
 
     if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("authToken", data.token);
-      localStorage.setItem("username", data.username);
-
       const nextPath = (router.query.next as string) || "/";
       router.push(nextPath);
     } else {
@@ -122,5 +116,25 @@ const LoginPage: NextPage = () => {
     </div>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = context.req.headers.cookie
+    ? parse(context.req.headers.cookie)
+    : {};
+  const isAuthenticated = !!cookies.authToken;
+  const nextPath = context.query.next as string || "/";
+
+  if (isAuthenticated) {
+    return {
+      redirect: {
+        destination: `/${nextPath}`,
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: { } };
+};
+
 
 export default LoginPage;

@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt, { Secret } from "jsonwebtoken";
+import { serialize } from "cookie";
 
 const prisma = new PrismaClient();
 
@@ -39,9 +40,24 @@ export default async function handler(
     }
   );
 
+  const tokenCookie = serialize("authToken", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV !== "development",
+    sameSite: "strict",
+    maxAge: 60 * 60 * 24, // 1 day in seconds
+    path: "/",
+  });
+
+  const usernameCookie = serialize("username", user.username, {
+    httpOnly: false,
+    secure: process.env.NODE_ENV !== "development",
+    sameSite: "strict",
+    maxAge: 60 * 60 * 24, // 1 day in seconds
+    path: "/",
+  });  
+
+  res.setHeader("Set-Cookie", [tokenCookie, usernameCookie]);
   res.status(200).json({
     message: "Logged in successfully",
-    username: user.username,
-    token,
   });
 }

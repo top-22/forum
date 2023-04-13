@@ -1,14 +1,12 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Layout from "../../components/layout";
 import SearchBar from "../../components/searchBar";
-import useAuth from "../../hooks/useAuth";
+import { parse } from "cookie";
 
 interface JoinProps {}
 
-const Join: NextPage<JoinProps> = () => {
-  useAuth();
-
+const Join: NextPage<JoinProps> = (props) => {
   return (
     <Layout>
       <div className="bg-dark vh-100">
@@ -34,6 +32,24 @@ const Join: NextPage<JoinProps> = () => {
       </div>
     </Layout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = context.req.headers.cookie
+    ? parse(context.req.headers.cookie)
+    : {};
+  const isAuthenticated = !!cookies.authToken;
+
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
 };
 
 export default Join;

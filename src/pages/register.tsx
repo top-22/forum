@@ -2,11 +2,10 @@ import Image from "next/image";
 import Logo from "../public/TUC-einfarbig.png";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import useRedirectIfLoggedIn from "../hooks/useRedirectIfLoggedIn";
+import { GetServerSideProps, NextPage } from "next";
+import { parse } from "cookie";
 
-const RegisterPage = () => {
-  useRedirectIfLoggedIn();
-
+const RegisterPage: NextPage = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -59,9 +58,7 @@ const RegisterPage = () => {
     });
 
     if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("authToken", data.token);
-      localStorage.setItem("username", data.username);
+      // const data = await response.json();
       router.push("/");
     } else {
       const data = await response.json();
@@ -154,6 +151,25 @@ const RegisterPage = () => {
       </div>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = context.req.headers.cookie
+    ? parse(context.req.headers.cookie)
+    : {};
+  const isAuthenticated = !!cookies.authToken;
+  // const nextPath = context.query.next as string || "/";
+
+  if (isAuthenticated) {
+    return {
+      redirect: {
+        destination: `/`,
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: { } };
 };
 
 export default RegisterPage;

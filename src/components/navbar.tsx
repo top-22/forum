@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Image from "next/image";
 import logo from "../public/Logo.svg";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { parse } from "cookie";
 
 const VerticalNavbar = () => {
   const navItems = [
@@ -17,6 +18,12 @@ const VerticalNavbar = () => {
   const isActive = (path: string) => {
     return mounted ? window.location.pathname === path : false;
   };
+
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    const cookies = parse(document.cookie);
+    setUsername(cookies.username || "");
+  }, []);
 
   return (
     <Navbar
@@ -62,7 +69,7 @@ const VerticalNavbar = () => {
           </div>
         </span>
         <Nav.Link as={Link} href="/settings" active={isActive("/settings")}>
-          Einstellungen
+          {username}
         </Nav.Link>
       </Nav>
     </Navbar>
