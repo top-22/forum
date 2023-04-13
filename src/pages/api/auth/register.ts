@@ -14,17 +14,15 @@ export default async function handler(
   }
 
   try {
-    const { name, username, email, password /*, repeatPassword*/ } = req.body;
+    const { name, username, email, password , repeatPassword } = req.body;
 
-    // ? Do we need to check for empty fields
-    // ? Client-side validation should be enough
-    // if (!name || !username || !email || !password || !repeatPassword) {
-    //  return res.status(400).json({ message: "All fields are required" });
-    // }
+    if (!name || !username || !email || !password || !repeatPassword) {
+     return res.status(400).json({ message: "All fields are required" });
+    }
 
-    // if (password !== repeatPassword) {
-    //   return res.status(400).json({ message: "Passwords do not match" });
-    // }
+    if (password !== repeatPassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
 
     const existingUserByUsername = await prisma.user.findFirst({
       where: {

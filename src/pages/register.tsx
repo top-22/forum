@@ -54,7 +54,7 @@ const RegisterPage = () => {
         username,
         email,
         password,
-        // repeatPassword,
+        repeatPassword,
       }),
     });
 
