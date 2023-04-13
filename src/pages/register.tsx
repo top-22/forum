@@ -158,7 +158,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ? parse(context.req.headers.cookie)
     : {};
   const isAuthenticated = !!cookies.authToken;
-  // const nextPath = context.query.next as string || "/";
 
   if (isAuthenticated) {
     return {
