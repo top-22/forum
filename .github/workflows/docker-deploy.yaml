@@ -189,7 +189,7 @@ jobs:
         uses: tzkhan/pr-update-action@v2
         continue-on-error: true
         with:
-          head-branch-regex: (?i)${{ github.head_ref }}
+          head-branch-regex: (?i)${{ github.head_ref }}(?-i)
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           body-template: |
             <a href="https://github.com/${{ github.repository }}/actions/workflows/docker-deploy.yaml">
