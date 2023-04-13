@@ -14,10 +14,10 @@ export default async function handler(
   }
 
   try {
-    const { name, username, email, password , repeatPassword } = req.body;
+    const { name, username, email, password, repeatPassword } = req.body;
 
     if (!name || !username || !email || !password || !repeatPassword) {
-     return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({ message: "All fields are required" });
     }
 
     if (password !== repeatPassword) {
