@@ -1,11 +1,14 @@
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import { Button } from "react-bootstrap";
+import { GetServerSideProps } from "next";
+import { PrismaClient, Room } from "@prisma/client";
 
-const SurveyPost = () => {
-  return (
-    <div>
-      <Form>
+interface SurveyProps {
+  rooms: Room[];
+}
+/*
         <Row>
           <Col sm="3">
             <p>Choose Room:</p>
@@ -18,6 +21,12 @@ const SurveyPost = () => {
             </Form.Select>
           </Col>
         </Row>
+  */
+
+const SurveyPost = () => {
+  return (
+    <div>
+      <Form>
         <br></br>
         <Row>
           <Col sm="3">
@@ -44,20 +53,20 @@ const SurveyPost = () => {
           <Col sm="3">
             <p>Answers:</p>
           </Col>
-          <Col sm="3">
+          <Col>
             <Form.Control as="textarea" placeholder="Option 1 (mandatory)" />
           </Col>
-          <Col sm="3">
+          <Col>
             <Form.Control as="textarea" placeholder="Option 2 (mandatory)" />
           </Col>
         </Row>
         <br></br>
         <Row>
           <Col sm="3" />
-          <Col sm="3">
+          <Col>
             <Form.Control as="textarea" placeholder="Option 3" />
           </Col>
-          <Col sm="3">
+          <Col>
             <Form.Control as="textarea" placeholder="Option 4" />
           </Col>
         </Row>
@@ -90,26 +99,29 @@ const SurveyPost = () => {
         </Row>
         <br></br>
         <Row>
-          <Form.Check
-            type="switch"
-            id="custom-switch"
-            label="Check this switch"
-          />
+          <Col>
+            <Form.Check
+              type="switch"
+              id="custom-switch"
+              label="Turn off comments"
+            />
+          </Col>
         </Row>
       </Form>
 
       <style jsx>{`
         p {
-          color: white;
           font-size: 26px;
         }
 
         div {
-          padding: 5em;
+          padding-left: 2em;
+          padding-right: 2em;
         }
       `}</style>
     </div>
   );
 };
+
 
 export default SurveyPost;
