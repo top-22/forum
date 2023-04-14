@@ -16,15 +16,14 @@ const VerticalNavbar: FunctionComponent<NavbarProps> = ({
   const router = useRouter();
 
   const navItems = [
-    { path: '/room/1', label: 'Page 1' },
-    { path: '/room/2', label: 'Page 2' },
+    { path: "/room/1", label: "Page 1" },
+    { path: "/room/2", label: "Page 2" },
   ];
 
   const isActive = (path: string) => {
     return router.asPath === path;
   };
 
-  
   return (
     <Navbar bg="primary" className="d-flex flex-column vh-100">
       <Navbar.Brand
@@ -46,12 +45,19 @@ const VerticalNavbar: FunctionComponent<NavbarProps> = ({
         <Nav.Link as={Link} href="/" active={isActive("/")} className="mx-auto">
           Home
         </Nav.Link>
-        <Nav.Link as={Link} href="/room/join" active={isActive("/room/join")} className="mx-auto">
+        <Nav.Link
+          as={Link}
+          href="/room/join"
+          active={isActive("/room/join")}
+          className="mx-auto"
+        >
           Explore
         </Nav.Link>
         <hr className="mx-auto w-75" /> {/* Trenner nach Home */}
-        <div className="flex-grow-1"> {/* sorgt dafür dass Settings ganz unten ist*/}
-          <div className="d-flex flex-column align-items-center"> {/* zentriert die Items */}
+        {/* sorgt dafür dass Settings ganz unten ist*/}
+        <div className="flex-grow-1">
+          {/* zentriert die Items */}
+          <div className="d-flex flex-column align-items-center">
             {/* Listet alle Items zwischen Home und Einstellungen */}
             {navItems.map((item) => (
               <Nav.Link
