@@ -12,7 +12,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
   return (
     <div className="d-flex">
       <Navbar setShowSettings={setShowSettingsPopup}></Navbar>
-      <main className="overflow-hidden">{children}</main> {/* overflow-hidden blockt ganzseitiges scrollen */}
+      <main className="overflow-hidden w-100">{children}</main> {/* overflow-hidden blockt ganzseitiges scrollen */}
       <SettingsPopup
         setShow={setShowSettingsPopup}
         show={showSettingsPopup}
