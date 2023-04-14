@@ -1,28 +1,8 @@
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { Button } from "react-bootstrap";
-import { GetServerSideProps } from "next";
-import { PrismaClient, Room } from "@prisma/client";
 
-interface SurveyProps {
-  rooms: Room[];
-}
-/*
-        <Row>
-          <Col sm="3">
-            <p>Choose Room:</p>
-          </Col>
-          <Col>
-            <Form.Select size="lg">
-              <option>Choose in which room to publish your post</option>
-              <option>Large select</option>
-              <option>Test</option>
-            </Form.Select>
-          </Col>
-        </Row>
-  */
-
+       
 const SurveyPost = () => {
   return (
     <div>
@@ -30,7 +10,7 @@ const SurveyPost = () => {
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Question:</p>
+            <p>Question</p>
           </Col>
           <Col>
             <Form.Control as="textarea" placeholder="question of your survey" />
@@ -39,19 +19,19 @@ const SurveyPost = () => {
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Subtitle:</p>
+            <p>Description</p>
           </Col>
           <Col>
             <Form.Control
               as="textarea"
-              placeholder="Short post describtion as a subtitle"
+              placeholder="Description of your question"
             />
           </Col>
         </Row>
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Answers:</p>
+            <p>Answers</p>
           </Col>
           <Col>
             <Form.Control as="textarea" placeholder="Option 1 (mandatory)" />
@@ -73,7 +53,7 @@ const SurveyPost = () => {
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Choose Tags:</p>
+            <p>Choose Tags</p>
           </Col>
           <Col>
             <Form.Select size="lg">
@@ -86,7 +66,7 @@ const SurveyPost = () => {
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Choose Endtime:</p>
+            <p>Choose Endtime</p>
           </Col>
           <Col>
             <Form.Select size="lg">
@@ -103,25 +83,26 @@ const SurveyPost = () => {
             <Form.Check
               type="switch"
               id="custom-switch"
-              label="Turn off comments"
-            />
+              label="Disable comments"
+              />
           </Col>
         </Row>
       </Form>
 
       <style jsx>{`
         p {
-          font-size: 26px;
+          font-size: 23px;
+          
         }
 
         div {
           padding-left: 2em;
           padding-right: 2em;
+          color: white
         }
       `}</style>
     </div>
   );
 };
-
 
 export default SurveyPost;

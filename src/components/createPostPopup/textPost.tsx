@@ -1,76 +1,59 @@
-import { Button } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import { Room } from "@prisma/client";
 
-/*
-        <Row>
-          <Col sm="3">
-            <p>Choose Room:</p>
-          </Col>
-          <Col>
-            <Form.Select size="lg">
-              <option>Choose in which room to publish your post</option>
-              <option>Large select</option>
-              <option>Test</option>
-            </Form.Select>
-          </Col>
-        </Row>
-*/
+interface TextProps {
+  room: Room
+}
 
-const TextPost = () => {
+const TextPost = (props: TextProps) => {
+  
   return (
     <div>
-      <Form id="save" onSubmit={saveThread}>
+      <Form id="save" onSubmit={handleSubmit}>
         <br></br>
+        <input type="hidden" name="room" value={props.room.id} />
         <Row>
           <Col sm="3">
-            <p>Title:</p>
+            <p>Title</p>
           </Col>
           <Col>
             <Form.Control as="textarea"
             id="title"
+            name="title"
+            required
+            minLength={10}
             placeholder="title of your post"/>
           </Col>
         </Row>
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Subtitle:</p>
+            <p>Description</p>
           </Col>
           <Col>
             <Form.Control
               id="description"
+              name="description"
               as="textarea"
-              placeholder="Short post describtion as a subtitle"
+              rows={3}
+              placeholder="Description of your post"
             />
           </Col>
         </Row>
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Description:</p>
+            <p>Choose Tags</p>
           </Col>
           <Col>
             <Form.Control
+              id="tags"
+              name="tags"
               as="textarea"
-              rows={3}
-              placeholder="Description of your post goes here"
+              placeholder="Fill in your #tags"   
             />
-          </Col>
-        </Row>
-        <br></br>
-        <Row>
-          <Col sm="3">
-            <p>Choose Tags:</p>
-          </Col>
-          <Col>
-            <Form.Select size="lg">
-              <option>Choose tags which best describe your post</option>
-              <option>Organization</option>
-              <option>Study Question</option>
-              <option>Ranting</option>
-            </Form.Select>
           </Col>
         </Row>
         <br></br>
@@ -78,7 +61,8 @@ const TextPost = () => {
           <Col>
             <Form.Check
               type="switch"
-              id="custom-switch"
+              id="commentsOff"
+              name="commentsOff"
               label="Turn off comments"
             />
           </Col>
@@ -87,27 +71,51 @@ const TextPost = () => {
 
       <style jsx>{`
         p {
-          font-size: 26px;
+          font-size: 23px;
         }
 
         div {
           padding-left: 2em;
           padding-right: 2em;
+          color: white
         }
       `}</style>
     </div>
   );
 };
 
-const saveThread = (event: any) => {
+
+const handleSubmit = async (event) => {
   event.preventDefault();
 
-    const title = event.target.title.value;
-    const description = event.target.description.value;
-    console.log(`Hello ${title}, ${description}!`);
-
-    //event.target.reset();
-  
-};
+  if (event.target.title.value) {
+    // send a request to the server.
+    console.log(event.target.room)
+    try {
+      const body = {
+        title: event.target.title.value,
+        description: event.target.description.value,
+        room: event.target.room.value,
+        tags: event.target.tags.value
+      }
+      const response =  await fetch(`/api/createPost`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(body),
+        }
+      );
+      const result = await response.json()
+      //console.log('test')
+      //console.log(result)
+      //alert(`Is this your thread: ${result.data}`)
+      //await Router.push("/drafts");
+    } catch (error) {
+        console.error(error);
+    }
+} else {
+  console.log('title required')
+    return;
+  }
+} 
 
 export default TextPost;

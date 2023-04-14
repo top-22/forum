@@ -7,20 +7,21 @@ import TextPost from "./textPost";
 
 interface PostProps {
   showTextPost: boolean;
-}
-
-function Post(props: PostProps) {
-  if (props.showTextPost == false) {
-    return <SurveyPost />;
-  } else {
-    return <TextPost />;
-  }
+  room: Room
 }
 
 interface CreateProps {
   onHide: () => void
   show: boolean;
   room: Room & { users: RoomUser[] };
+}
+
+function Post(props: PostProps) {
+  if (props.showTextPost == false) {
+    return <SurveyPost />;
+  } else {
+    return <TextPost room={props.room}/>;
+  }
 }
 
 const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
@@ -36,51 +37,45 @@ const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
   };
 
   return (
-    <div className="bg-dark">
-
     <Modal
       {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      ba
       className="my-modal" 
     >
-      <Modal.Header closeButton>
-        <div>
-          <h2 className="text-primary">Create a Post in {props.room.name}!</h2>
+      <div className="bg-dark">
+        <Modal.Header closeButton closeVariant="white" className="modal-footer border-0">
           <div>
-            <button
-              className="btn btn-primary m-1"
-              type="button"
-              onClick={openTextPost}
-            >
-              Text Post
-            </button>
-            <button
-              className="btn btn-primary m-1"
-              type="button"
-              onClick={openSurveyPost}
-            >
-              Survey Post
-            </button>
+            <br/>
+            <h2 className="text-primary">Create a Post in {props.room.name}!</h2>
+            <div>
+              <button
+                className="btn btn-primary m-1"
+                type="button"
+                onClick={openTextPost}
+              >
+                Text Post
+              </button>
+              <button
+                className="btn btn-primary m-1"
+                type="button"
+                onClick={openSurveyPost}
+              >
+                Survey Post
+              </button>
+            </div>
           </div>
-        </div>
-      </Modal.Header>
-      <Modal.Body>
-        <Post showTextPost={showTextPost}></Post>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button type="submit" form="save">Submit</Button>
-      </Modal.Footer>
-    </Modal>
-    <style jsx>{`
-        .my-modal {
-          background-color: red;
-        }
-      `}</style>
+        </Modal.Header>
+        <Modal.Body>
+          <Post showTextPost={showTextPost} room={props.room}></Post>
+        </Modal.Body>
+        <Modal.Footer className="modal-footer border-top-0">
+          <Button type="submit" form="save">Submit</Button>
+        </Modal.Footer>
       </div>
+    </Modal>
   );
 };
 
-export default CreatePost;
+export default CreatePost; 
