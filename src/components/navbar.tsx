@@ -46,6 +46,9 @@ const VerticalNavbar: FunctionComponent<NavbarProps> = ({
         <Nav.Link as={Link} href="/" active={isActive("/")} className="mx-auto">
           Home
         </Nav.Link>
+        <Nav.Link as={Link} href="/room/join" active={isActive("/room/join")} className="mx-auto">
+          Explore
+        </Nav.Link>
         <hr className="mx-auto w-75" /> {/* Trenner nach Home */}
         <div className="flex-grow-1"> {/* sorgt dafür dass Settings ganz unten ist*/}
           <div className="d-flex flex-column align-items-center"> {/* zentriert die Items */}
