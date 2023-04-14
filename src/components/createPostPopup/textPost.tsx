@@ -4,14 +4,13 @@ import Row from "react-bootstrap/Row";
 import { Room } from "@prisma/client";
 
 interface TextProps {
-  room: Room
+  room: Room;
 }
 
 const TextPost = (props: TextProps) => {
-  
   return (
     <div>
-      <Form id="save" onSubmit={handleSubmit}>
+      <Form id="postForm" onSubmit={handleSubmit}>
         <br></br>
         <input type="hidden" name="room" value={props.room.id} />
         <Row>
@@ -19,12 +18,14 @@ const TextPost = (props: TextProps) => {
             <p>Title</p>
           </Col>
           <Col>
-            <Form.Control as="textarea"
-            id="title"
-            name="title"
-            required
-            minLength={10}
-            placeholder="title of your post"/>
+            <Form.Control
+              as="textarea"
+              id="title"
+              name="title"
+              required
+              minLength={10}
+              placeholder="title of your post"
+            />
           </Col>
         </Row>
         <br></br>
@@ -52,7 +53,7 @@ const TextPost = (props: TextProps) => {
               id="tags"
               name="tags"
               as="textarea"
-              placeholder="Fill in your #tags"   
+              placeholder="Fill in your #tags"
             />
           </Col>
         </Row>
@@ -77,45 +78,43 @@ const TextPost = (props: TextProps) => {
         div {
           padding-left: 2em;
           padding-right: 2em;
-          color: white
+          color: white;
         }
       `}</style>
     </div>
   );
 };
 
-
 const handleSubmit = async (event) => {
   event.preventDefault();
 
   if (event.target.title.value) {
     // send a request to the server.
-    console.log(event.target.room)
+    console.log(event.target.room);
     try {
       const body = {
         title: event.target.title.value,
         description: event.target.description.value,
         room: event.target.room.value,
-        tags: event.target.tags.value
-      }
-      const response =  await fetch(`/api/createPost`, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(body),
-        }
-      );
-      const result = await response.json()
+        tags: event.target.tags.value,
+      };
+      const response = await fetch(`/api/createPost`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const result = await response.json();
       //console.log('test')
       //console.log(result)
       //alert(`Is this your thread: ${result.data}`)
       //await Router.push("/drafts");
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
-} else {
-  console.log('title required')
+  } else {
+    console.log("title required");
     return;
   }
-} 
+};
 
 export default TextPost;

@@ -1,19 +1,31 @@
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import { Room } from "@prisma/client";
 
-       
-const SurveyPost = () => {
+interface SurveyProps {
+  room: Room;
+}
+
+const SurveyPost = (props: SurveyProps) => {
   return (
     <div>
-      <Form>
+      <Form id="postForm" onSubmit={handleSubmit}>
         <br></br>
+        <input type="hidden" name="room" value={props.room.id} />
         <Row>
           <Col sm="3">
             <p>Question</p>
           </Col>
           <Col>
-            <Form.Control as="textarea" placeholder="question of your survey" />
+            <Form.Control
+              id="title"
+              name="title"
+              as="textarea"
+              required
+              minLength={10}
+              placeholder="question of your survey"
+            />
           </Col>
         </Row>
         <br></br>
@@ -23,6 +35,8 @@ const SurveyPost = () => {
           </Col>
           <Col>
             <Form.Control
+              id="description"
+              name="description"
               as="textarea"
               placeholder="Description of your question"
             />
@@ -34,10 +48,20 @@ const SurveyPost = () => {
             <p>Answers</p>
           </Col>
           <Col>
-            <Form.Control as="textarea" placeholder="Option 1 (mandatory)" />
+            <Form.Control
+              as="textarea"
+              required
+              minLength={1}
+              placeholder="Option 1 (mandatory)"
+            />
           </Col>
           <Col>
-            <Form.Control as="textarea" placeholder="Option 2 (mandatory)" />
+            <Form.Control
+              as="textarea"
+              required
+              minLength={1}
+              placeholder="Option 2 (mandatory)"
+            />
           </Col>
         </Row>
         <br></br>
@@ -69,12 +93,12 @@ const SurveyPost = () => {
             <p>Choose Endtime</p>
           </Col>
           <Col>
-            <Form.Select size="lg">
-              <option>Choose when the survey ends</option>
-              <option>1 hour</option>
-              <option>2 hours</option>
-              <option>1 day</option>
-            </Form.Select>
+            <Form.Control
+              id="tags"
+              name="tags"
+              as="textarea"
+              placeholder="Fill in your #tags"
+            />
           </Col>
         </Row>
         <br></br>
@@ -84,7 +108,7 @@ const SurveyPost = () => {
               type="switch"
               id="custom-switch"
               label="Disable comments"
-              />
+            />
           </Col>
         </Row>
       </Form>
@@ -92,17 +116,48 @@ const SurveyPost = () => {
       <style jsx>{`
         p {
           font-size: 23px;
-          
         }
 
         div {
           padding-left: 2em;
           padding-right: 2em;
-          color: white
+          color: white;
         }
       `}</style>
     </div>
   );
+};
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  if (event.target.title.value) {
+    // send a request to the server.
+    console.log(event.target.room);
+    try {
+      const body = {
+        title: event.target.title.value,
+        description: event.target.description.value,
+        room: event.target.room.value,
+        tags: event.target.tags.value,
+      };
+      const response = await fetch(`/api/createPost`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const result = await response.json();
+      //console.log('test')
+      //console.log(result)
+      //alert(`Is this your thread: ${result.data}`)
+      //await Router.push("/drafts");
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    console.log("title required");
+    return;
+  }
 };
 
 export default SurveyPost;

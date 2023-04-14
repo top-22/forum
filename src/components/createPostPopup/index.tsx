@@ -7,25 +7,24 @@ import TextPost from "./textPost";
 
 interface PostProps {
   showTextPost: boolean;
-  room: Room
+  room: Room;
 }
 
 interface CreateProps {
-  onHide: () => void
+  onHide: () => void;
   show: boolean;
   room: Room & { users: RoomUser[] };
 }
 
 function Post(props: PostProps) {
   if (props.showTextPost == false) {
-    return <SurveyPost />;
+    return <SurveyPost room={props.room} />;
   } else {
-    return <TextPost room={props.room}/>;
+    return <TextPost room={props.room} />;
   }
 }
 
 const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
-
   const [showTextPost, setTextPost] = useState(true);
 
   const openSurveyPost = () => {
@@ -42,13 +41,19 @@ const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      className="my-modal" 
+      className="my-modal"
     >
       <div className="bg-dark">
-        <Modal.Header closeButton closeVariant="white" className="modal-footer border-0">
+        <Modal.Header
+          closeButton
+          closeVariant="white"
+          className="modal-footer border-0"
+        >
           <div>
-            <br/>
-            <h2 className="text-primary">Create a Post in {props.room.name}!</h2>
+            <br />
+            <h2 className="text-primary">
+              Create a Post in {props.room.name}!
+            </h2>
             <div>
               <button
                 className="btn btn-primary m-1"
@@ -71,11 +76,13 @@ const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
           <Post showTextPost={showTextPost} room={props.room}></Post>
         </Modal.Body>
         <Modal.Footer className="modal-footer border-top-0">
-          <Button type="submit" form="save">Submit</Button>
+          <Button type="submit" form="postForm">
+            Submit
+          </Button>
         </Modal.Footer>
       </div>
     </Modal>
   );
 };
 
-export default CreatePost; 
+export default CreatePost;
