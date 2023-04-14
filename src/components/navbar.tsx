@@ -28,7 +28,8 @@ const VerticalNavbar: FunctionComponent<NavbarProps> = ({
   return (
     <Navbar bg="primary" className="d-flex flex-column vh-100">
       <Navbar.Brand
-        onClick={() => router.push("/")}
+        as={Link}
+        href="/"
         className="mx-auto"
         style={{ cursor: "pointer" }}
       >
