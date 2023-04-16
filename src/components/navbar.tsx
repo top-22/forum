@@ -2,17 +2,10 @@ import { useRouter } from "next/router";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Image from "next/image";
-import { FunctionComponent } from "react";
 import logo from "../public/Logo.svg";
 import Link from "next/link";
 
-interface NavbarProps {
-  setShowSettings: (show: boolean) => void;
-}
-
-const VerticalNavbar: FunctionComponent<NavbarProps> = ({
-  setShowSettings,
-}) => {
+const VerticalNavbar = () => {
   const router = useRouter();
 
   const navItems = [
@@ -73,8 +66,13 @@ const VerticalNavbar: FunctionComponent<NavbarProps> = ({
           </div>
         </div>
         <hr className="mx-auto w-75" /> {/* Trenner vor Einstellungen */}
-        <Nav.Link onClick={() => setShowSettings(true)} className="mx-auto">
-          Einstellungen
+        <Nav.Link
+          as={Link}
+          href="/settings"
+          active={isActive("/settings")}
+          className="mx-auto"
+        >
+          Settings
         </Nav.Link>
       </Nav>
     </Navbar>
