@@ -1,4 +1,5 @@
 import { useState, FunctionComponent } from "react";
+import { useRouter } from "next/router";
 import { Modal, Button } from "react-bootstrap";
 import { Room, RoomUser } from "@prisma/client";
 
@@ -8,6 +9,7 @@ import TextPost from "./textPost";
 interface PostProps {
   showTextPost: boolean;
   room: Room;
+  router: any;
 }
 
 interface CreateProps {
@@ -16,22 +18,23 @@ interface CreateProps {
   room: Room & { users: RoomUser[] };
 }
 
-function Post(props: PostProps) {
+function Post(props: PostProps): JSX.Element {
   if (props.showTextPost == false) {
-    return <SurveyPost room={props.room} />;
+    return <SurveyPost room={props.room} router={props.router} />;
   } else {
-    return <TextPost room={props.room} />;
+    return <TextPost room={props.room} router={props.router} />;
   }
 }
 
 const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
+  const router = useRouter();
   const [showTextPost, setTextPost] = useState(true);
 
-  const openSurveyPost = () => {
+  const openSurveyPost = (): void => {
     setTextPost(false);
   };
 
-  const openTextPost = () => {
+  const openTextPost = (): void => {
     setTextPost(true);
   };
 
@@ -73,7 +76,11 @@ const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
           </div>
         </Modal.Header>
         <Modal.Body>
-          <Post showTextPost={showTextPost} room={props.room}></Post>
+          <Post
+            showTextPost={showTextPost}
+            room={props.room}
+            router={router}
+          ></Post>
         </Modal.Body>
         <Modal.Footer className="modal-footer border-top-0">
           <Button type="submit" form="postForm">

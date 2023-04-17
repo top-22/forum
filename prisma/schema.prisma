@@ -39,6 +39,10 @@ model Thread {
   creatorId   Int       @map("creator_id")
   tags        Tag[]
   messages    Message[]
+  commentsOff Boolean   @default(false)
+  endtime     String?
+  options     String[]
+
 
   @@map("threads")
 }

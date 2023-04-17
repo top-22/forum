@@ -5,9 +5,41 @@ import { Room } from "@prisma/client";
 
 interface TextProps {
   room: Room;
+  router: any;
 }
 
-const TextPost = (props: TextProps) => {
+const TextPost = (props: TextProps): JSX.Element => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (event.target.title.value) {
+      // send a request to the server.
+      try {
+        const body = {
+          title: event.target.title.value,
+          description: event.target.description.value,
+          room: event.target.room.value,
+          tags: event.target.tags.value,
+          commentsOff: event.target.commentsOff.checked,
+        };
+
+        const response = await fetch(`/api/createPost`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+
+        const result = await response.json();
+        props.router.push(body.room + "/" + result.id);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.log("title required");
+      return;
+    }
+  };
+
   return (
     <div>
       <Form id="postForm" onSubmit={handleSubmit}>
@@ -39,21 +71,21 @@ const TextPost = (props: TextProps) => {
               name="description"
               as="textarea"
               rows={3}
-              placeholder="Description of your post"
+              placeholder="description of your post"
             />
           </Col>
         </Row>
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Choose Tags</p>
+            <p>Tags</p>
           </Col>
           <Col>
             <Form.Control
               id="tags"
               name="tags"
               as="textarea"
-              placeholder="Fill in your #tags"
+              placeholder="#question #opinion"
             />
           </Col>
         </Row>
@@ -64,7 +96,7 @@ const TextPost = (props: TextProps) => {
               type="switch"
               id="commentsOff"
               name="commentsOff"
-              label="Turn off comments"
+              label="Disable comments"
             />
           </Col>
         </Row>
@@ -83,38 +115,6 @@ const TextPost = (props: TextProps) => {
       `}</style>
     </div>
   );
-};
-
-const handleSubmit = async (event) => {
-  event.preventDefault();
-
-  if (event.target.title.value) {
-    // send a request to the server.
-    console.log(event.target.room);
-    try {
-      const body = {
-        title: event.target.title.value,
-        description: event.target.description.value,
-        room: event.target.room.value,
-        tags: event.target.tags.value,
-      };
-      const response = await fetch(`/api/createPost`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      const result = await response.json();
-      //console.log('test')
-      //console.log(result)
-      //alert(`Is this your thread: ${result.data}`)
-      //await Router.push("/drafts");
-    } catch (error) {
-      console.error(error);
-    }
-  } else {
-    console.log("title required");
-    return;
-  }
 };
 
 export default TextPost;

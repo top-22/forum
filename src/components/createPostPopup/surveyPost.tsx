@@ -5,9 +5,46 @@ import { Room } from "@prisma/client";
 
 interface SurveyProps {
   room: Room;
+  router: any;
 }
 
-const SurveyPost = (props: SurveyProps) => {
+const SurveyPost = (props: SurveyProps): JSX.Element => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (event.target.title.value) {
+      // send a request to the server.
+      try {
+        const body = {
+          title: event.target.title.value,
+          description: event.target.description.value,
+          room: event.target.room.value,
+          tags: event.target.tags.value,
+          commentsOff: event.target.commentsOff.checked,
+          options: [
+            event.target.option1.value,
+            event.target.option2.value,
+            event.target.option3.value,
+            event.target.option4.value,
+          ],
+          endtime: event.target.endtime.value,
+        };
+        const response = await fetch(`/api/createPost`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        const result = await response.json();
+        props.router.push(body.room + "/" + result.id);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.log("title required");
+      return;
+    }
+  };
+
   return (
     <div>
       <Form id="postForm" onSubmit={handleSubmit}>
@@ -38,7 +75,8 @@ const SurveyPost = (props: SurveyProps) => {
               id="description"
               name="description"
               as="textarea"
-              placeholder="Description of your question"
+              rows={3}
+              placeholder="description of your survey"
             />
           </Col>
         </Row>
@@ -49,18 +87,22 @@ const SurveyPost = (props: SurveyProps) => {
           </Col>
           <Col>
             <Form.Control
+              id="option1"
+              name="option1"
               as="textarea"
               required
               minLength={1}
-              placeholder="Option 1 (mandatory)"
+              placeholder="option 1 (mandatory)"
             />
           </Col>
           <Col>
             <Form.Control
+              id="option2"
+              name="option2"
               as="textarea"
               required
               minLength={1}
-              placeholder="Option 2 (mandatory)"
+              placeholder="option 2 (mandatory)"
             />
           </Col>
         </Row>
@@ -68,36 +110,46 @@ const SurveyPost = (props: SurveyProps) => {
         <Row>
           <Col sm="3" />
           <Col>
-            <Form.Control as="textarea" placeholder="Option 3" />
+            <Form.Control
+              id="option3"
+              name="option3"
+              as="textarea"
+              placeholder="option 3"
+            />
           </Col>
           <Col>
-            <Form.Control as="textarea" placeholder="Option 4" />
+            <Form.Control
+              id="option4"
+              name="option4"
+              as="textarea"
+              placeholder="option 4"
+            />
           </Col>
         </Row>
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Choose Tags</p>
+            <p>Endtime</p>
           </Col>
           <Col>
-            <Form.Select size="lg">
-              <option>Choose tags which best describe your post</option>
-              <option>Large select</option>
-              <option>Test</option>
+            <Form.Select id="endtime" name="endtime" required size="lg">
+              <option>1 hour</option>
+              <option>3 hours</option>
+              <option>1 day</option>
             </Form.Select>
           </Col>
         </Row>
         <br></br>
         <Row>
           <Col sm="3">
-            <p>Choose Endtime</p>
+            <p>Tags</p>
           </Col>
           <Col>
             <Form.Control
               id="tags"
               name="tags"
               as="textarea"
-              placeholder="Fill in your #tags"
+              placeholder="#question #opinion"
             />
           </Col>
         </Row>
@@ -106,7 +158,7 @@ const SurveyPost = (props: SurveyProps) => {
           <Col>
             <Form.Check
               type="switch"
-              id="custom-switch"
+              id="commentsOff"
               label="Disable comments"
             />
           </Col>
@@ -114,6 +166,11 @@ const SurveyPost = (props: SurveyProps) => {
       </Form>
 
       <style jsx>{`
+        .test {
+          font-size: 12px;
+          color: red;
+        }
+
         p {
           font-size: 23px;
         }
@@ -126,38 +183,6 @@ const SurveyPost = (props: SurveyProps) => {
       `}</style>
     </div>
   );
-};
-
-const handleSubmit = async (event) => {
-  event.preventDefault();
-
-  if (event.target.title.value) {
-    // send a request to the server.
-    console.log(event.target.room);
-    try {
-      const body = {
-        title: event.target.title.value,
-        description: event.target.description.value,
-        room: event.target.room.value,
-        tags: event.target.tags.value,
-      };
-      const response = await fetch(`/api/createPost`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      const result = await response.json();
-      //console.log('test')
-      //console.log(result)
-      //alert(`Is this your thread: ${result.data}`)
-      //await Router.push("/drafts");
-    } catch (error) {
-      console.error(error);
-    }
-  } else {
-    console.log("title required");
-    return;
-  }
 };
 
 export default SurveyPost;
