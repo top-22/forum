@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Image from "next/image";
@@ -6,17 +6,17 @@ import logo from "../public/Logo.svg";
 import Link from "next/link";
 
 const VerticalNavbar = () => {
-  const router = useRouter();
-
+  
   const navItems = [
     { path: "/room/1", label: "Raum 1" },
     { path: "/room/2", label: "Raum 2" },
   ];
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true));
+
   const isActive = (path: string) => {
-    const currentPath = new URL(router.asPath, "http://forum.jeschek.eu")
-      .pathname;
-    return currentPath === path;
+    return mounted ? window.location.pathname === path : false;
   };
 
   return (
