@@ -14,7 +14,8 @@ const VerticalNavbar = () => {
   ];
 
   const isActive = (path: string) => {
-    return router.asPath === path;
+    const currentPath = new URL(router.asPath, 'http://forum.jeschek.eu').pathname;
+    return currentPath === path;
   };
 
   return (
