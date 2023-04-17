@@ -9,7 +9,7 @@ interface SurveyProps {
 }
 
 const SurveyPost = (props: SurveyProps): JSX.Element => {
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     if (event.target.title.value) {

@@ -9,7 +9,7 @@ interface TextProps {
 }
 
 const TextPost = (props: TextProps): JSX.Element => {
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     if (event.target.title.value) {
