@@ -14,7 +14,8 @@ const VerticalNavbar = () => {
   ];
 
   const isActive = (path: string) => {
-    const currentPath = new URL(router.asPath, 'http://forum.jeschek.eu').pathname;
+    const currentPath = new URL(router.asPath, "http://forum.jeschek.eu")
+      .pathname;
     return currentPath === path;
   };
 
@@ -39,11 +40,7 @@ const VerticalNavbar = () => {
         <Nav.Link as={Link} href="/" active={isActive("/")}>
           Home
         </Nav.Link>
-        <Nav.Link
-          as={Link}
-          href="/room/join"
-          active={isActive("/room/join")}
-        >
+        <Nav.Link as={Link} href="/room/join" active={isActive("/room/join")}>
           Entdecken
         </Nav.Link>
         <span className="border border-dark border-start-0 border-end-0 flex-grow-1 mx-auto w-75">
@@ -62,11 +59,7 @@ const VerticalNavbar = () => {
             ))}
           </div>
         </span>
-        <Nav.Link
-          as={Link}
-          href="/settings"
-          active={isActive("/settings")}
-        >
+        <Nav.Link as={Link} href="/settings" active={isActive("/settings")}>
           Einstellungen
         </Nav.Link>
       </Nav>
