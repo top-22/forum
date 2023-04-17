@@ -19,7 +19,7 @@ const VerticalNavbar = () => {
   };
 
   return (
-    <Navbar bg="primary" className="d-flex flex-column vh-100">
+    <Navbar bg="primary" className="d-flex flex-column vh-100 p-1">
       <Navbar.Brand
         as={Link}
         href="/"
@@ -34,16 +34,15 @@ const VerticalNavbar = () => {
           className="rounded"
         />
       </Navbar.Brand>
-      <Nav className="flex-column d-flex flex-grow-1">
+      <Nav className="flex-column d-flex flex-grow-1 align-items-center">
         {/* nav items */}
-        <Nav.Link as={Link} href="/" active={isActive("/")} className="mx-auto">
+        <Nav.Link as={Link} href="/" active={isActive("/")}>
           Home
         </Nav.Link>
         <Nav.Link
           as={Link}
           href="/room/join"
           active={isActive("/room/join")}
-          className="mx-auto"
         >
           Entdecken
         </Nav.Link>
@@ -57,7 +56,6 @@ const VerticalNavbar = () => {
                 as={Link}
                 href={item.path}
                 active={isActive(item.path)}
-                className="mx-auto"
               >
                 {item.label}
               </Nav.Link>
@@ -68,7 +66,6 @@ const VerticalNavbar = () => {
           as={Link}
           href="/settings"
           active={isActive("/settings")}
-          className="mx-auto"
         >
           Einstellungen
         </Nav.Link>
