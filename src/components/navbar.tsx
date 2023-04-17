@@ -20,11 +20,11 @@ const VerticalNavbar = () => {
   };
 
   return (
-    <Navbar bg="primary" className="d-flex flex-column vh-100 p-1">
+    <Navbar bg="primary" className="d-flex flex-column vh-100 p-1 align-items-center">
       <Navbar.Brand
         as={Link}
         href="/"
-        className="mx-auto"
+        className="m-0"
         style={{ cursor: "pointer" }}
       >
         <Image
