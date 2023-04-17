@@ -6,7 +6,6 @@ import logo from "../public/Logo.svg";
 import Link from "next/link";
 
 const VerticalNavbar = () => {
-  
   const navItems = [
     { path: "/room/1", label: "Raum 1" },
     { path: "/room/2", label: "Raum 2" },
@@ -20,7 +19,10 @@ const VerticalNavbar = () => {
   };
 
   return (
-    <Navbar bg="primary" className="d-flex flex-column vh-100 p-1 align-items-center">
+    <Navbar
+      bg="primary"
+      className="d-flex flex-column vh-100 p-1 align-items-center"
+    >
       <Navbar.Brand
         as={Link}
         href="/"
