@@ -47,9 +47,7 @@ const VerticalNavbar = () => {
         >
           Entdecken
         </Nav.Link>
-        <hr className="mx-auto w-75" /> {/* Trenner nach Home */}
-        {/* sorgt dafür dass Settings ganz unten ist*/}
-        <div className="flex-grow-1">
+        <span className="border border-dark border-start-0 border-end-0 flex-grow-1 mx-auto w-75">
           {/* zentriert die Items */}
           <div className="d-flex flex-column align-items-center">
             {/* Listet alle Items zwischen Home und Einstellungen */}
@@ -65,8 +63,7 @@ const VerticalNavbar = () => {
               </Nav.Link>
             ))}
           </div>
-        </div>
-        <hr className="mx-auto w-75" /> {/* Trenner vor Einstellungen */}
+        </span>
         <Nav.Link
           as={Link}
           href="/settings"
