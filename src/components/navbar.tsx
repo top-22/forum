@@ -44,7 +44,7 @@ const VerticalNavbar = () => {
           active={isActive("/room/join")}
           className="mx-auto"
         >
-          Explore
+          Entdecken
         </Nav.Link>
         <hr className="mx-auto w-75" /> {/* Trenner nach Home */}
         {/* sorgt dafür dass Settings ganz unten ist*/}
@@ -72,7 +72,7 @@ const VerticalNavbar = () => {
           active={isActive("/settings")}
           className="mx-auto"
         >
-          Settings
+          Einstellungen
         </Nav.Link>
       </Nav>
     </Navbar>
