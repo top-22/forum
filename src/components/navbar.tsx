@@ -9,8 +9,8 @@ const VerticalNavbar = () => {
   const router = useRouter();
 
   const navItems = [
-    { path: "/room/1", label: "Page 1" },
-    { path: "/room/2", label: "Page 2" },
+    { path: "/room/1", label: "Raum 1" },
+    { path: "/room/2", label: "Raum 2" },
   ];
 
   const isActive = (path: string) => {
