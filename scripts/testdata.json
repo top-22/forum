@@ -53,6 +53,10 @@
         {
           "name": "Study Buddies",
           "role": "MEMBER"
+        },
+        {
+          "name": "Admin Room",
+          "role": "MEMBER"
         }
       ]
     },
@@ -439,192 +443,230 @@
     {
       "name": "Cellular Respiration and ATP Production",
       "room": "BioTalk",
-      "tags": ["Science"]
+      "tags": ["Science"],
+      "creator": "Olivia Perez"
     },
     {
       "name": "Evolutionary Biology and Natural Selection",
       "room": "BioTalk",
-      "tags": []
+      "tags": [],
+      "creator": "Olivia Perez"
     },
     {
       "name": "Genetics and Heredity",
       "room": "BioTalk",
-      "tags": []
+      "tags": [],
+      "creator": "Jessica Green"
     },
     {
       "name": "Algebraic Expressions and Equations",
       "room": "NumberCrunch",
-      "tags": ["Mathematics", "Logic"]
+      "tags": ["Mathematics", "Logic"],
+      "creator": "Isabella Kim"
     },
     {
       "name": "Geometry and Trigonometry",
       "room": "NumberCrunch",
-      "tags": ["Mathematics", "Shapes"]
+      "tags": ["Mathematics", "Shapes"],
+      "creator": "Dominic Young"
     },
     {
       "name": "Debate on Gun Control in the US",
       "room": "PoliDebate",
-      "tags": ["Politics", "Controversy"]
+      "tags": ["Politics", "Controversy"],
+      "creator": "Sophia Reynolds"
     },
     {
       "name": "The Ethics of Political Lobbying",
       "room": "PoliDebate",
-      "tags": ["Politics", "Morality"]
+      "tags": ["Politics", "Morality"],
+      "creator": "Sofia Ramirez"
     },
     {
       "name": "International Relations and Diplomacy",
       "room": "PoliDebate",
-      "tags": ["Politics", "Foreign Affairs"]
+      "tags": ["Politics", "Foreign Affairs"],
+      "creator": "Sophia Reynolds"
     },
     {
       "name": "The Works of Shakespeare",
       "room": "LitLounge",
-      "tags": ["Drama"]
+      "tags": ["Drama"],
+      "creator": "Rita Singh"
     },
     {
       "name": "Postmodernism in Literature",
       "room": "LitLounge",
-      "tags": ["Literature", "Philosophy"]
+      "tags": ["Literature", "Philosophy"],
+      "creator": "Isabella Kim"
     },
     {
       "name": "The American Literary Canon",
       "room": "LitLounge",
-      "tags": ["Literature", "Culture"]
+      "tags": ["Literature", "Culture"],
+      "creator": "Rita Singh"
     },
     {
       "name": "Microeconomics and Market Structures",
       "room": "EconChat",
-      "tags": ["Markets"]
+      "tags": ["Markets"],
+      "creator": "Ethan Lee"
     },
     {
       "name": "Macroeconomics and Fiscal Policy",
       "room": "EconChat",
-      "tags": ["Policy"]
+      "tags": ["Policy"],
+      "creator": "Ethan Lee"
     },
     {
       "name": "The Industrial Revolution and Its Impact",
       "room": "HistHorizon",
-      "tags": []
+      "tags": [],
+      "creator": "Hannah Patel"
     },
     {
       "name": "World War II and Its Aftermath",
       "room": "HistHorizon",
-      "tags": ["History", "War"]
+      "tags": ["History", "War"],
+      "creator": "Hannah Patel"
     },
     {
       "name": "The Renaissance and Its Legacy",
       "room": "HistHorizon",
-      "tags": ["History", "Art"]
+      "tags": ["History", "Art"],
+      "creator": "Hannah Patel"
     },
     {
       "name": "Abnormal Psychology and Mental Illness",
       "room": "PsychPanel",
-      "tags": ["Mental Health"]
+      "tags": ["Mental Health"],
+      "creator": "Max Johnson"
     },
     {
       "name": "Cognitive Psychology and Memory",
       "room": "PsychPanel",
-      "tags": []
+      "tags": [],
+      "creator": "Max Johnson"
     },
     {
       "name": "Climate Change and Global Warming",
       "room": "SciSwap",
-      "tags": ["Science", "Environment"]
+      "tags": ["Science", "Environment"],
+      "creator": "Jessica Green"
     },
     {
       "name": "Quantum Mechanics and Particle Physics",
       "room": "SciSwap",
-      "tags": ["Physics", "Theory"]
+      "tags": ["Physics", "Theory"],
+      "creator": "Nolan Gomez"
     },
     {
       "name": "French Conversation and Pronunciation Practice",
       "room": "LangLab",
-      "tags": ["Language", "French"]
+      "tags": ["Language", "French"],
+      "creator": "Rita Singh"
     },
     {
       "name": "Modern Art and Its Critics",
       "room": "ArtSpace",
-      "tags": ["art"]
+      "tags": ["art"],
+      "creator": "Avery Patel"
     },
     {
       "name": "Graphic Design and Visual Communication",
       "room": "ArtSpace",
-      "tags": ["art", "design"]
+      "tags": ["art", "design"],
+      "creator": "Avery Patel"
     },
     {
       "name": "Upcoming Music Festivals on Campus",
       "room": "Campus Life",
-      "tags": ["music"]
+      "tags": ["music"],
+      "creator": "Rita Singh"
     },
     {
       "name": "Volunteer Opportunities for Community Service",
       "room": "Campus Life",
-      "tags": ["volunteering"]
+      "tags": ["volunteering"],
+      "creator": "Hannah Patel"
     },
     {
       "name": "Chemistry Exam Preparation",
       "room": "Study Buddies",
-      "tags": ["chemistry"]
+      "tags": ["chemistry"],
+      "creator": "Daniel Lee"
     },
     {
       "name": "Essay Writing Techniques for Humanities Courses",
       "room": "Study Buddies",
-      "tags": ["writing"]
+      "tags": ["writing"],
+      "creator": "Daniel Lee"
     },
     {
       "name": "Networking Strategies for Business Majors",
       "room": "Career Corner",
-      "tags": ["business"]
+      "tags": ["business"],
+      "creator": "Zoe Kim"
     },
     {
       "name": "Internship Opportunities in the Tech Industry",
       "room": "Career Corner",
-      "tags": ["tech"]
+      "tags": ["tech"],
+      "creator": "Zoe Kim"
     },
     {
       "name": "Artificial Intelligence and Machine Learning",
       "room": "Tech Talk",
-      "tags": ["AI"]
+      "tags": ["AI"],
+      "creator": "Nolan Gomez"
     },
     {
       "name": "Artificial Intelligence: Friend or Foe?",
       "room": "Tech Talk",
-      "tags": ["AI"]
+      "tags": ["AI"],
+      "creator": "Nolan Gomez"
     },
     {
       "name": "The Future of Robotics in Industry",
       "room": "Tech Talk",
-      "tags": ["robotics"]
+      "tags": ["robotics"],
+      "creator": "Ethan Lee"
     },
     {
       "name": "Mindful Meditation Practices",
       "room": "Wellness Warriors",
-      "tags": ["mindfulness"]
+      "tags": ["mindfulness"],
+      "creator": "Olivia Lee"
     },
     {
       "name": "Overcoming Burnout in the Workplace",
       "room": "Wellness Warriors",
-      "tags": ["wellness"]
+      "tags": ["wellness"],
+      "creator": "Emily Kim"
     },
     {
       "name": "Best Practices for Forum Moderation",
       "room": "Admin Room",
-      "tags": ["forum"]
+      "tags": ["forum"],
+      "creator": "Michael Scott"
     },
     {
       "name": "Effective Communication with Users",
       "room": "Admin Room",
-      "tags": ["communication"]
+      "tags": ["communication"],
+      "creator": "Michael Scott"
     },
     {
       "name": "Tips and Tricks for JavaScript Development",
       "room": "Developer Room",
-      "tags": ["javascript"]
+      "tags": ["javascript"],
+      "creator": "Luke Parker"
     },
     {
       "name": "Building Scalable Web Applications with React",
       "room": "Developer Room",
-      "tags": ["web"]
+      "tags": ["web"],
+      "creator": "Luke Parker"
     }
   ],
   "affiliations": [
