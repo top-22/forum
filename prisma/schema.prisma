@@ -35,7 +35,7 @@ model Thread {
   description String?
   room        Room      @relation(fields: [roomId], references: [id])
   roomId      Int       @map("room_id")
-  creator     User      @relation(map: "created_by", fields: [userId], references: [id])
+  creator     User      @relation(fields: [userId], references: [id])
   userId      Int
   tags        Tag[]
   messages    Message[]
