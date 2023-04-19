@@ -7,7 +7,7 @@ import Layout from "../../components/layout";
 interface RoomProps {
   room: Room;
   users: User[];
-  threads: Thread[];
+  threads: (Thread & { creator: User })[];
 }
 
 const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
@@ -41,7 +41,7 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
                             href={`${room.id}/${thread.id}`}
                           >
                             <h5 className="card-title text-white text-decoration-underline">
-                              {thread.name}{" "}
+                              {thread.name}{" "}{thread.creator.name ?? "Unbekannt"}
                             </h5>
                             <p className="card-text text-secondary text-decoration-none">
                               {thread.description ??
@@ -94,8 +94,8 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
   let users = await prisma.roomUser
     .findMany({ where: { roomId }, include: { user: true } })
     .then((roomUsers) => roomUsers.map((roomUser) => roomUser.user));
-  let threads = await prisma.thread.findMany({ where: { roomId } });
-  return { props: { room, users, threads } };
+  let threads = await prisma.thread.findMany({ where: { roomId }, include:{creator: true}});
+  return { props: { room, users, threads: threads.map((thread) => ({ ...thread, creator: thread.creator })) } };
 };
 
 export default Room;
