@@ -17,8 +17,7 @@ async function main() {
   console.log("deleting affiliations...");
   await prisma.affiliation.deleteMany();
 
-  if (process.argv[2] === "delete")
-    return;
+  if (process.argv[2] === "delete") return;
 
   console.log("===========");
 
@@ -98,7 +97,11 @@ async function main() {
   console.log("CREATING THREADS");
   for (const threadData of data.threads) {
     console.log("   " + threadData.name);
-    const creatorId = (await prisma.user.findFirstOrThrow({ where: { name: threadData.creator } })).id
+    const creatorId = (
+      await prisma.user.findFirstOrThrow({
+        where: { name: threadData.creator },
+      })
+    ).id;
     await prisma.thread.create({
       data: {
         name: threadData.name,
