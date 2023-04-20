@@ -2,7 +2,7 @@ import Layout from "../components/layout";
 import Button from "react-bootstrap/Button";
 import Image from "next/image";
 import Avatar from "../public/avatar.png";
-import { useRouter  } from "next/router";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { serialize, parse } from "cookie";
 
