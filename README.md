@@ -30,3 +30,9 @@ INSERT INTO <schema>."<table>" SELECT * FROM testdata"<table>";
 - Have a look at [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/)
 - follow style guidelines, preferably enforced by a plugin
   - TODO: write style guidelines, (eslint + editorconfig)
+
+## Usefull things
+- remove last pushed commit
+  - git reset --soft HEAD~1
+  - git add ... git commit ...
+  - git push -f
