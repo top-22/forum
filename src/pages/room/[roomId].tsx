@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Room, PrismaClient, RoomUser, User, Thread } from "@prisma/client";
+import { Room, PrismaClient, User, Thread } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import Layout from "../../components/layout";
 
