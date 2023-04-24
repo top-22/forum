@@ -5,7 +5,6 @@ import { Room } from "@prisma/client";
 
 interface TextProps {
   room: Room;
-  router: any;
 }
 
 const TextPost = (props: TextProps): JSX.Element => {

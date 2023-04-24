@@ -5,7 +5,6 @@ import { Room } from "@prisma/client";
 
 interface SurveyProps {
   room: Room;
-  router: any;
 }
 
 const SurveyPost = (props: SurveyProps): JSX.Element => {

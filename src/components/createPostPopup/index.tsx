@@ -9,7 +9,6 @@ import TextPost from "./textPost";
 interface PostProps {
   showTextPost: boolean;
   room: Room;
-  router: any;
 }
 
 interface CreateProps {
@@ -20,9 +19,9 @@ interface CreateProps {
 
 function Post(props: PostProps): JSX.Element {
   if (props.showTextPost == false) {
-    return <SurveyPost room={props.room} router={props.router} />;
+    return <SurveyPost room={props.room}/>;
   } else {
-    return <TextPost room={props.room} router={props.router} />;
+    return <TextPost room={props.room}/>;
   }
 }
 
