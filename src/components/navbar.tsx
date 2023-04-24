@@ -12,7 +12,7 @@ const VerticalNavbar = () => {
   ];
 
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true));
+  useEffect(() => setMounted(true), []);
 
   const isActive = (path: string) => {
     return mounted ? window.location.pathname === path : false;
