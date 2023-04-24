@@ -19,9 +19,9 @@ interface CreateProps {
 
 function Post(props: PostProps): JSX.Element {
   if (props.showTextPost == false) {
-    return <SurveyPost room={props.room}/>;
+    return <SurveyPost room={props.room} />;
   } else {
-    return <TextPost room={props.room}/>;
+    return <TextPost room={props.room} />;
   }
 }
 
