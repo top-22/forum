@@ -1,5 +1,4 @@
 import { useState, FunctionComponent } from "react";
-import { useRouter } from "next/router";
 import { Modal, Button } from "react-bootstrap";
 import { Room, RoomUser } from "@prisma/client";
 
@@ -26,7 +25,6 @@ function Post(props: PostProps): JSX.Element {
 }
 
 const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
-  const router = useRouter();
   const [showTextPost, setTextPost] = useState(true);
 
   const openSurveyPost = (): void => {
@@ -78,7 +76,6 @@ const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
           <Post
             showTextPost={showTextPost}
             room={props.room}
-            router={router}
           ></Post>
         </Modal.Body>
         <Modal.Footer className="modal-footer border-top-0">
