@@ -22,7 +22,7 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
         <div className="bg-dark vh-100">
           <div className="d-flex justify-content-between p-2">
             <h1 className="text-primary">{room.name}</h1>
-            <h1 className="text-secondary">Raumoptionen</h1>
+            <button className="text-secondary h3">Raumoptionen</button>
             {/*Popup für Raumoptionen hinzufügen */}
           </div>
           <div className="p-2">
@@ -56,9 +56,9 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
                               </p>
                             </Link>
                           </div>
-                          <div className="ms-auto position-absolute top-0 end-0 p-2">
+                          <button className="btn ms-auto position-absolute top-0 end-0 p-2">
                             Optionen {/*Popup für Optionen hinzufügen */}
-                          </div>
+                          </button>
                         </div>
                       </div>
                     ))
