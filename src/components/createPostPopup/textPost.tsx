@@ -19,7 +19,7 @@ const TextPost = (props: TextProps): JSX.Element => {
           title: event.target.title.value,
           description: event.target.description.value,
           room: event.target.room.value,
-          tags: event.target.tags.value,
+          tags: (event.target.tags.value ?? '').toLowerCase().split(" "),
           commentsOff: event.target.commentsOff.checked,
         };
 

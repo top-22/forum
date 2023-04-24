@@ -9,19 +9,13 @@ export default async function handler(
 
   // Get data submitted in request's body.
   const body = req.body;
-  const room: string = body.room;
-  const title: string = body.title;
-  const description: string = body.description;
-  const tags: string = body.tags;
-  const commentsOff: boolean = body.commentsOff;
-  const options: string[] = body.options;
-  const endtime: string = body.endtime;
-
-  let tagsArray: string[] = [];
-
-  if (tags.length > 0) {
-    tagsArray = tags.split(" ");
-  }
+  const room = body.room as string;
+  const title = body.title as string;
+  const description = body.description as string;
+  const tags = body.tags as string[];
+  const commentsOff = body.commentsOff as boolean;
+  const options = body.options as string[];
+  const endtime = body.endtime as string;
 
   const result = await prisma.thread.create({
     data: {
@@ -29,7 +23,7 @@ export default async function handler(
       description: description,
       room: { connect: { id: parseInt(room) } },
       tags: {
-        connectOrCreate: tagsArray.map((tag) => {
+        connectOrCreate: tags.map((tag) => {
           return {
             where: { name: tag },
             create: { name: tag },
