@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, ThreadType } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -10,17 +10,22 @@ export default async function handler(
   // Get data submitted in request's body.
   const body = req.body;
   const room = body.room as string;
-  const title = body.title as string;
+  const type = body.type as ThreadType;
+  const name = body.name as string;
   const description = body.description as string;
-  const tags = body.tags as string[];
-  const commentsOff = body.commentsOff as boolean;
+  const tags = ((body.tags as string) ?? "")
+    .toLowerCase()
+    .split(" ")
+    .filter((tag) => tag != "");
+  const readOnly = body.readOnly as boolean;
   const options = body.options as string[];
   const endtime = body.endtime as string;
 
   const result = await prisma.thread.create({
     data: {
-      name: title,
-      description: description,
+      name,
+      description,
+      type,
       room: { connect: { id: parseInt(room) } },
       tags: {
         connectOrCreate: tags.map((tag) => {
@@ -30,11 +35,11 @@ export default async function handler(
           };
         }),
       },
-      commentsOff: commentsOff,
-      options: options,
-      endtime: endtime,
+      readOnly,
+      options,
+      endtime,
     },
   });
 
-  res.json(result);
+  res.redirect(`/room/${room}/${result.id}`);
 }

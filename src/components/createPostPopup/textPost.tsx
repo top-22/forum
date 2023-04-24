@@ -9,42 +9,12 @@ interface TextProps {
 }
 
 const TextPost = (props: TextProps): JSX.Element => {
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-
-    if (event.target.title.value) {
-      // send a request to the server.
-      try {
-        const body = {
-          title: event.target.title.value,
-          description: event.target.description.value,
-          room: event.target.room.value,
-          tags: (event.target.tags.value ?? '').toLowerCase().split(" "),
-          commentsOff: event.target.commentsOff.checked,
-        };
-
-        const response = await fetch(`/api/createPost`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        });
-
-        const result = await response.json();
-        props.router.push(body.room + "/" + result.id);
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      console.log("title required");
-      return;
-    }
-  };
-
   return (
     <div>
-      <Form id="postForm" onSubmit={handleSubmit}>
+      <Form id="postForm" action="/api/createPost" method="POST">
         <br></br>
         <input type="hidden" name="room" value={props.room.id} />
+        <input type="hidden" name="type" value="TEXT" />
         <Row>
           <Col sm="3">
             <p>Title</p>
@@ -53,7 +23,7 @@ const TextPost = (props: TextProps): JSX.Element => {
             <Form.Control
               as="textarea"
               id="title"
-              name="title"
+              name="name"
               required
               minLength={10}
               placeholder="title of your post"
@@ -94,8 +64,8 @@ const TextPost = (props: TextProps): JSX.Element => {
           <Col>
             <Form.Check
               type="switch"
-              id="commentsOff"
-              name="commentsOff"
+              id="readOnly"
+              name="readOnly"
               label="Disable comments"
             />
           </Col>

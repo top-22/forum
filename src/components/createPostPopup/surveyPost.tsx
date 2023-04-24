@@ -9,47 +9,12 @@ interface SurveyProps {
 }
 
 const SurveyPost = (props: SurveyProps): JSX.Element => {
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-
-    if (event.target.title.value) {
-      // send a request to the server.
-      try {
-        const body = {
-          title: event.target.title.value,
-          description: event.target.description.value,
-          room: event.target.room.value,
-          tags: (event.target.tags.value ?? '').toLowerCase().split(" "),
-          commentsOff: event.target.commentsOff.checked,
-          options: [
-            event.target.option1.value,
-            event.target.option2.value,
-            event.target.option3.value,
-            event.target.option4.value,
-          ],
-          endtime: event.target.endtime.value,
-        };
-        const response = await fetch(`/api/createPost`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        });
-        const result = await response.json();
-        props.router.push(body.room + "/" + result.id);
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      console.log("title required");
-      return;
-    }
-  };
-
   return (
     <div>
-      <Form id="postForm" onSubmit={handleSubmit}>
+      <Form id="postForm" action="/api/createPost" method="POST">
         <br></br>
         <input type="hidden" name="room" value={props.room.id} />
+        <input type="hidden" name="type" value="SURVEY" />
         <Row>
           <Col sm="3">
             <p>Question</p>
@@ -57,7 +22,7 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
           <Col>
             <Form.Control
               id="title"
-              name="title"
+              name="name"
               as="textarea"
               required
               minLength={10}
@@ -158,7 +123,8 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
           <Col>
             <Form.Check
               type="switch"
-              id="commentsOff"
+              id="readOnly"
+              name="readOnly"
               label="Disable comments"
             />
           </Col>
