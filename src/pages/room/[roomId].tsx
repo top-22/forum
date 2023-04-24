@@ -19,62 +19,65 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
       </Head>
 
       <main>
-        <div className="d-flex justify-content-between p-2">
-          <h1 className="text-primary">{room.name}</h1>
-          <h1 className="text-secondary">Raumoptionen</h1>{" "}
-          {/*Popup für Raumoptionen hinzufügen */}
-        </div>
-        <div className="p-2">
-          <div className="container-fluid m-0 p-0 w-100">
-            <div className="overflow-auto">
-              <div className="col flex-nowrap">
-                {threads.length > 0 ? (
-                  threads.map((thread) => (
-                    <div className="col mb-2" key={thread.id}>
-                      <div
-                        className="card text-bg-primary h-100 d-flex align-items-start"
-                        style={{ width: "80%", position: "relative" }}
-                      >
-                        <div className="card-body">
-                          <Link
-                            key={thread.id}
-                            href={`${room.id}/${thread.id}`}
-                          >
-                            <h5 className="card-title text-white text-decoration-underline">
-                              {thread.name} {thread.creator.name ?? "Unbekannt"}
-                            </h5>
-                            <p className="card-text text-secondary text-decoration-none">
-                              {thread.description ??
-                                "Dieser Thread hat keine genauere Beschreibung."}
-                            </p>
-                          </Link>
-                        </div>
-                        <div className="ms-auto position-absolute top-0 end-0 p-2">
-                          Optionen {/*Popup für Optionen hinzufügen */}
+        <div className="bg-dark vh-100">
+          <div className="d-flex justify-content-between p-2">
+            <h1 className="text-primary">{room.name}</h1>
+            <h1 className="text-secondary">Raumoptionen</h1>{" "}
+            {/*Popup für Raumoptionen hinzufügen */}
+          </div>
+          <div className="p-2">
+            <button className="btn btn-primary">CREATE POST</button>
+          </div>
+          <div className="p-2">
+            <div className="container-fluid m-0 p-0 w-100">
+              <div className="overflow-auto">
+                <div className="col flex-nowrap">
+                  {threads.length > 0 ? (
+                    threads.map((thread) => (
+                      <div className="col mb-2" key={thread.id}>
+                        <div
+                          className="card text-bg-primary h-100 d-flex align-items-start"
+                          style={{ width: "80%", position: "relative" }}
+                        >
+                          <div className="card-body">
+                            <Link
+                              key={thread.id}
+                              href={`${room.id}/${thread.id}`}
+                            >
+                              <h5 className="card-title text-white text-decoration-underline">
+                                {thread.name}{" "}
+                                {thread.creator.name ?? "Unbekannt"}
+                              </h5>
+                              <p className="card-text text-secondary text-decoration-none">
+                                {thread.description ??
+                                  "Dieser Thread hat keine genauere Beschreibung."}
+                              </p>
+                            </Link>
+                          </div>
+                          <div className="ms-auto position-absolute top-0 end-0 p-2">
+                            Optionen {/*Popup für Optionen hinzufügen */}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-center">Es gibt keine Threads.</div>
-                )}
+                    ))
+                  ) : (
+                    <div className="text-center">Es gibt keine Threads.</div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="text-white">
-          <span>{room.description}</span>
-          <div>
-            <h2>Benutzer im Raum:</h2>
-            <ul>
-              {users.map((user) => (
-                <li key={user.id}>{user.name}</li>
-              ))}
-            </ul>
+          <div className="text-white">
+            <span>{room.description}</span>
+            <div>
+              <h2>Benutzer im Raum:</h2>
+              <ul>
+                {users.map((user) => (
+                  <li key={user.id}>{user.name}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className="d-flex justify-content-end p-2">
-          <button className="btn btn-primary">CREATE POST</button>
         </div>
       </main>
     </Layout>
