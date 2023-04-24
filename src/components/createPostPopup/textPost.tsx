@@ -14,7 +14,7 @@ const TextPost = (props: TextProps): JSX.Element => {
         <br></br>
         <input type="hidden" name="room" value={props.room.id} />
         <input type="hidden" name="type" value="TEXT" />
-        <Row>
+        <Row className="my-2">
           <Col sm="3">
             <p>Title</p>
           </Col>
@@ -24,13 +24,12 @@ const TextPost = (props: TextProps): JSX.Element => {
               id="title"
               name="name"
               required
-              minLength={10}
+              minLength={5}
               placeholder="title of your post"
             />
           </Col>
         </Row>
-        <br></br>
-        <Row>
+        <Row className="my-2">
           <Col sm="3">
             <p>Description</p>
           </Col>
@@ -44,8 +43,7 @@ const TextPost = (props: TextProps): JSX.Element => {
             />
           </Col>
         </Row>
-        <br></br>
-        <Row>
+        <Row className="my-2">
           <Col sm="3">
             <p>Tags</p>
           </Col>
@@ -58,7 +56,6 @@ const TextPost = (props: TextProps): JSX.Element => {
             />
           </Col>
         </Row>
-        <br></br>
         <Row>
           <Col>
             <Form.Check

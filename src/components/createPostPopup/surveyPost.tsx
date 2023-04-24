@@ -14,7 +14,7 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
         <br></br>
         <input type="hidden" name="room" value={props.room.id} />
         <input type="hidden" name="type" value="SURVEY" />
-        <Row>
+        <Row className="my-2">
           <Col sm="3">
             <p>Question</p>
           </Col>
@@ -24,13 +24,12 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
               name="name"
               as="textarea"
               required
-              minLength={10}
+              minLength={5}
               placeholder="question of your survey"
             />
           </Col>
         </Row>
-        <br></br>
-        <Row>
+        <Row className="my-2">
           <Col sm="3">
             <p>Description</p>
           </Col>
@@ -44,8 +43,7 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
             />
           </Col>
         </Row>
-        <br></br>
-        <Row>
+        <Row className="my-2">
           <Col sm="3">
             <p>Answers</p>
           </Col>
@@ -70,8 +68,7 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
             />
           </Col>
         </Row>
-        <br></br>
-        <Row>
+        <Row className="my-2">
           <Col sm="3" />
           <Col>
             <Form.Control
@@ -90,8 +87,7 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
             />
           </Col>
         </Row>
-        <br></br>
-        <Row>
+        <Row className="my-2">
           <Col sm="3">
             <p>Endtime</p>
           </Col>
@@ -103,8 +99,7 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
             </Form.Select>
           </Col>
         </Row>
-        <br></br>
-        <Row>
+        <Row className="my-2">
           <Col sm="3">
             <p>Tags</p>
           </Col>
@@ -117,7 +112,6 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
             />
           </Col>
         </Row>
-        <br></br>
         <Row>
           <Col>
             <Form.Check

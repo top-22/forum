@@ -80,7 +80,7 @@ const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
         </Modal.Body>
         <Modal.Footer className="modal-footer border-top-0">
           <Button type="submit" form="postForm">
-            Submit
+            Create
           </Button>
         </Modal.Footer>
       </div>
