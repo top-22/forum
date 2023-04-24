@@ -22,11 +22,12 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
         <div className="bg-dark vh-100">
           <div className="d-flex justify-content-between p-2">
             <h1 className="text-primary">{room.name}</h1>
-            <h1 className="text-secondary">Raumoptionen</h1>{" "}
+            <h1 className="text-secondary">Raumoptionen</h1>
             {/*Popup für Raumoptionen hinzufügen */}
           </div>
           <div className="p-2">
             <button className="btn btn-primary">CREATE POST</button>
+            {/*Popup für Roomcreate hinzufügen */}
           </div>
           <div className="p-2">
             <div className="container-fluid m-0 p-0 w-100">
@@ -45,7 +46,8 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
                               href={`${room.id}/${thread.id}`}
                             >
                               <h5 className="card-title text-white text-decoration-underline">
-                                {thread.name}{" "}
+                                {thread.name}
+                                {" - "}
                                 {thread.creator.name ?? "Unbekannt"}
                               </h5>
                               <p className="card-text text-secondary text-decoration-none">
@@ -67,7 +69,8 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
               </div>
             </div>
           </div>
-          <div className="text-white">
+          <div className="text-white p-2">
+            {/*Infos über den Room für die Rauminfos/Raumoptionen, müssen später an Raumoptionen-Componente übergebn werden und hier rausgelöscht werden*/}
             <span>{room.description}</span>
             <div>
               <h2>Benutzer im Raum:</h2>
