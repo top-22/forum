@@ -67,89 +67,101 @@ const RegisterPage: NextPage = () => {
   };
 
   return (
-    <div className="bg-dark vh-100 overflow-hidden d-flex align-items-center">
-      <div
-        className="col-6 d-flex flex-column justify-content-end mx-auto"
-        style={{ width: "400px" }}
-      >
-        <Image
-          src={Logo}
-          alt="Logo"
-          width={250}
-          className="mx-auto d-block mb-4"
-        />
-        <h1 className="text-light mb-3">Registrierung</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3 d-flex align-items-center">
-            <label htmlFor="name"></label>
-            <input
-              type="text"
-              className="form-control bg-light"
-              id="name"
-              value={name}
-              placeholder="Name"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="mb-3 d-flex align-items-center">
-            <label htmlFor="username"></label>
-            <input
-              type="text"
-              className="form-control bg-light"
-              id="username"
-              value={username}
-              placeholder="Username"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div className="mb-3 d-flex align-items-center">
-            <label htmlFor="email"></label>
-            <input
-              type="email"
-              className="form-control bg-light"
-              id="email"
-              value={email}
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="mb-3 d-flex align-items-center">
-            <label htmlFor="password"></label>
-            <input
-              type="password"
-              className="form-control bg-light"
-              id="password"
-              value={password}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="mb-3 d-flex align-items-center">
-            <label htmlFor="repeatPassword"></label>
-            <input
-              type="password"
-              className="form-control bg-light"
-              id="repeatPassword"
-              value={repeatPassword}
-              placeholder="Repeat Password"
-              onChange={(e) => setRepeatPassword(e.target.value)}
-            />
-          </div>
-          <div className="d-flex align-items-center justify-content-between">
-            <button className="btn btn-primary" type="submit">
-              Registrieren
-            </button>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              {error && (
-                <p className="text-light d-flex align-self-center mb-0 ml-auto">
-                  {error}
-                </p>
-              )}
-            </div>
-          </div>
-        </form>
+    <>
+      <div className="position-fixed" style={{ top: "10px", left: "10px" }}>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            window.location.href = "/login";
+          }}
+        >
+          Zurück
+        </button>
       </div>
-    </div>
+      <div className="bg-dark vh-100 overflow-hidden d-flex align-items-center">
+        <div
+          className="col-6 d-flex flex-column justify-content-end mx-auto"
+          style={{ width: "400px" }}
+        >
+          <Image
+            src={Logo}
+            alt="Logo"
+            width={250}
+            className="mx-auto d-block mb-4"
+          />
+          <h1 className="text-light mb-3">Registrierung</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3 d-flex align-items-center">
+              <label htmlFor="name"></label>
+              <input
+                type="text"
+                className="form-control bg-light"
+                id="name"
+                value={name}
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="mb-3 d-flex align-items-center">
+              <label htmlFor="username"></label>
+              <input
+                type="text"
+                className="form-control bg-light"
+                id="username"
+                value={username}
+                placeholder="Username"
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div className="mb-3 d-flex align-items-center">
+              <label htmlFor="email"></label>
+              <input
+                type="email"
+                className="form-control bg-light"
+                id="email"
+                value={email}
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="mb-3 d-flex align-items-center">
+              <label htmlFor="password"></label>
+              <input
+                type="password"
+                className="form-control bg-light"
+                id="password"
+                value={password}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="mb-3 d-flex align-items-center">
+              <label htmlFor="repeatPassword"></label>
+              <input
+                type="password"
+                className="form-control bg-light"
+                id="repeatPassword"
+                value={repeatPassword}
+                placeholder="Repeat Password"
+                onChange={(e) => setRepeatPassword(e.target.value)}
+              />
+            </div>
+            <div className="d-flex align-items-center justify-content-between">
+              <button className="btn btn-primary" type="submit">
+                Registrieren
+              </button>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                {error && (
+                  <p className="text-light d-flex align-self-center mb-0 ml-auto">
+                    {error}
+                  </p>
+                )}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
   );
 };
 
