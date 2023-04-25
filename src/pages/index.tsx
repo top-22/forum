@@ -42,6 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const prisma = new PrismaClient();
   const rooms = await prisma.room.findMany();
 
+  prisma.$disconnect();
   return { props: { rooms } };
 };
 

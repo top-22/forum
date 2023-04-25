@@ -10,11 +10,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
-
   try {
+    if (req.method !== "POST") {
+      return res.status(405).json({ message: "Method not allowed" });
+    }
+
     const { name, username, email, password, repeatPassword } = req.body;
 
     if (!name || !username || !email || !password || !repeatPassword) {
@@ -92,7 +92,8 @@ export default async function handler(
       message: "User created successfully",
     });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Internal server error" });
+  } finally {
+    await prisma.$disconnect();
   }
 }
