@@ -45,11 +45,11 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
                               key={thread.id}
                               href={`${room.id}/${thread.id}`}
                             >
-                              <h5 className="card-title text-white text-decoration-underline">
+                              <h2 className="card-title text-white text-decoration-underline">
                                 {thread.name}
                                 {" - "}
                                 {thread.creator.name ?? "Unbekannt"}
-                              </h5>
+                              </h2>
                               <p className="card-text text-secondary text-decoration-none">
                                 {thread.description ??
                                   "Dieser Thread hat keine genauere Beschreibung."}
