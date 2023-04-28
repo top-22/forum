@@ -1,17 +1,18 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Room, PrismaClient, User, Thread } from "@prisma/client";
+import { Room, RoomUser, PrismaClient, User, Thread } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import { Modal, Button } from "react-bootstrap";
 import Layout from "../../components/layout";
 
 interface RoomProps {
-  room: Room;
-  users: User[];
-  threads: (Thread & { creator: User })[];
+  room: Room & {
+    users: (RoomUser & { user: User })[];
+    threads: (Thread & { creator: User })[];
+  };
 }
 
-const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
+const Room: NextPage<RoomProps> = ({ room }) => {
   return (
     <Layout>
       <Head>
@@ -34,8 +35,8 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
             <div className="container-fluid m-0 p-0 w-100">
               <div className="overflow-auto">
                 <div className="col flex-nowrap">
-                  {threads.length > 0 ? (
-                    threads.map((thread) => (
+                  {room.threads.length > 0 ? (
+                    room.threads.map((thread) => (
                       <div className="col mb-2" key={thread.id}>
                         <div
                           className="card text-bg-primary h-100 d-flex align-items-start"
@@ -76,8 +77,8 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
             <div>
               <h2>Benutzer im Raum:</h2>
               <ul>
-                {users.map((user) => (
-                  <li key={user.id}>{user.name}</li>
+                {room.users.map((user) => (
+                  <li key={user.user.id}>{user.user.name}</li>
                 ))}
               </ul>
             </div>
@@ -93,26 +94,22 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
 ) => {
   const roomId = Number(context.params?.roomId);
   const prisma = new PrismaClient();
-  let room = await prisma.room
-    .findFirst({ where: { id: roomId } })
-    .catch(() => null);
+  const room = await prisma.room
+    .findFirst({
+      where: { id: roomId },
+      include: {
+        users: { include: { user: true } },
+        threads: { include: { creator: true } },
+      },
+    })
+    .catch(console.error);
   if (!room) return { redirect: { destination: "/", permanent: false } };
-  let users = await prisma.roomUser
-    .findMany({ where: { roomId }, include: { user: true } })
-    .then((roomUsers) => roomUsers.map((roomUser) => roomUser.user));
-  let threads = await prisma.thread.findMany({
-    where: { roomId },
-    include: { creator: true },
-  });
   prisma.$disconnect();
   return {
     props: {
       room,
-      users,
-      threads: threads.map((thread) => ({
-        ...thread,
-        creator: thread.creator,
-      })),
+      users: room.users,
+      threads: room.threads,
     },
   };
 };
