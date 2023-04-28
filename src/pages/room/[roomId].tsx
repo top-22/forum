@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { Room, PrismaClient, User, Thread } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
+import { Modal, Button } from "react-bootstrap";
 import Layout from "../../components/layout";
 
 interface RoomProps {
@@ -22,11 +23,11 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
         <div className="bg-dark vh-100">
           <div className="d-flex justify-content-between p-2">
             <h1 className="text-primary">{room.name}</h1>
-            <button className="text-secondary h3">Raumoptionen</button>
+            <Button className="btn-secondary">Raumoptionen</Button>
             {/*Popup für Raumoptionen hinzufügen */}
           </div>
           <div className="p-2">
-            <button className="btn btn-primary">CREATE POST</button>
+            <Button>CREATE POST</Button>
             {/*Popup für Roomcreate hinzufügen */}
           </div>
           <div className="p-2">
@@ -56,9 +57,9 @@ const Room: NextPage<RoomProps> = ({ room, users, threads }) => {
                               </p>
                             </Link>
                           </div>
-                          <button className="btn ms-auto position-absolute top-0 end-0 p-2">
+                          <Button className="btn-secondary ms-auto position-absolute top-0 end-0 p-2">
                             Optionen {/*Popup für Optionen hinzufügen */}
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     ))
