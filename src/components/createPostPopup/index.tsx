@@ -43,14 +43,13 @@ const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
       centered
       className="my-modal"
     >
-      <div className="bg-dark">
+      <div className="bg-dark rounded">
         <Modal.Header
           closeButton
           closeVariant="white"
           className="modal-footer border-0"
         >
           <div>
-            <br />
             <h2 className="text-primary">
               Create a Post in {props.room.name}!
             </h2>
@@ -73,10 +72,7 @@ const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
           </div>
         </Modal.Header>
         <Modal.Body>
-          <Post
-            showTextPost={showTextPost}
-            room={props.room}
-          ></Post>
+          <Post showTextPost={showTextPost} room={props.room}></Post>
         </Modal.Body>
         <Modal.Footer className="modal-footer border-top-0">
           <Button type="submit" form="postForm">
