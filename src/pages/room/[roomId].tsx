@@ -96,7 +96,6 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
     .findFirst({ where: { id: roomId } })
     .catch(() => null);
   if (!room) return { redirect: { destination: "/", permanent: false } };
-  console.dir(room, { depth: null });
   let users = await prisma.roomUser
     .findMany({ where: { roomId }, include: { user: true } })
     .then((roomUsers) => roomUsers.map((roomUser) => roomUser.user));
