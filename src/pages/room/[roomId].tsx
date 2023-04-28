@@ -104,6 +104,7 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
     where: { roomId },
     include: { creator: true },
   });
+  prisma.$disconnect();
   return {
     props: {
       room,
