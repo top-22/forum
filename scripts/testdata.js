@@ -4,11 +4,11 @@ const data = require("./testdata.json");
 
 async function main() {
   // delete old data
+  console.log("deleting threads...");
+  await prisma.thread.deleteMany();
   console.log("deleting users...");
   await prisma.roomUser.deleteMany();
   await prisma.user.deleteMany();
-  console.log("deleting threads...");
-  await prisma.thread.deleteMany();
   console.log("deleting tags...");
   await prisma.tag.deleteMany();
   console.log("deleting rooms...");
@@ -16,6 +16,8 @@ async function main() {
   await prisma.room.deleteMany();
   console.log("deleting affiliations...");
   await prisma.affiliation.deleteMany();
+
+  if (process.argv[2] === "delete") return;
 
   console.log("===========");
 
@@ -67,31 +69,6 @@ async function main() {
     });
   }
 
-  console.log("CREATING THREADS");
-  for (const threadData of data.threads) {
-    console.log("   " + threadData.name);
-    await prisma.thread.create({
-      data: {
-        name: threadData.name,
-        room: {
-          connect: {
-            id: (
-              await prisma.room.findFirstOrThrow({
-                where: { name: threadData.room },
-              })
-            ).id,
-          },
-        },
-        tags: {
-          connectOrCreate: threadData.tags.map((tag) => ({
-            where: { name: tag },
-            create: { name: tag },
-          })),
-        },
-      },
-    });
-  }
-
   console.log("CREATING USERS");
   for (const userData of data.users) {
     console.log("   " + userData.name);
@@ -112,6 +89,39 @@ async function main() {
         },
         rooms: {
           create: roomUsers,
+        },
+      },
+    });
+  }
+
+  console.log("CREATING THREADS");
+  for (const threadData of data.threads) {
+    console.log("   " + threadData.name);
+    const creatorId = (
+      await prisma.user.findFirstOrThrow({
+        where: { name: threadData.creator },
+      })
+    ).id;
+    await prisma.thread.create({
+      data: {
+        name: threadData.name,
+        room: {
+          connect: {
+            id: (
+              await prisma.room.findFirstOrThrow({
+                where: { name: threadData.room },
+              })
+            ).id,
+          },
+        },
+        tags: {
+          connectOrCreate: threadData.tags.map((tag) => ({
+            where: { name: tag },
+            create: { name: tag },
+          })),
+        },
+        creator: {
+          connect: { id: creatorId },
         },
       },
     });

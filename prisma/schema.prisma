@@ -12,6 +12,7 @@ model User {
   name         String
   messages     Message[]
   rooms        RoomUser[]
+  threads      Thread[]
   affiliations Affiliation[]
 
   @@map("users")
@@ -34,6 +35,8 @@ model Thread {
   description String?
   room        Room      @relation(fields: [roomId], references: [id])
   roomId      Int       @map("room_id")
+  creator     User      @relation(fields: [creatorId], references: [id])
+  creatorId   Int       @map("creator_id")
   tags        Tag[]
   messages    Message[]
 
@@ -54,8 +57,8 @@ model Message {
 }
 
 model Tag {
-  name     String    @id
-  threads  Thread[]
+  name    String   @id
+  threads Thread[]
 
   @@map("tags")
 }
