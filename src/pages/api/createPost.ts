@@ -21,6 +21,14 @@ export default async function handler(
   const options = body.options as string[];
   const endtime = body.endtime as string;
 
+  const roomUserIds =
+    (
+      await prisma.room.findFirstOrThrow({
+        where: { id: parseInt(room) },
+        include: { users: true },
+      })
+    ).users.map((user) => user.userId) || [];
+
   const result = await prisma.thread.create({
     data: {
       name,
@@ -35,11 +43,17 @@ export default async function handler(
           };
         }),
       },
+      creator: {
+        connect: {
+          id: roomUserIds[Math.floor(Math.random() * roomUserIds.length)],
+        },
+      },
       readOnly,
       options,
       endtime,
     },
   });
 
+  prisma.$disconnect();
   res.redirect(`/room/${room}/${result.id}`);
 }
