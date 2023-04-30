@@ -15,7 +15,7 @@ interface RoomProps {
 }
 
 const Room: NextPage<RoomProps> = ({ room }) => {
-  const [ showCreatePost, setShowCreatePost ] = useState(false);
+  const [showCreatePost, setShowCreatePost] = useState(false);
   return (
     <Layout>
       <Head>
@@ -31,7 +31,9 @@ const Room: NextPage<RoomProps> = ({ room }) => {
             {/*Popup für Raumoptionen hinzufügen */}
           </div>
           <div className="p-2">
-            <Button onClick={() => setShowCreatePost(!showCreatePost)}>CREATE POST</Button>
+            <Button onClick={() => setShowCreatePost(!showCreatePost)}>
+              CREATE POST
+            </Button>
             {/*Popup für Roomcreate hinzufügen */}
           </div>
           <div className="p-2">
@@ -88,7 +90,11 @@ const Room: NextPage<RoomProps> = ({ room }) => {
           </div>
         </div>
       </main>
-      <CreatePost show={showCreatePost} room={room} onHide={() => setShowCreatePost(false)}/>
+      <CreatePost
+        show={showCreatePost}
+        room={room}
+        onHide={() => setShowCreatePost(false)}
+      />
     </Layout>
   );
 };
