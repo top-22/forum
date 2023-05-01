@@ -54,20 +54,12 @@ const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
               Create a Post in {props.room.name}!
             </h2>
             <div>
-              <button
-                className="btn btn-primary m-1"
-                type="button"
-                onClick={openTextPost}
-              >
+              <Button className="m-1" type="button" onClick={openTextPost}>
                 Text Post
-              </button>
-              <button
-                className="btn btn-primary m-1"
-                type="button"
-                onClick={openSurveyPost}
-              >
+              </Button>
+              <Button className="m-1" type="button" onClick={openSurveyPost}>
                 Survey Post
-              </button>
+              </Button>
             </div>
           </div>
         </Modal.Header>

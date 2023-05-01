@@ -9,14 +9,14 @@ interface SurveyProps {
 
 const SurveyPost = (props: SurveyProps): JSX.Element => {
   return (
-    <div>
+    <div className="text-white px-4">
       <Form id="postForm" action="/api/createPost" method="POST">
         <br></br>
         <input type="hidden" name="room" value={props.room.id} />
         <input type="hidden" name="type" value="SURVEY" />
         <Row className="my-2">
           <Col sm="3">
-            <p>Question</p>
+            <p className="fs-4">Question</p>
           </Col>
           <Col>
             <Form.Control
@@ -31,7 +31,7 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
         </Row>
         <Row className="my-2">
           <Col sm="3">
-            <p>Description</p>
+            <p className="fs-4">Description</p>
           </Col>
           <Col>
             <Form.Control
@@ -45,7 +45,7 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
         </Row>
         <Row className="my-2">
           <Col sm="3">
-            <p>Answers</p>
+            <p className="fs-4">Answers</p>
           </Col>
           <Col>
             <Form.Control
@@ -89,7 +89,7 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
         </Row>
         <Row className="my-2">
           <Col sm="3">
-            <p>Endtime</p>
+            <p className="fs-4">Endtime</p>
           </Col>
           <Col>
             <Form.Select id="endtime" name="endtime" required size="lg">
@@ -101,7 +101,7 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
         </Row>
         <Row className="my-2">
           <Col sm="3">
-            <p>Tags</p>
+            <p className="fs-4">Tags</p>
           </Col>
           <Col>
             <Form.Control
@@ -123,23 +123,6 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
           </Col>
         </Row>
       </Form>
-
-      <style jsx>{`
-        .test {
-          font-size: 12px;
-          color: red;
-        }
-
-        p {
-          font-size: 23px;
-        }
-
-        div {
-          padding-left: 2em;
-          padding-right: 2em;
-          color: white;
-        }
-      `}</style>
     </div>
   );
 };
