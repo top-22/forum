@@ -11,7 +11,6 @@ const TextPost = (props: TextProps): JSX.Element => {
   return (
     <div className="text-white px-4">
       <Form id="postForm" action="/api/createPost" method="POST">
-        <br></br>
         <input type="hidden" name="room" value={props.room.id} />
         <input type="hidden" name="type" value="TEXT" />
         <Row className="my-2">
