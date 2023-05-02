@@ -50,7 +50,7 @@ const Room: NextPage<RoomProps> = ({ room }) => {
                           <div className="card-body">
                             <Link
                               key={thread.id}
-                              href={`${room.id}/${thread.id}`}
+                              href={`/room/${room.id}/${thread.id}`}
                             >
                               <h2 className="card-title text-white text-decoration-underline">
                                 {thread.name}
