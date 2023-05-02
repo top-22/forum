@@ -169,7 +169,8 @@ jobs:
       - name: Update Database 📝
         run: |
           ssh -o StrictHostKeyChecking=no -p 22 $VPS_USER@$VPS_HOST "\
-            (sudo docker exec $CONTAINER_NAME npx prisma db push --force-reset && \
+            (sudo docker exec $CONTAINER_NAME yarn testdata delete && \
+            sudo docker exec $CONTAINER_NAME npx prisma db push --force-reset && \
             sudo docker exec $CONTAINER_NAME yarn testdata) || true"
 
   update_pr:
