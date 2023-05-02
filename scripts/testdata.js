@@ -2,7 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const data = require("./testdata.json");
 
-const SUBCOMMANDS = ["delete"]
+const SUBCOMMANDS = ["delete"];
 
 async function main() {
   if (process.argv.length > 2 && !SUBCOMMANDS.includes(process.argv[2])) {
