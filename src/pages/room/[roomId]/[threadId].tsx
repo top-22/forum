@@ -52,6 +52,7 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
     .catch(() => null);
   if (!room) return { redirect: { destination: "/", permanent: false } };
   console.dir(room, { depth: null });
+  prisma.$disconnect();
   return { props: { room, thread: threadId } };
 };
 
