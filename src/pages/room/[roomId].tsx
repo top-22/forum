@@ -4,6 +4,8 @@ import { Room, RoomUser, PrismaClient, User, Thread } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import { Modal, Button } from "react-bootstrap";
 import Layout from "../../components/layout";
+import CreatePost from "../../components/createPostPopup";
+import { useState } from "react";
 
 interface RoomProps {
   room: Room & {
@@ -13,6 +15,7 @@ interface RoomProps {
 }
 
 const Room: NextPage<RoomProps> = ({ room }) => {
+  const [showCreatePost, setShowCreatePost] = useState(false);
   return (
     <Layout>
       <Head>
@@ -28,7 +31,9 @@ const Room: NextPage<RoomProps> = ({ room }) => {
             {/*Popup für Raumoptionen hinzufügen */}
           </div>
           <div className="p-2">
-            <Button>CREATE POST</Button>
+            <Button onClick={() => setShowCreatePost(!showCreatePost)}>
+              CREATE POST
+            </Button>
             {/*Popup für Roomcreate hinzufügen */}
           </div>
           <div className="p-2">
@@ -85,6 +90,11 @@ const Room: NextPage<RoomProps> = ({ room }) => {
           </div>
         </div>
       </main>
+      <CreatePost
+        show={showCreatePost}
+        room={room}
+        onHide={() => setShowCreatePost(false)}
+      />
     </Layout>
   );
 };

@@ -31,6 +31,7 @@ model Room {
 
 model Thread {
   id          Int       @id @default(autoincrement())
+  type        ThreadType
   name        String
   description String?
   room        Room      @relation(fields: [roomId], references: [id])
@@ -39,6 +40,10 @@ model Thread {
   creatorId   Int       @map("creator_id")
   tags        Tag[]
   messages    Message[]
+  readOnly    Boolean   @map("read_only") @default(false)
+  endtime     String?
+  options     String[]
+
 
   @@map("threads")
 }
@@ -108,6 +113,11 @@ model RoomUser {
 }
 
 // ENUMS
+
+enum ThreadType {
+  TEXT
+  SURVEY
+}
 
 enum AttachmentType {
   FILE

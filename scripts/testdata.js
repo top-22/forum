@@ -114,6 +114,8 @@ async function main() {
     await prisma.thread.create({
       data: {
         name: threadData.name,
+        type: threadData.type,
+        readOnly: threadData.readOnly,
         room: {
           connect: {
             id: (
