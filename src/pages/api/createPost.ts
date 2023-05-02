@@ -17,7 +17,7 @@ export default async function handler(
     .toLowerCase()
     .split(" ")
     .filter((tag) => tag != "");
-  const readOnly = Boolean(body.readOnly as undefined | 'on');
+  const readOnly = Boolean(body.readOnly as undefined | "on");
   const options = body.options as string[];
   const endtime = body.endtime as string;
 
