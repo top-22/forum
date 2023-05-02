@@ -2,7 +2,16 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const data = require("./testdata.json");
 
+const SUBCOMMANDS = ["delete"]
+
 async function main() {
+  if (process.argv.length > 2 && !SUBCOMMANDS.includes(process.argv[2])) {
+    console.error("usage: yarn testdata <subcommand>");
+    console.error("subcommands: " + SUBCOMMANDS.join(", "));
+    console.error("or no subcommand to create test data");
+    process.exit(1);
+  }
+
   // delete old data
   console.log("deleting threads...");
   await prisma.thread.deleteMany();
