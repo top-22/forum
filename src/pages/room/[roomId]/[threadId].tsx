@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Room, RoomUser, PrismaClient, User, Thread } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
-import Layout from "../../../components/layout";
 import dynamic from 'next/dynamic';
 
 const RoomPage = dynamic(() => import('../[roomId]'));
@@ -11,7 +10,7 @@ interface ThreadProps {
     users: (RoomUser & { user: User })[];
     threads: (Thread & { creator: User })[];
   };
-  thread: Number;
+  thread: Thread;
 }
 
 const Thread: NextPage<ThreadProps> = ({ room, thread }) => {
@@ -22,13 +21,13 @@ const Thread: NextPage<ThreadProps> = ({ room, thread }) => {
       </div>
       <div className="col">
         <Head>
-          <title>{`TUC Forum - ${room.name} - ${thread}`}</title>
+          <title>{`TUC Forum - ${room.name} - ${thread.name}`}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main>
           <h1 className="text-primary">{room.name}</h1>
-          <h2 className="text-primary">{`Thread: ${thread}`}</h2>
           <span>{room.description}</span>
+          <h2 className="text-primary">{thread.name}</h2>
         </main>
       </div>
     </div>
@@ -50,10 +49,15 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
       },
     })
     .catch(() => null);
-  if (!room) return { redirect: { destination: "/", permanent: false } };
+  let thread = await prisma.thread
+    .findFirst({
+      where: { id: threadId },
+      
+    })
+    .catch(() => null);
+  if (!room || !thread) return { redirect: { destination: "/", permanent: false } };
   console.dir(room, { depth: null });
-  prisma.$disconnect();
-  return { props: { room, thread: threadId } };
+  return { props: { room, thread } };
 };
 
 export default Thread;
