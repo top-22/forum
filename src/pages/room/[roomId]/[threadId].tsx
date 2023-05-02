@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { Room, RoomUser, PrismaClient, User, Thread } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const RoomPage = dynamic(() => import('../[roomId]'));
+const RoomPage = dynamic(() => import("../[roomId]"));
 
 interface ThreadProps {
   room: Room & {
@@ -52,10 +52,10 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
   let thread = await prisma.thread
     .findFirst({
       where: { id: threadId },
-      
     })
     .catch(() => null);
-  if (!room || !thread) return { redirect: { destination: "/", permanent: false } };
+  if (!room || !thread)
+    return { redirect: { destination: "/", permanent: false } };
   console.dir(room, { depth: null });
   return { props: { room, thread } };
 };
