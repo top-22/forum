@@ -31,8 +31,8 @@ INSERT INTO <schema>."<table>" SELECT * FROM testdata"<table>";
 - follow style guidelines, preferably enforced by a plugin
   - TODO: write style guidelines, (eslint + editorconfig)
 
-## Usefull things
-- remove last pushed commit
+## Useful things
+- edit last pushed commit
   - git reset --soft HEAD~1
   - git add ... git commit ...
   - git push -f
