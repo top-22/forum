@@ -57,7 +57,7 @@ const Thread: NextPage<ThreadProps> = ({ room, thread, messages }) => {
                 messages.map((message) => (
                   <div className="container" key={message.id}>
                     <div className="row">
-                      <div className="col-auto align-self-center">
+                      <div className="col-auto align-self-center p-0">
                         <div className="d-flex flex-column align-items-start">
                           <div>{formatTime(new Date(message.createdAt))}</div>
                           <div>{message.user.name}</div>
