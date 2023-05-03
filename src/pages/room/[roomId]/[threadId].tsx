@@ -19,7 +19,8 @@ interface ThreadProps {
     threads: (Thread & { creator: User })[];
   };
   thread: Thread;
-  messages: Message[];
+  /*you can use the Omit utility type to remove the user property from the Message type, and then add it back with the correct type */
+  messages: (Omit<Message, "user"> & { user: User })[];
 }
 
 function formatTime(date: Date) {
@@ -57,7 +58,10 @@ const Thread: NextPage<ThreadProps> = ({ room, thread, messages }) => {
                   <div className="container" key={message.id}>
                     <div className="row">
                       <div className="col-auto align-self-center">
-                        {formatTime(new Date(message.createdAt))}
+                        <div className="d-flex flex-column align-items-start">
+                          <div>{formatTime(new Date(message.createdAt))}</div>
+                          <div>{message.user.name}</div>
+                        </div>
                       </div>
                       <div className="col bg-secondary rounded p-2">
                         {message.content}
@@ -108,11 +112,15 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
   if (!room || !thread)
     return { redirect: { destination: "/", permanent: false } };
   console.dir(room, { depth: null });
+  const messagesWithUser = await prisma.message.findMany({
+    where: { threadId: threadId },
+    include: { user: true },
+  });
   return {
     props: {
       room,
       thread: JSON.parse(JSON.stringify(thread)),
-      messages: JSON.parse(JSON.stringify(thread.messages)),
+      messages: JSON.parse(JSON.stringify(messagesWithUser)),
     },
   };
 };
