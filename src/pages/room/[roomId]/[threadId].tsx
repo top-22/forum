@@ -15,19 +15,17 @@ interface ThreadProps {
 
 const Thread: NextPage<ThreadProps> = ({ room, thread }) => {
   return (
-    <div className="row">
+    <div className="row bg-dark">
+      <Head>
+        <title>{`TUC Forum - ${room.name} - ${thread.name}`}</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="col">
         <RoomPage room={room}></RoomPage>
       </div>
-      <div className="col">
-        <Head>
-          <title>{`TUC Forum - ${room.name} - ${thread.name}`}</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+      <div className="col border-start border-primary border-4">
         <main>
-          <h1 className="text-primary">{room.name}</h1>
-          <span>{room.description}</span>
-          <h2 className="text-primary">{thread.name}</h2>
+          <h1 className="text-primary">{thread.name}</h1>
         </main>
       </div>
     </div>
