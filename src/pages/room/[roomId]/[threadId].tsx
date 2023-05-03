@@ -40,7 +40,7 @@ const Thread: NextPage<ThreadProps> = ({ room, thread, messages }) => {
         <div className="col p-0">
           <RoomPage room={room}></RoomPage>
         </div>
-        <div className="col border-start border-primary border-4 p-0 d-flex flex-column">
+        <div className="col border-start border-primary border-4 p-0 d-flex flex-column vh-100 overflow-hidden">
           <div className="container text-center">
             <div className="row">
               <div className="col-auto mt-2">
@@ -51,28 +51,26 @@ const Thread: NextPage<ThreadProps> = ({ room, thread, messages }) => {
               </div>
             </div>
           </div>
-          <div className="bg-primary m-3 p-3 rounded flex-grow-1">
-            <div>
-              {messages.length > 0 ? (
-                messages.map((message) => (
-                  <div className="container" key={message.id}>
-                    <div className="row">
-                      <div className="col-auto align-self-center p-0 m-1">
-                        <div className="d-flex flex-column align-items-start">
-                          <div>{formatTime(new Date(message.createdAt))}</div>
-                          <div>{message.user.name}</div>
-                        </div>
-                      </div>
-                      <div className="col bg-secondary rounded p-2">
-                        {message.content}
+          <div className="bg-primary m-3 p-3 rounded overflow-auto">
+            {messages.length > 0 ? (
+              messages.map((message) => (
+                <div className="container p-1" key={message.id}>
+                  <div className="row">
+                    <div className="col-auto align-self-center p-0 m-1 w-25">
+                      <div className="d-flex flex-column align-items-start">
+                        <div>{formatTime(new Date(message.createdAt))}</div>
+                        <div>{message.user.name}</div>
                       </div>
                     </div>
+                    <div className="col bg-secondary rounded p-2">
+                      {message.content}
+                    </div>
                   </div>
-                ))
-              ) : (
-                <div>Keine Nachrichten</div>
-              )}
-            </div>
+                </div>
+              ))
+            ) : (
+              <div>Keine Nachrichten</div>
+            )}
           </div>
           <div className="input-group p-3">
             <input
