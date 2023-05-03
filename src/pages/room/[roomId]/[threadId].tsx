@@ -26,7 +26,16 @@ const Thread: NextPage<ThreadProps> = ({ room, thread }) => {
           <RoomPage room={room}></RoomPage>
         </div>
         <div className="col border-start border-primary border-4 p-0 d-flex flex-column">
-          <h1 className="text-primary text-center">{thread.name}</h1>
+          <div className="container text-center">
+            <div className="row">
+              <div className="col-auto mt-2">
+                <Button href={`/room/${room.id}`}>X</Button>
+              </div>
+              <div className="col">
+                <h1 className="text-primary">{thread.name}</h1>
+              </div>
+            </div>
+          </div>
           <div className="bg-primary m-3 p-3 rounded flex-grow-1">
             Nachrichten
           </div>
