@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Room, RoomUser, PrismaClient, User, Thread } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import dynamic from "next/dynamic";
+import Button from 'react-bootstrap/Button';
 
 const RoomPage = dynamic(() => import("../[roomId]"));
 
@@ -15,18 +16,23 @@ interface ThreadProps {
 
 const Thread: NextPage<ThreadProps> = ({ room, thread }) => {
   return (
-    <div className="row bg-dark">
-      <Head>
-        <title>{`TUC Forum - ${room.name} - ${thread.name}`}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div className="col">
-        <RoomPage room={room}></RoomPage>
-      </div>
-      <div className="col border-start border-primary border-4">
-        <main>
-          <h1 className="text-primary">{thread.name}</h1>
-        </main>
+    <div className="container-fluid">
+      <div className="row bg-dark">
+        <Head>
+          <title>{`TUC Forum - ${room.name} - ${thread.name}`}</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <div className="col p-0">
+          <RoomPage room={room}></RoomPage>
+        </div>
+        <div className="col border-start border-primary border-4 p-0 d-flex flex-column">
+          <h1 className="text-primary text-center">{thread.name}</h1>
+          <div className="bg-primary m-3 p-3 rounded flex-grow-1">Nachrichten</div>
+          <div className="input-group p-3">
+            <input type="text" className="form-control" placeholder="Nachricht" aria-label="Nachricht" aria-describedby="button-addon2"/>
+            <Button variant="outline-primary">Senden</Button>
+          </div>
+        </div>
       </div>
     </div>
   );
