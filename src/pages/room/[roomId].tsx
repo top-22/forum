@@ -14,10 +14,57 @@ interface RoomProps {
     threads: (Thread & { creator: User })[];
   };
   username: string;
+  userId: number;
+  isJoined: boolean;
 }
 
-const Room: NextPage<RoomProps> = ({ room, username }) => {
+const Room: NextPage<RoomProps> = ({ room, username, userId, isJoined }) => {
   const [showCreatePost, setShowCreatePost] = useState(false);
+
+  const handleJoinRoom = async () => {
+    try {
+      const response = await fetch("/api/rooms/join", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          roomId: room.id,
+          userId: userId,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Joined room successfully");
+        window.location.reload();
+      } else {
+        console.error("Failed to join room");
+      }
+    } catch (error) {
+      console.error("Failed to join room:", error);
+    }
+  };
+
+  const handleLeaveRoom = async () => {
+    try {
+      const response = await fetch("/api/rooms/leave", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          roomId: room.id,
+          userId: userId,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Left room successfully");
+        window.location.reload();
+      } else {
+        console.error("Failed to leave room");
+      }
+    } catch (error) {
+      console.error("Failed to leave room:", error);
+    }
+  };
+
   return (
     <Layout>
       <Head>
@@ -28,7 +75,15 @@ const Room: NextPage<RoomProps> = ({ room, username }) => {
       <main>
         <div className="bg-dark vh-100">
           <div className="d-flex justify-content-between p-2">
-            <h1 className="text-primary">{room.name}</h1>
+            <div className="d-flex align-items-center">
+              <h1 className="text-primary">{room.name}</h1>
+              <Button
+                className="btn-secondary ms-2"
+                onClick={isJoined ? handleLeaveRoom : handleJoinRoom}
+              >
+                {isJoined ? "Leave Room" : "Join Room"}
+              </Button>
+            </div>
             <Button className="btn-secondary">Raumoptionen</Button>
             {/*Popup für Raumoptionen hinzufügen */}
           </div>
@@ -132,6 +187,44 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
     })
     .catch(console.error);
   if (!room) return { redirect: { destination: "/", permanent: false } };
+
+  const user = await prisma.user
+    .findUnique({ where: { username: cookies.username } })
+    .catch(console.error);
+
+  if (!user) {
+    context.res.setHeader(
+      "Set-Cookie",
+      "authToken=; username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+    );
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
+  const isJoined = await prisma.roomUser
+    .findFirst({
+      where: { userId: user.id, roomId: roomId },
+    })
+    .then((roomUser) => !!roomUser)
+    .catch(console.error);
+
+  if (isJoined === undefined) {
+    context.res.setHeader(
+      "Set-Cookie",
+      "authToken=; username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+    );
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
   prisma.$disconnect();
   return {
     props: {
@@ -139,6 +232,8 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
       users: room.users,
       threads: room.threads,
       username: username,
+      userId: user.id,
+      isJoined: isJoined,
     },
   };
 };
