@@ -19,7 +19,7 @@ interface ThreadProps {
     threads: (Thread & { creator: User })[];
   };
   thread: Thread;
-  /*you can use the Omit utility type to remove the user property from the Message type, and then add it back with the correct type */
+  /*fügt den Ersteller der Nachricht zur Nachricht hinzu*/
   messages: (Omit<Message, "user"> & { user: User })[];
 }
 
