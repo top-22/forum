@@ -507,7 +507,53 @@
       "creator": "Olivia Perez",
       "readOnly": false,
       "type": "TEXT",
-      "messages": []
+      "messages": [
+        {
+          "content": "Willkommen",
+          "createdAt": "2023-05-03T11:51:13.464Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Hallo zusammen! Ich bin neu hier und interessiere mich sehr für die Evolutionäre Biologie und die natürliche Selektion. Gibt es jemanden, der mir ein paar Tipps geben kann, wo ich anfangen soll?",
+          "createdAt": "2023-05-03T12:15:32.871Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Hey Sophie, willkommen im BioTalk! Ich kann dir ein paar Bücher empfehlen, die dir helfen könnten, die Grundlagen der Evolutionären Biologie zu verstehen. 'The Selfish Gene' von Richard Dawkins und 'On the Origin of Species' von Charles Darwin sind zwei Klassiker.",
+          "createdAt": "2023-05-03T12:23:44.905Z",
+          "user": "Luke Parker"
+        },
+        {
+          "content": "Vielen Dank, Luke! Ich werde diese Bücher auf jeden Fall lesen. Gibt es noch andere Empfehlungen?",
+          "createdAt": "2023-05-03T12:35:17.192Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Ich würde auch empfehlen, 'The Blind Watchmaker' von Richard Dawkins zu lesen. Es ist ein großartiges Buch, das die Idee der Evolution durch natürliche Selektion erklärt.",
+          "createdAt": "2023-05-03T12:45:03.681Z",
+          "user": "Emma Davis"
+        },
+        {
+          "content": "Ich kann auch 'The Origin of Life' von Paul Davies empfehlen. Es ist ein faszinierendes Buch, das sich mit der Entstehung des Lebens auf der Erde beschäftigt.",
+          "createdAt": "2023-05-03T13:01:55.319Z",
+          "user": "Nolan Gomez"
+        },
+        {
+          "content": "Vielen Dank für die Empfehlungen! Ich werde sie mir alle anschauen.",
+          "createdAt": "2023-05-03T13:14:27.005Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Ich finde die Evolutionäre Biologie auch sehr spannend! Habt ihr schon von der Theorie der sexuellen Selektion gehört? Es ist eine interessante Idee, die besagt, dass die Partnerwahl ein wichtiger Faktor bei der Evolution sein kann.",
+          "createdAt": "2023-05-04T09:18:22.009Z",
+          "user": "Emma Davis"
+        },
+        {
+          "content": "Ja, das ist eine faszinierende Idee. Die sexuelle Selektion könnte erklären, warum manche Merkmale bei manchen Arten stärker ausgeprägt sind als bei anderen, obwohl sie keinen offensichtlichen evolutionären Vorteil bieten.",
+          "createdAt": "2023-05-04T09:29:16.926Z",
+          "user": "Nolan Gomez"
+        }
+      ]
     },
     {
       "name": "Genetics and Heredity",
@@ -516,7 +562,58 @@
       "creator": "Jessica Green",
       "readOnly": false,
       "type": "TEXT",
-      "messages": []
+      "messages": [
+        {
+          "content": "Willkommen",
+          "createdAt": "2023-05-03T11:51:13.464Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Hi, I'm Sophie! I'm interested in genetics and heredity, what topics will we be discussing?",
+          "createdAt": "2023-05-03T12:05:21.732Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Hey Sophie, we'll be talking about everything from the basics of inheritance to modern genetic research. What specific questions do you have?",
+          "createdAt": "2023-05-03T12:08:49.321Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "I'm Luke. I'm curious about how genetic traits are passed down from one generation to the next.",
+          "createdAt": "2023-05-03T12:15:02.108Z",
+          "user": "Luke Parker"
+        },
+        {
+          "content": "Hi Luke, that's a great question! It all comes down to the passing of DNA from parents to their offspring. Would you like me to explain further?",
+          "createdAt": "2023-05-03T12:17:45.872Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Hi everyone, my name is Emma. I'm interested in the ethical issues surrounding genetic testing and engineering. Has this been discussed yet?",
+          "createdAt": "2023-05-03T12:21:11.901Z",
+          "user": "Emma Davis"
+        },
+        {
+          "content": "No, we haven't talked about that yet, Emma. It's definitely an important topic, and we'll be sure to get to it soon.",
+          "createdAt": "2023-05-03T12:24:56.239Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Hi, I'm Nolan. I'm interested in learning more about genetic disorders and how they can be treated.",
+          "createdAt": "2023-05-03T12:28:44.670Z",
+          "user": "Nolan Gomez"
+        },
+        {
+          "content": "Hey Nolan, that's a fascinating topic. We'll definitely cover genetic disorders and their treatment in this group.",
+          "createdAt": "2023-05-03T12:32:17.012Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Thanks Emily! Looking forward to learning more about genetics and heredity.",
+          "createdAt": "2023-05-03T12:35:10.987Z",
+          "user": "Sophie Anderson"
+        }
+      ]
     },
     {
       "name": "Algebraic Expressions and Equations",
