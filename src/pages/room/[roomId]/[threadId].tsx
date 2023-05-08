@@ -113,6 +113,7 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
     where: { threadId: threadId },
     include: { user: true },
   });
+  prisma.$disconnect();
   return {
     props: {
       room,
