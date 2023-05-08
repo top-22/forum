@@ -16,9 +16,16 @@ interface RoomProps {
   username: string;
   userId: number;
   isJoined: boolean;
+  isAdmin: boolean;
 }
 
-const Room: NextPage<RoomProps> = ({ room, username, userId, isJoined }) => {
+const Room: NextPage<RoomProps> = ({
+  room,
+  username,
+  userId,
+  isJoined,
+  isAdmin,
+}) => {
   const [showCreatePost, setShowCreatePost] = useState(false);
 
   const handleJoinRoom = async () => {
@@ -77,22 +84,28 @@ const Room: NextPage<RoomProps> = ({ room, username, userId, isJoined }) => {
           <div className="d-flex justify-content-between p-2">
             <div className="d-flex align-items-center">
               <h1 className="text-primary">{room.name}</h1>
-              <Button
-                className="btn-secondary ms-2"
-                onClick={isJoined ? handleLeaveRoom : handleJoinRoom}
-              >
-                {isJoined ? "Leave Room" : "Join Room"}
-              </Button>
+              {!isAdmin && (
+                <Button
+                  className="btn-secondary ms-2"
+                  onClick={isJoined ? handleLeaveRoom : handleJoinRoom}
+                >
+                  {isJoined ? "Leave Room" : "Join Room"}
+                </Button>
+              )}
             </div>
-            <Button className="btn-secondary">Raumoptionen</Button>
+            {isJoined && (
+              <Button className="btn-secondary">Raumoptionen</Button>
+            )}
             {/*Popup für Raumoptionen hinzufügen */}
           </div>
-          <div className="p-2">
-            <Button onClick={() => setShowCreatePost(!showCreatePost)}>
-              CREATE POST
-            </Button>
-            {/*Popup für Roomcreate hinzufügen */}
-          </div>
+          {isJoined && (
+            <div className="p-2">
+              <Button onClick={() => setShowCreatePost(!showCreatePost)}>
+                CREATE POST
+              </Button>
+              {/*Popup für Roomcreate hinzufügen */}
+            </div>
+          )}
           <div className="p-2">
             <div className="container-fluid m-0 p-0 w-100">
               <div className="overflow-auto">
@@ -120,9 +133,11 @@ const Room: NextPage<RoomProps> = ({ room, username, userId, isJoined }) => {
                               </p>
                             </Link>
                           </div>
-                          <Button className="btn-secondary ms-auto position-absolute top-0 end-0 p-2">
-                            Optionen {/*Popup für Optionen hinzufügen */}
-                          </Button>
+                          {isJoined && (
+                            <Button className="btn-secondary ms-auto position-absolute top-0 end-0 p-2">
+                              Optionen {/*Popup für Optionen hinzufügen */}
+                            </Button>
+                          )}
                         </div>
                       </div>
                     ))
@@ -147,12 +162,14 @@ const Room: NextPage<RoomProps> = ({ room, username, userId, isJoined }) => {
           </div>
         </div>
       </main>
-      <CreatePost
-        show={showCreatePost}
-        room={room}
-        username={username}
-        onHide={() => setShowCreatePost(false)}
-      />
+      {isJoined && (
+        <CreatePost
+          show={showCreatePost}
+          room={room}
+          onHide={() => setShowCreatePost(false)}
+          username={username}
+        />
+      )}
     </Layout>
   );
 };
@@ -205,12 +222,14 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
     };
   }
 
-  const isJoined = await prisma.roomUser
+  const roomUser = await prisma.roomUser
     .findFirst({
       where: { userId: user.id, roomId: roomId },
     })
-    .then((roomUser) => !!roomUser)
     .catch(console.error);
+
+  const isJoined = !!roomUser;
+  const isAdmin = roomUser?.role === "ADMIN";
 
   if (isJoined === undefined) {
     context.res.setHeader(
@@ -234,6 +253,7 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
       username: username,
       userId: user.id,
       isJoined: isJoined,
+      isAdmin: isAdmin,
     },
   };
 };
