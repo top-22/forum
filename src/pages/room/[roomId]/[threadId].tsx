@@ -24,7 +24,10 @@ interface ThreadProps {
 }
 
 function formatTime(date: Date) {
-  const time = date.toLocaleString('de', { hour:'numeric', minute:'numeric' })
+  const time = date.toLocaleString("de", {
+    hour: "numeric",
+    minute: "numeric",
+  });
   return time;
 }
 
