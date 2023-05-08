@@ -446,7 +446,59 @@
       "creator": "Olivia Perez",
       "tags": ["Science"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": [
+        {
+          "content": "Willkommen",
+          "createdAt": "2023-05-03T11:51:13.464Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Hallo alle zusammen, ich freue mich auf eine spannende Diskussion über zelluläre Atmung und ATP-Produktion.",
+          "createdAt": "2023-05-03T12:03:05.874Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Ja, das ist ein interessantes Thema. Ich bin auch gespannt darauf, was wir hier alles besprechen werden.",
+          "createdAt": "2023-05-03T12:18:12.542Z",
+          "user": "Luke Parker"
+        },
+        {
+          "content": "Ich habe eine Frage: Wie wird ATP in den Mitochondrien produziert?",
+          "createdAt": "2023-05-03T12:29:09.321Z",
+          "user": "Emma Davis"
+        },
+        {
+          "content": "Das ist eine gute Frage, Emma. Die ATP-Produktion in Mitochondrien erfolgt durch die Atmungskette, die aus mehreren Komplexen besteht und Elektronen von NADH und FADH2 auf Sauerstoff überträgt.",
+          "createdAt": "2023-05-03T12:41:05.987Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Ich denke, es ist auch wichtig zu erwähnen, dass die Energie, die für die ATP-Produktion benötigt wird, aus der Oxidation von Glukose oder anderen Brennstoffen stammt.",
+          "createdAt": "2023-05-03T12:53:09.126Z",
+          "user": "Nolan Gomez"
+        },
+        {
+          "content": "Genau, Nolan. Die Glykolyse ist der erste Schritt der Glukoseoxidation und findet im Zytosol statt.",
+          "createdAt": "2023-05-03T13:06:23.551Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Stimmt, Sophie. Dann werden die Produkte der Glykolyse in den Mitochondrien durch den Citratzyklus weiter verarbeitet.",
+          "createdAt": "2023-05-03T13:19:15.332Z",
+          "user": "Luke Parker"
+        },
+        {
+          "content": "Ich denke, es ist auch wichtig zu erwähnen, dass die Atmungskette einen Protonengradienten erzeugt, der zur Synthese von ATP verwendet wird.",
+          "createdAt": "2023-05-03T13:31:01.645Z",
+          "user": "Emma Davis"
+        },
+        {
+          "content": "Ja, genau. Dieser Gradient wird durch den Elektronentransport durch die Atmungskette aufgebaut und durch die ATP-Synthase genutzt, um ATP zu produzieren.",
+          "createdAt": "2023-05-03T13:44:07.019Z",
+          "user": "Sophie Anderson"
+        }
+      ]
     },
     {
       "name": "Evolutionary Biology and Natural Selection",
@@ -454,7 +506,8 @@
       "tags": [],
       "creator": "Olivia Perez",
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Genetics and Heredity",
@@ -462,7 +515,8 @@
       "tags": [],
       "creator": "Jessica Green",
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Algebraic Expressions and Equations",
@@ -470,7 +524,8 @@
       "creator": "Isabella Kim",
       "tags": ["Mathematics", "Logic"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Geometry and Trigonometry",
@@ -478,7 +533,8 @@
       "creator": "Dominic Young",
       "tags": ["Mathematics", "Shapes"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Debate on Gun Control in the US",
@@ -486,7 +542,8 @@
       "creator": "Sophia Reynolds",
       "tags": ["Politics", "Controversy"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The Ethics of Political Lobbying",
@@ -494,7 +551,8 @@
       "creator": "Sofia Ramirez",
       "tags": ["Politics", "Morality"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "International Relations and Diplomacy",
@@ -502,7 +560,8 @@
       "creator": "Sophia Reynolds",
       "tags": ["Politics", "Foreign Affairs"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The Works of Shakespeare",
@@ -510,7 +569,8 @@
       "creator": "Rita Singh",
       "tags": ["Drama"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Postmodernism in Literature",
@@ -518,7 +578,8 @@
       "creator": "Isabella Kim",
       "tags": ["Literature", "Philosophy"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The American Literary Canon",
@@ -526,7 +587,8 @@
       "creator": "Rita Singh",
       "tags": ["Literature", "Culture"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Microeconomics and Market Structures",
@@ -534,7 +596,8 @@
       "creator": "Ethan Lee",
       "tags": ["Markets"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Macroeconomics and Fiscal Policy",
@@ -542,7 +605,8 @@
       "creator": "Ethan Lee",
       "tags": ["Policy"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The Industrial Revolution and Its Impact",
@@ -550,7 +614,8 @@
       "creator": "Hannah Patel",
       "tags": [],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "World War II and Its Aftermath",
@@ -558,7 +623,8 @@
       "creator": "Hannah Patel",
       "tags": ["History", "War"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The Renaissance and Its Legacy",
@@ -566,7 +632,8 @@
       "creator": "Hannah Patel",
       "tags": ["History", "Art"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Abnormal Psychology and Mental Illness",
@@ -574,7 +641,8 @@
       "creator": "Max Johnson",
       "tags": ["Mental Health"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Cognitive Psychology and Memory",
@@ -582,7 +650,8 @@
       "tags": [],
       "creator": "Max Johnson",
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Climate Change and Global Warming",
@@ -590,7 +659,8 @@
       "creator": "Jessica Green",
       "tags": ["Science", "Environment"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Quantum Mechanics and Particle Physics",
@@ -598,7 +668,8 @@
       "creator": "Nolan Gomez",
       "tags": ["Physics", "Theory"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "French Conversation and Pronunciation Practice",
@@ -606,7 +677,8 @@
       "creator": "Rita Singh",
       "tags": ["Language", "French"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Modern Art and Its Critics",
@@ -614,7 +686,8 @@
       "creator": "Avery Patel",
       "tags": ["art"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Graphic Design and Visual Communication",
@@ -622,7 +695,8 @@
       "creator": "Avery Patel",
       "tags": ["art", "design"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Upcoming Music Festivals on Campus",
@@ -630,7 +704,8 @@
       "creator": "Rita Singh",
       "tags": ["music"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Volunteer Opportunities for Community Service",
@@ -638,7 +713,8 @@
       "creator": "Hannah Patel",
       "tags": ["volunteering"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Chemistry Exam Preparation",
@@ -646,7 +722,8 @@
       "creator": "Daniel Lee",
       "tags": ["chemistry"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Essay Writing Techniques for Humanities Courses",
@@ -654,7 +731,8 @@
       "creator": "Daniel Lee",
       "tags": ["writing"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Networking Strategies for Business Majors",
@@ -662,7 +740,8 @@
       "creator": "Zoe Kim",
       "tags": ["business"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Internship Opportunities in the Tech Industry",
@@ -670,7 +749,8 @@
       "creator": "Zoe Kim",
       "tags": ["tech"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Artificial Intelligence and Machine Learning",
@@ -678,7 +758,8 @@
       "creator": "Nolan Gomez",
       "tags": ["AI"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Artificial Intelligence: Friend or Foe?",
@@ -686,7 +767,8 @@
       "creator": "Nolan Gomez",
       "tags": ["AI"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The Future of Robotics in Industry",
@@ -694,7 +776,8 @@
       "creator": "Ethan Lee",
       "tags": ["robotics"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Mindful Meditation Practices",
@@ -702,7 +785,8 @@
       "creator": "Olivia Lee",
       "tags": ["mindfulness"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Overcoming Burnout in the Workplace",
@@ -710,7 +794,8 @@
       "creator": "Emily Kim",
       "tags": ["wellness"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Best Practices for Forum Moderation",
@@ -718,7 +803,8 @@
       "creator": "Michael Scott",
       "tags": ["forum"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Effective Communication with Users",
@@ -726,7 +812,8 @@
       "creator": "Michael Scott",
       "tags": ["communication"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Tips and Tricks for JavaScript Development",
@@ -734,7 +821,8 @@
       "creator": "Luke Parker",
       "tags": ["javascript"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Building Scalable Web Applications with React",
@@ -742,7 +830,8 @@
       "creator": "Luke Parker",
       "tags": ["web"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     }
   ],
   "affiliations": [
