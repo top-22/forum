@@ -115,6 +115,9 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
   const messagesWithUser = await prisma.message.findMany({
     where: { threadId: threadId },
     include: { user: true },
+    orderBy: {
+      createdAt: "asc",
+    },
   });
   prisma.$disconnect();
   return {
