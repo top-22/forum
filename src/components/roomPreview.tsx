@@ -11,9 +11,9 @@ const RoomPreview: FunctionComponent<RoomPreviewProps> = ({ rooms, title }) => {
   return (
     <div className="p-2">
       <p className="text-white">{title}</p>
-      <div className="container-fluid m-0 p-0 w-100">
-        <div className="overflow-auto">
-          <div className="row flex-nowrap">
+      <div className="overflow-auto">
+        <div className="container-fluid m-0 p-0 d-inline-block w-auto">
+          <div className="row flex-nowrap m-0 p-0">
             {rooms.map((room) => (
               <div className="col mb-2" key={room.id}>
                 <div
