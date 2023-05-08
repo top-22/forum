@@ -46,7 +46,7 @@ const Thread: NextPage<ThreadProps> = ({ room, thread, messages }) => {
                 <Button href={`/room/${room.id}`}>X</Button>
               </div>
               <div className="col">
-                <h1 className="text-primary">{thread.name}</h1>
+                <h2 className="text-primary">{thread.name}</h2>
               </div>
             </div>
           </div>
