@@ -12,7 +12,7 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({ rooms, joinedRooms }) => {
   return (
-    <Layout>
+    <Layout rooms={joinedRooms}>
       <div className="bg-dark vh-100">
         <Head>
           <title>TUC Forum</title>

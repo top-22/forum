@@ -3,12 +3,15 @@ import Head from "next/head";
 import Layout from "../../components/layout";
 import SearchBar from "../../components/searchBar";
 import { parse } from "cookie";
+import { Room, PrismaClient } from "@prisma/client";
 
-interface JoinProps {}
+interface JoinProps {
+  joinedRooms: Room[];
+}
 
-const Join: NextPage<JoinProps> = (props) => {
+const Join: NextPage<JoinProps> = ({ joinedRooms }) => {
   return (
-    <Layout>
+    <Layout rooms={joinedRooms}>
       <div className="bg-dark vh-100">
         <Head>
           <title>TUC Join Room</title>
@@ -34,7 +37,9 @@ const Join: NextPage<JoinProps> = (props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps<JoinProps> = async (
+  context
+) => {
   const cookies = context.req.headers.cookie
     ? parse(context.req.headers.cookie)
     : {};
@@ -49,7 +54,32 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  return { props: {} };
+  const prisma = new PrismaClient();
+
+  const user = await prisma.user
+    .findUnique({ where: { username: cookies.username } })
+    .catch(console.error);
+
+  if (!user) {
+    context.res.setHeader(
+      "Set-Cookie",
+      "authToken=; username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+    );
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
+  const joinedRooms = await prisma.room.findMany({
+    where: { users: { some: { userId: user.id } } },
+  });
+
+  prisma.$disconnect();
+
+  return { props: { joinedRooms } };
 };
 
 export default Join;

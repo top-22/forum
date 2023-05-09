@@ -23,6 +23,7 @@ interface ThreadProps {
   /*fügt den Ersteller der Nachricht zur Nachricht hinzu*/
   messages: (Omit<Message, "user"> & { user: User })[];
   username: string;
+  joinedRooms: Room[];
 }
 
 function formatTime(date: Date) {
@@ -38,6 +39,7 @@ const Thread: NextPage<ThreadProps> = ({
   thread,
   messages,
   username,
+  joinedRooms,
 }) => {
   return (
     <div className="container-fluid">
@@ -113,6 +115,24 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
   }
 
   const prisma = new PrismaClient();
+
+  const user = await prisma.user
+    .findUnique({ where: { username: cookies.username } })
+    .catch(console.error);
+
+  if (!user) {
+    context.res.setHeader(
+      "Set-Cookie",
+      "authToken=; username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+    );
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
   const roomId = Number(context.params?.roomId);
   const threadId = Number(context.params?.threadId);
 
@@ -141,6 +161,11 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
       createdAt: "asc",
     },
   });
+
+  const joinedRooms = await prisma.room.findMany({
+    where: { users: { some: { userId: user.id } } },
+  });
+
   prisma.$disconnect();
   return {
     props: {
@@ -148,6 +173,7 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
       thread: JSON.parse(JSON.stringify(thread)),
       messages: JSON.parse(JSON.stringify(messagesWithUser)),
       username: cookies.username,
+      joinedRooms: joinedRooms,
     },
   };
 };

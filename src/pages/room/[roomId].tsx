@@ -17,6 +17,7 @@ interface RoomProps {
   userId: number;
   isJoined: boolean;
   isAdmin: boolean;
+  joinedRooms: Room[];
 }
 
 const Room: NextPage<RoomProps> = ({
@@ -25,6 +26,7 @@ const Room: NextPage<RoomProps> = ({
   userId,
   isJoined,
   isAdmin,
+  joinedRooms,
 }) => {
   const [showCreatePost, setShowCreatePost] = useState(false);
 
@@ -73,7 +75,7 @@ const Room: NextPage<RoomProps> = ({
   };
 
   return (
-    <Layout>
+    <Layout rooms={joinedRooms}>
       <Head>
         <title>{`TUC Forum - ${room.name}`}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -244,6 +246,10 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
     };
   }
 
+  const joinedRooms = await prisma.room.findMany({
+    where: { users: { some: { userId: user.id } } },
+  });
+
   prisma.$disconnect();
   return {
     props: {
@@ -254,6 +260,7 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
       userId: user.id,
       isJoined: isJoined,
       isAdmin: isAdmin,
+      joinedRooms,
     },
   };
 };
