@@ -13,9 +13,10 @@ interface RoomProps {
     users: (RoomUser & { user: User })[];
     threads: (Thread & { creator: User })[];
   };
+  username: string;
 }
 
-const Room: NextPage<RoomProps> = ({ room }) => {
+const Room: NextPage<RoomProps> = ({ room, username }) => {
   const [showCreatePost, setShowCreatePost] = useState(false);
   return (
     <Layout>
@@ -94,6 +95,7 @@ const Room: NextPage<RoomProps> = ({ room }) => {
       <CreatePost
         show={showCreatePost}
         room={room}
+        username={username}
         onHide={() => setShowCreatePost(false)}
       />
     </Layout>
@@ -107,6 +109,7 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
     ? parse(context.req.headers.cookie)
     : {};
   const isAuthenticated = !!cookies.authToken;
+  const username = cookies.username;
 
   if (!isAuthenticated) {
     return {
@@ -135,6 +138,7 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
       room,
       users: room.users,
       threads: room.threads,
+      username: username,
     },
   };
 };

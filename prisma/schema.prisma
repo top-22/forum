@@ -33,19 +33,19 @@ model Room {
 }
 
 model Thread {
-  id          Int       @id @default(autoincrement())
-  type        ThreadType
-  name        String
-  description String?
-  room        Room      @relation(fields: [roomId], references: [id])
-  roomId      Int       @map("room_id")
-  creator     User      @relation(fields: [creatorId], references: [id])
-  creatorId   Int       @map("creator_id")
-  tags        Tag[]
-  messages    Message[]
-  readOnly    Boolean   @map("read_only") @default(false)
-  endtime     String?
-  options     String[]
+  id            Int       @id @default(autoincrement())
+  type          ThreadType
+  name          String
+  description   String?
+  room          Room      @relation(fields: [roomId], references: [id])
+  roomId        Int       @map("room_id")
+  creator       User      @relation(fields: [creatorName], references: [username])
+  creatorName   String    @map("creator_name")
+  tags          Tag[]
+  messages      Message[]
+  readOnly      Boolean   @map("read_only") @default(false)
+  endtime       String?
+  options       String[]
 
 
   @@map("threads")

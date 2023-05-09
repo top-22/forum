@@ -2,9 +2,12 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { Room } from "@prisma/client";
+import { GetServerSideProps } from "next";
+import { parse } from "cookie";
 
 interface SurveyProps {
   room: Room;
+  username: string;
 }
 
 const SurveyPost = (props: SurveyProps): JSX.Element => {
@@ -13,6 +16,7 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
       <Form id="postForm" action="/api/createPost" method="POST">
         <input type="hidden" name="room" value={props.room.id} />
         <input type="hidden" name="type" value="SURVEY" />
+        <input type="hidden" name="creator" value={props.username} />
         <Row className="my-2">
           <Col sm="3">
             <p className="fs-4">Question</p>
@@ -124,6 +128,15 @@ const SurveyPost = (props: SurveyProps): JSX.Element => {
       </Form>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = context.req.headers.cookie
+    ? parse(context.req.headers.cookie)
+    : {};
+  const username = !!cookies.username;
+
+  return { props: { username } };
 };
 
 export default SurveyPost;
