@@ -37,7 +37,7 @@ export default async function handler(
       },
       creator: {
         connect: {
-          username: creatorName
+          username: creatorName,
         },
       },
       readOnly,
