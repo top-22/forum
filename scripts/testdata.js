@@ -13,8 +13,9 @@ async function main() {
   }
 
   // delete old data
-  console.log("deleting threads...");
+  console.log("deleting messages...");
   await prisma.message.deleteMany();
+  console.log("deleting threads...");
   await prisma.thread.deleteMany();
   console.log("deleting users...");
   await prisma.roomUser.deleteMany();
