@@ -5,6 +5,7 @@ import Avatar from "../public/avatar.png";
 import { useRouter } from "next/router";
 import { useState, useEffect, FunctionComponent } from "react";
 import { serialize, parse } from "cookie";
+import { GetServerSideProps } from "next";
 import { Room } from "@prisma/client";
 
 const Settings = () => {
@@ -60,6 +61,24 @@ const Settings = () => {
       </div>
     </Layout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = context.req.headers.cookie
+    ? parse(context.req.headers.cookie)
+    : {};
+  const isAuthenticated = !!cookies.authToken;
+
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
 };
 
 export default Settings;
