@@ -5,10 +5,14 @@ import Avatar from "../public/avatar.png";
 import { useRouter } from "next/router";
 import { useState, useEffect, FunctionComponent } from "react";
 import { serialize, parse } from "cookie";
-import { GetServerSideProps } from "next";
-import { Room } from "@prisma/client";
+import { GetServerSideProps, NextPage } from "next";
+import { PrismaClient, Room } from "@prisma/client";
 
-const Settings = () => {
+interface SettingsProps {
+  joinedRooms: Room[];
+}
+
+const Settings: NextPage<SettingsProps> = ({ joinedRooms }) => {
   const router = useRouter();
 
   const goBack = () => {
@@ -32,11 +36,6 @@ const Settings = () => {
     const cookies = parse(document.cookie);
     setUsername(cookies.username || "");
   }, []);
-
-  const joinedRooms: Room[] = [];
-  {
-    /* Statt dieser leerdeffinition müssen hier die Räume angezeigt werden */
-  }
 
   return (
     <Layout rooms={joinedRooms}>
@@ -78,7 +77,33 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  return { props: {} };
+  const prisma = new PrismaClient();
+
+  const user = await prisma.user
+    .findUnique({ where: { username: cookies.username } })
+    .catch(console.error);
+
+  if (!user) {
+    context.res.setHeader(
+      "Set-Cookie",
+      "authToken=; username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+    );
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
+  // get joined room of the user (relation RoomUser) and add them to the props
+  const joinedRooms = await prisma.room.findMany({
+    where: { users: { some: { userId: user.id } } },
+  });
+
+  prisma.$disconnect();
+
+  return { props: { joinedRooms } };
 };
 
 export default Settings;
