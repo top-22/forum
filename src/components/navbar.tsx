@@ -64,6 +64,7 @@ const VerticalNavbar: FunctionComponent<VerticalNavbarProps> = ({
                 as={Link}
                 href={`/room/${room.id}`}
                 active={isActive(`/room/${room.id}`)}
+                className="text-center"
               >
                 {room.name}
               </Nav.Link>
