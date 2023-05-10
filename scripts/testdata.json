@@ -446,7 +446,59 @@
       "creator": "Olivia Perez",
       "tags": ["Science"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": [
+        {
+          "content": "Willkommen",
+          "createdAt": "2023-05-03T11:51:13.464Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Hallo alle zusammen, ich freue mich auf eine spannende Diskussion über zelluläre Atmung und ATP-Produktion.",
+          "createdAt": "2023-05-03T12:03:05.874Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Ja, das ist ein interessantes Thema. Ich bin auch gespannt darauf, was wir hier alles besprechen werden.",
+          "createdAt": "2023-05-03T12:18:12.542Z",
+          "user": "Luke Parker"
+        },
+        {
+          "content": "Ich habe eine Frage: Wie wird ATP in den Mitochondrien produziert?",
+          "createdAt": "2023-05-03T12:29:09.321Z",
+          "user": "Emma Davis"
+        },
+        {
+          "content": "Das ist eine gute Frage, Emma. Die ATP-Produktion in Mitochondrien erfolgt durch die Atmungskette, die aus mehreren Komplexen besteht und Elektronen von NADH und FADH2 auf Sauerstoff überträgt.",
+          "createdAt": "2023-05-03T12:41:05.987Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Ich denke, es ist auch wichtig zu erwähnen, dass die Energie, die für die ATP-Produktion benötigt wird, aus der Oxidation von Glukose oder anderen Brennstoffen stammt.",
+          "createdAt": "2023-05-03T12:53:09.126Z",
+          "user": "Nolan Gomez"
+        },
+        {
+          "content": "Genau, Nolan. Die Glykolyse ist der erste Schritt der Glukoseoxidation und findet im Zytosol statt.",
+          "createdAt": "2023-05-03T13:06:23.551Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Stimmt, Sophie. Dann werden die Produkte der Glykolyse in den Mitochondrien durch den Citratzyklus weiter verarbeitet.",
+          "createdAt": "2023-05-03T13:19:15.332Z",
+          "user": "Luke Parker"
+        },
+        {
+          "content": "Ich denke, es ist auch wichtig zu erwähnen, dass die Atmungskette einen Protonengradienten erzeugt, der zur Synthese von ATP verwendet wird.",
+          "createdAt": "2023-05-03T13:31:01.645Z",
+          "user": "Emma Davis"
+        },
+        {
+          "content": "Ja, genau. Dieser Gradient wird durch den Elektronentransport durch die Atmungskette aufgebaut und durch die ATP-Synthase genutzt, um ATP zu produzieren.",
+          "createdAt": "2023-05-03T13:44:07.019Z",
+          "user": "Sophie Anderson"
+        }
+      ]
     },
     {
       "name": "Evolutionary Biology and Natural Selection",
@@ -454,7 +506,54 @@
       "tags": [],
       "creator": "Olivia Perez",
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": [
+        {
+          "content": "Willkommen",
+          "createdAt": "2023-05-03T11:51:13.464Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Hallo zusammen! Ich bin neu hier und interessiere mich sehr für die Evolutionäre Biologie und die natürliche Selektion. Gibt es jemanden, der mir ein paar Tipps geben kann, wo ich anfangen soll?",
+          "createdAt": "2023-05-03T12:15:32.871Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Hey Sophie, willkommen im BioTalk! Ich kann dir ein paar Bücher empfehlen, die dir helfen könnten, die Grundlagen der Evolutionären Biologie zu verstehen. 'The Selfish Gene' von Richard Dawkins und 'On the Origin of Species' von Charles Darwin sind zwei Klassiker.",
+          "createdAt": "2023-05-03T12:23:44.905Z",
+          "user": "Luke Parker"
+        },
+        {
+          "content": "Vielen Dank, Luke! Ich werde diese Bücher auf jeden Fall lesen. Gibt es noch andere Empfehlungen?",
+          "createdAt": "2023-05-03T12:35:17.192Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Ich würde auch empfehlen, 'The Blind Watchmaker' von Richard Dawkins zu lesen. Es ist ein großartiges Buch, das die Idee der Evolution durch natürliche Selektion erklärt.",
+          "createdAt": "2023-05-03T12:45:03.681Z",
+          "user": "Emma Davis"
+        },
+        {
+          "content": "Ich kann auch 'The Origin of Life' von Paul Davies empfehlen. Es ist ein faszinierendes Buch, das sich mit der Entstehung des Lebens auf der Erde beschäftigt.",
+          "createdAt": "2023-05-03T13:01:55.319Z",
+          "user": "Nolan Gomez"
+        },
+        {
+          "content": "Vielen Dank für die Empfehlungen! Ich werde sie mir alle anschauen.",
+          "createdAt": "2023-05-03T13:14:27.005Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Ich finde die Evolutionäre Biologie auch sehr spannend! Habt ihr schon von der Theorie der sexuellen Selektion gehört? Es ist eine interessante Idee, die besagt, dass die Partnerwahl ein wichtiger Faktor bei der Evolution sein kann.",
+          "createdAt": "2023-05-04T09:18:22.009Z",
+          "user": "Emma Davis"
+        },
+        {
+          "content": "Ja, das ist eine faszinierende Idee. Die sexuelle Selektion könnte erklären, warum manche Merkmale bei manchen Arten stärker ausgeprägt sind als bei anderen, obwohl sie keinen offensichtlichen evolutionären Vorteil bieten.",
+          "createdAt": "2023-05-04T09:29:16.926Z",
+          "user": "Nolan Gomez"
+        }
+      ]
     },
     {
       "name": "Genetics and Heredity",
@@ -462,7 +561,59 @@
       "tags": [],
       "creator": "Jessica Green",
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": [
+        {
+          "content": "Willkommen",
+          "createdAt": "2023-05-03T11:51:13.464Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Hi, I'm Sophie! I'm interested in genetics and heredity, what topics will we be discussing?",
+          "createdAt": "2023-05-03T12:05:21.732Z",
+          "user": "Sophie Anderson"
+        },
+        {
+          "content": "Hey Sophie, we'll be talking about everything from the basics of inheritance to modern genetic research. What specific questions do you have?",
+          "createdAt": "2023-05-03T12:08:49.321Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "I'm Luke. I'm curious about how genetic traits are passed down from one generation to the next.",
+          "createdAt": "2023-05-03T12:15:02.108Z",
+          "user": "Luke Parker"
+        },
+        {
+          "content": "Hi Luke, that's a great question! It all comes down to the passing of DNA from parents to their offspring. Would you like me to explain further?",
+          "createdAt": "2023-05-03T12:17:45.872Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Hi everyone, my name is Emma. I'm interested in the ethical issues surrounding genetic testing and engineering. Has this been discussed yet?",
+          "createdAt": "2023-05-03T12:21:11.901Z",
+          "user": "Emma Davis"
+        },
+        {
+          "content": "No, we haven't talked about that yet, Emma. It's definitely an important topic, and we'll be sure to get to it soon.",
+          "createdAt": "2023-05-03T12:24:56.239Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Hi, I'm Nolan. I'm interested in learning more about genetic disorders and how they can be treated.",
+          "createdAt": "2023-05-03T12:28:44.670Z",
+          "user": "Nolan Gomez"
+        },
+        {
+          "content": "Hey Nolan, that's a fascinating topic. We'll definitely cover genetic disorders and their treatment in this group.",
+          "createdAt": "2023-05-03T12:32:17.012Z",
+          "user": "Emily Kim"
+        },
+        {
+          "content": "Thanks Emily! Looking forward to learning more about genetics and heredity.",
+          "createdAt": "2023-05-03T12:35:10.987Z",
+          "user": "Sophie Anderson"
+        }
+      ]
     },
     {
       "name": "Algebraic Expressions and Equations",
@@ -470,7 +621,8 @@
       "creator": "Isabella Kim",
       "tags": ["Mathematics", "Logic"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Geometry and Trigonometry",
@@ -478,7 +630,8 @@
       "creator": "Dominic Young",
       "tags": ["Mathematics", "Shapes"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Debate on Gun Control in the US",
@@ -486,7 +639,8 @@
       "creator": "Sophia Reynolds",
       "tags": ["Politics", "Controversy"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The Ethics of Political Lobbying",
@@ -494,7 +648,8 @@
       "creator": "Sofia Ramirez",
       "tags": ["Politics", "Morality"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "International Relations and Diplomacy",
@@ -502,7 +657,8 @@
       "creator": "Sophia Reynolds",
       "tags": ["Politics", "Foreign Affairs"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The Works of Shakespeare",
@@ -510,7 +666,8 @@
       "creator": "Rita Singh",
       "tags": ["Drama"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Postmodernism in Literature",
@@ -518,7 +675,8 @@
       "creator": "Isabella Kim",
       "tags": ["Literature", "Philosophy"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The American Literary Canon",
@@ -526,7 +684,8 @@
       "creator": "Rita Singh",
       "tags": ["Literature", "Culture"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Microeconomics and Market Structures",
@@ -534,7 +693,8 @@
       "creator": "Ethan Lee",
       "tags": ["Markets"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Macroeconomics and Fiscal Policy",
@@ -542,7 +702,8 @@
       "creator": "Ethan Lee",
       "tags": ["Policy"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The Industrial Revolution and Its Impact",
@@ -550,7 +711,8 @@
       "creator": "Hannah Patel",
       "tags": [],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "World War II and Its Aftermath",
@@ -558,7 +720,8 @@
       "creator": "Hannah Patel",
       "tags": ["History", "War"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The Renaissance and Its Legacy",
@@ -566,7 +729,8 @@
       "creator": "Hannah Patel",
       "tags": ["History", "Art"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Abnormal Psychology and Mental Illness",
@@ -574,7 +738,8 @@
       "creator": "Max Johnson",
       "tags": ["Mental Health"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Cognitive Psychology and Memory",
@@ -582,7 +747,8 @@
       "tags": [],
       "creator": "Max Johnson",
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Climate Change and Global Warming",
@@ -590,7 +756,8 @@
       "creator": "Jessica Green",
       "tags": ["Science", "Environment"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Quantum Mechanics and Particle Physics",
@@ -598,7 +765,8 @@
       "creator": "Nolan Gomez",
       "tags": ["Physics", "Theory"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "French Conversation and Pronunciation Practice",
@@ -606,7 +774,8 @@
       "creator": "Rita Singh",
       "tags": ["Language", "French"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Modern Art and Its Critics",
@@ -614,7 +783,8 @@
       "creator": "Avery Patel",
       "tags": ["art"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Graphic Design and Visual Communication",
@@ -622,7 +792,8 @@
       "creator": "Avery Patel",
       "tags": ["art", "design"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Upcoming Music Festivals on Campus",
@@ -630,7 +801,8 @@
       "creator": "Rita Singh",
       "tags": ["music"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Volunteer Opportunities for Community Service",
@@ -638,7 +810,8 @@
       "creator": "Hannah Patel",
       "tags": ["volunteering"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Chemistry Exam Preparation",
@@ -646,7 +819,8 @@
       "creator": "Daniel Lee",
       "tags": ["chemistry"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Essay Writing Techniques for Humanities Courses",
@@ -654,7 +828,8 @@
       "creator": "Daniel Lee",
       "tags": ["writing"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Networking Strategies for Business Majors",
@@ -662,7 +837,8 @@
       "creator": "Zoe Kim",
       "tags": ["business"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Internship Opportunities in the Tech Industry",
@@ -670,7 +846,8 @@
       "creator": "Zoe Kim",
       "tags": ["tech"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Artificial Intelligence and Machine Learning",
@@ -678,7 +855,8 @@
       "creator": "Nolan Gomez",
       "tags": ["AI"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Artificial Intelligence: Friend or Foe?",
@@ -686,7 +864,8 @@
       "creator": "Nolan Gomez",
       "tags": ["AI"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "The Future of Robotics in Industry",
@@ -694,7 +873,8 @@
       "creator": "Ethan Lee",
       "tags": ["robotics"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Mindful Meditation Practices",
@@ -702,7 +882,8 @@
       "creator": "Olivia Lee",
       "tags": ["mindfulness"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Overcoming Burnout in the Workplace",
@@ -710,7 +891,8 @@
       "creator": "Emily Kim",
       "tags": ["wellness"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Best Practices for Forum Moderation",
@@ -718,7 +900,8 @@
       "creator": "Michael Scott",
       "tags": ["forum"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Effective Communication with Users",
@@ -726,7 +909,8 @@
       "creator": "Michael Scott",
       "tags": ["communication"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Tips and Tricks for JavaScript Development",
@@ -734,7 +918,8 @@
       "creator": "Luke Parker",
       "tags": ["javascript"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     },
     {
       "name": "Building Scalable Web Applications with React",
@@ -742,7 +927,8 @@
       "creator": "Luke Parker",
       "tags": ["web"],
       "readOnly": false,
-      "type": "TEXT"
+      "type": "TEXT",
+      "messages": []
     }
   ],
   "affiliations": [

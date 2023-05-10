@@ -13,6 +13,8 @@ async function main() {
   }
 
   // delete old data
+  console.log("deleting messages...");
+  await prisma.message.deleteMany();
   console.log("deleting threads...");
   await prisma.thread.deleteMany();
   console.log("deleting users...");
@@ -111,6 +113,25 @@ async function main() {
         where: { name: threadData.creator },
       })
     ).id;
+
+    const messages = threadData.messages
+      ? await Promise.all(
+          threadData.messages.map(async (message) => ({
+            content: message.content,
+            createdAt: message.createdAt,
+            user: {
+              connect: {
+                id: (
+                  await prisma.user.findFirstOrThrow({
+                    where: { name: message.user },
+                  })
+                ).id,
+              },
+            },
+          }))
+        )
+      : [];
+
     await prisma.thread.create({
       data: {
         name: threadData.name,
@@ -133,6 +154,9 @@ async function main() {
         },
         creator: {
           connect: { id: creatorId },
+        },
+        messages: {
+          create: messages,
         },
       },
     });
