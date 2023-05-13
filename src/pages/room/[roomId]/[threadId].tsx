@@ -23,6 +23,9 @@ interface ThreadProps {
   /*fügt den Ersteller der Nachricht zur Nachricht hinzu*/
   messages: (Omit<Message, "user"> & { user: User })[];
   username: string;
+  userId: number;
+  isJoined: boolean;
+  isAdmin: boolean;
   joinedRooms: Room[];
 }
 
@@ -39,6 +42,9 @@ const Thread: NextPage<ThreadProps> = ({
   thread,
   messages,
   username,
+  userId,
+  isJoined,
+  isAdmin,
   joinedRooms,
 }) => {
   return (
@@ -49,7 +55,14 @@ const Thread: NextPage<ThreadProps> = ({
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="col p-0">
-          <RoomPage room={room} username={username}></RoomPage>
+          <RoomPage
+            room={room}
+            userId={userId}
+            isJoined={isJoined}
+            isAdmin={isAdmin}
+            joinedRooms={joinedRooms}
+            username={username}
+          ></RoomPage>
         </div>
         <div className="col border-start border-primary border-4 p-0 d-flex flex-column vh-100 overflow-hidden">
           <div className="container text-center">
@@ -83,14 +96,16 @@ const Thread: NextPage<ThreadProps> = ({
               <div>Keine Nachrichten</div>
             )}
           </div>
-          <div className="input-group p-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Nachricht"
-            />
-            <Button variant="outline-primary">Senden</Button>
-          </div>
+          {isJoined && (
+            <div className="input-group p-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nachricht"
+              />
+              <Button variant="outline-primary">Senden</Button>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -115,6 +130,8 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
   }
 
   const prisma = new PrismaClient();
+  const roomId = Number(context.params?.roomId);
+  const threadId = Number(context.params?.threadId);
 
   const user = await prisma.user
     .findUnique({ where: { username: cookies.username } })
@@ -133,8 +150,31 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
     };
   }
 
-  const roomId = Number(context.params?.roomId);
-  const threadId = Number(context.params?.threadId);
+  const roomUser = await prisma.roomUser
+    .findFirst({
+      where: { userId: user.id, roomId: roomId },
+    })
+    .catch(console.error);
+
+  const isJoined = !!roomUser;
+  const isAdmin = roomUser?.role === "ADMIN";
+
+  if (isJoined === undefined) {
+    context.res.setHeader(
+      "Set-Cookie",
+      "authToken=; username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+    );
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
+  const joinedRooms = await prisma.room.findMany({
+    where: { users: { some: { userId: user.id } } },
+  });
 
   let room = await prisma.room
     .findFirst({
@@ -162,10 +202,6 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
     },
   });
 
-  const joinedRooms = await prisma.room.findMany({
-    where: { users: { some: { userId: user.id } } },
-  });
-
   prisma.$disconnect();
   return {
     props: {
@@ -173,6 +209,9 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
       thread: JSON.parse(JSON.stringify(thread)),
       messages: JSON.parse(JSON.stringify(messagesWithUser)),
       username: cookies.username,
+      userId: user.id,
+      isJoined: isJoined,
+      isAdmin: isAdmin,
       joinedRooms: joinedRooms,
     },
   };
