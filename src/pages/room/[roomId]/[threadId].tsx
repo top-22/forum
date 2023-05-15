@@ -22,6 +22,7 @@ interface ThreadProps {
   thread: Thread;
   /*fügt den Ersteller der Nachricht zur Nachricht hinzu*/
   messages: (Omit<Message, "user"> & { user: User })[];
+  username: string;
 }
 
 function formatTime(date: Date) {
@@ -32,7 +33,12 @@ function formatTime(date: Date) {
   return time;
 }
 
-const Thread: NextPage<ThreadProps> = ({ room, thread, messages }) => {
+const Thread: NextPage<ThreadProps> = ({
+  room,
+  thread,
+  messages,
+  username,
+}) => {
   return (
     <div className="container-fluid">
       <div className="row bg-dark">
@@ -41,7 +47,7 @@ const Thread: NextPage<ThreadProps> = ({ room, thread, messages }) => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="col p-0">
-          <RoomPage room={room}></RoomPage>
+          <RoomPage room={room} username={username}></RoomPage>
         </div>
         <div className="col border-start border-primary border-4 p-0 d-flex flex-column vh-100 overflow-hidden">
           <div className="container text-center">
@@ -141,6 +147,7 @@ export const getServerSideProps: GetServerSideProps<ThreadProps> = async (
       room,
       thread: JSON.parse(JSON.stringify(thread)),
       messages: JSON.parse(JSON.stringify(messagesWithUser)),
+      username: cookies.username,
     },
   };
 };
