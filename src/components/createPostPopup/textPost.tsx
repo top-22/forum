@@ -5,6 +5,7 @@ import { Room } from "@prisma/client";
 
 interface TextProps {
   room: Room;
+  username: string;
 }
 
 const TextPost = (props: TextProps): JSX.Element => {
@@ -13,6 +14,7 @@ const TextPost = (props: TextProps): JSX.Element => {
       <Form id="postForm" action="/api/createPost" method="POST">
         <input type="hidden" name="room" value={props.room.id} />
         <input type="hidden" name="type" value="TEXT" />
+        <input type="hidden" name="creator" value={props.username} />
         <Row className="my-2">
           <Col sm="3">
             <p className="fs-4">Title</p>

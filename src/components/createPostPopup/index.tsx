@@ -8,19 +8,21 @@ import TextPost from "./textPost";
 interface PostProps {
   showTextPost: boolean;
   room: Room;
+  username: string;
 }
 
 interface CreateProps {
   onHide: () => void;
   show: boolean;
   room: Room & { users: RoomUser[] };
+  username: string;
 }
 
 function Post(props: PostProps): JSX.Element {
   if (props.showTextPost == false) {
-    return <SurveyPost room={props.room} />;
+    return <SurveyPost room={props.room} username={props.username} />;
   } else {
-    return <TextPost room={props.room} />;
+    return <TextPost room={props.room} username={props.username} />;
   }
 }
 
@@ -64,7 +66,11 @@ const CreatePost: FunctionComponent<CreateProps> = (props: CreateProps) => {
           </div>
         </Modal.Header>
         <Modal.Body>
-          <Post showTextPost={showTextPost} room={props.room}></Post>
+          <Post
+            showTextPost={showTextPost}
+            room={props.room}
+            username={props.username}
+          ></Post>
         </Modal.Body>
         <Modal.Footer className="modal-footer border-top-0">
           <Button type="submit" form="postForm">

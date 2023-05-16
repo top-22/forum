@@ -12,7 +12,10 @@
           "name": "SciSwap",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "sophieanderson@top22.com",
+      "password": "0T8Hab0bS5",
+      "username": "sophieanderson"
     },
     {
       "name": "Luke Parker",
@@ -26,7 +29,10 @@
           "name": "Developer Room",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "lukeparker@top22.com",
+      "password": "YOPWm6OQU3",
+      "username": "lukeparker"
     },
     {
       "name": "Olivia Lee",
@@ -40,7 +46,10 @@
           "name": "Wellness Warriors",
           "role": "MODERATOR"
         }
-      ]
+      ],
+      "email": "olivialee@top22.com",
+      "password": "pPdeZX4DGx",
+      "username": "olivialee"
     },
     {
       "name": "Michael Scott",
@@ -58,7 +67,10 @@
           "name": "Admin Room",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "michaelscott@top22.com",
+      "password": "mZyVIsitdy",
+      "username": "michaelscott"
     },
     {
       "name": "Emma Davis",
@@ -72,7 +84,10 @@
           "name": "Campus Life",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "emmadavis@top22.com",
+      "password": "oW2ufwcmdo",
+      "username": "emmadavis"
     },
     {
       "name": "Sophia Reynolds",
@@ -90,7 +105,10 @@
           "name": "Campus Life",
           "role": "MODERATOR"
         }
-      ]
+      ],
+      "email": "sophiareynolds@top22.com",
+      "password": "69TiPXWEnq",
+      "username": "sophiareynolds"
     },
     {
       "name": "Nolan Gomez",
@@ -108,7 +126,10 @@
           "name": "Campus Life",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "nolangomez@top22.com",
+      "password": "1jJzNUiSSd",
+      "username": "nolangomez"
     },
     {
       "name": "Avery Patel",
@@ -126,7 +147,10 @@
           "name": "Campus Life",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "averypatel@top22.com",
+      "password": "dUb92oYicG",
+      "username": "averypatel"
     },
     {
       "name": "Dominic Young",
@@ -144,7 +168,10 @@
           "name": "Campus Life",
           "role": "MODERATOR"
         }
-      ]
+      ],
+      "email": "dominicyoung@top22.com",
+      "password": "3WtAQ7Kuao",
+      "username": "dominicyoung"
     },
     {
       "name": "Zoe Kim",
@@ -162,7 +189,10 @@
           "name": "Career Corner",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "zoekim@top22.com",
+      "password": "F2xMFUzNlm",
+      "username": "zoekim"
     },
     {
       "name": "Olivia Perez",
@@ -172,7 +202,10 @@
           "name": "BioTalk",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "oliviaperez@top22.com",
+      "password": "UNamRSCcUa",
+      "username": "oliviaperez"
     },
     {
       "name": "Ethan Lee",
@@ -186,7 +219,10 @@
           "name": "Tech Talk",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "ethanlee@top22.com",
+      "password": "pD81I3YVvk",
+      "username": "ethanlee"
     },
     {
       "name": "Sofia Ramirez",
@@ -196,7 +232,10 @@
           "name": "PoliDebate",
           "role": "MODERATOR"
         }
-      ]
+      ],
+      "email": "sofiaramirez@top22.com",
+      "password": "MsaUin2KOy",
+      "username": "sofiaramirez"
     },
     {
       "name": "Max Johnson",
@@ -210,7 +249,10 @@
           "name": "Wellness Warriors",
           "role": "MODERATOR"
         }
-      ]
+      ],
+      "email": "maxjohnson@top22.com",
+      "password": "z8h2FNVAnu",
+      "username": "maxjohnson"
     },
     {
       "name": "Isabella Kim",
@@ -224,7 +266,10 @@
           "name": "LitLounge",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "isabellakim@top22.com",
+      "password": "crEnqPPhH5",
+      "username": "isabellakim"
     },
     {
       "name": "Jessica Green",
@@ -238,7 +283,10 @@
           "name": "SciSwap",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "jessicagreen@top22.com",
+      "password": "KqP6BRr1FL",
+      "username": "jessicagreen"
     },
     {
       "name": "Hannah Patel",
@@ -252,7 +300,10 @@
           "name": "Campus Life",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "hannahpatel@top22.com",
+      "password": "PZ41rV8XrT",
+      "username": "hannahpatel"
     },
     {
       "name": "Emily Kim",
@@ -266,7 +317,10 @@
           "name": "Wellness Warriors",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "emilykim@top22.com",
+      "password": "wGzCdVlTcz",
+      "username": "emilykim"
     },
     {
       "name": "Daniel Lee",
@@ -280,7 +334,10 @@
           "name": "Study Buddies",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "daniellee@top22.com",
+      "password": "bS7ymActzQ",
+      "username": "daniellee"
     },
     {
       "name": "Rita Singh",
@@ -298,7 +355,10 @@
           "name": "Campus Life",
           "role": "MEMBER"
         }
-      ]
+      ],
+      "email": "ritasingh@top22.com",
+      "password": "Td05YnYRdW",
+      "username": "ritasingh"
     }
   ],
   "rooms": [

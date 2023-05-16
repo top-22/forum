@@ -113,6 +113,8 @@ jobs:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       LETSENCRYPT_EMAIL: ${{ secrets.LETSENCRYPT_EMAIL }}
       VPS_HOST: ${{ secrets.VPS_HOST }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      SALT_VALUE: ${{ secrets.SALT_VALUE }}
 
     steps:
       - name: Setup SSH key 🔑
@@ -142,6 +144,8 @@ jobs:
               --restart always \
               --network=proxy_default \
               -e DATABASE_URL=$DATABASE_URL \
+              -e JWT_SECRET=$JWT_SECRET \
+              -e SALT_VALUE=$SALT_VALUE \
               -e VIRTUAL_HOST=$HOST \
               -e LETSENCRYPT_HOST=$HOST \
               -e LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL \

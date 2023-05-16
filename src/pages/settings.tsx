@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import Image from "next/image";
 import Avatar from "../public/avatar.png";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import { serialize, parse } from "cookie";
 
 const Settings = () => {
   const router = useRouter();
@@ -10,6 +12,24 @@ const Settings = () => {
   const goBack = () => {
     router.back();
   };
+
+  const handleLogout = () => {
+    document.cookie = serialize("authToken", "", {
+      maxAge: -1,
+      path: "/",
+    });
+    document.cookie = serialize("username", "", {
+      maxAge: -1,
+      path: "/",
+    });
+    router.push("/login");
+  };
+
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    const cookies = parse(document.cookie);
+    setUsername(cookies.username || "");
+  }, []);
 
   return (
     <Layout>
@@ -25,10 +45,12 @@ const Settings = () => {
           alt="profile picture"
           className="img-fluid w-25 mb-3"
         />
-        <h4 className="text-light mb-3 mx-auto">Nutzername</h4>
+        <h4 className="text-light mb-3 mx-auto">{username}</h4>
         <Button className="mb-3 w-25">Einstellungen</Button>
         <Button className="mb-3 w-25">Darkmode</Button>
-        <Button className="mb-3 w-25">Abmelden</Button>
+        <Button className="mb-3 w-25" onClick={handleLogout}>
+          Abmelden
+        </Button>
       </div>
     </Layout>
   );

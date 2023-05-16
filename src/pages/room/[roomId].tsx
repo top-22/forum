@@ -2,19 +2,21 @@ import Head from "next/head";
 import Link from "next/link";
 import { Room, RoomUser, PrismaClient, User, Thread } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
-import { Modal, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Layout from "../../components/layout";
 import CreatePost from "../../components/createPostPopup";
 import { useState } from "react";
+import { parse } from "cookie";
 
 interface RoomProps {
   room: Room & {
     users: (RoomUser & { user: User })[];
     threads: (Thread & { creator: User })[];
   };
+  username: string;
 }
 
-const Room: NextPage<RoomProps> = ({ room }) => {
+const Room: NextPage<RoomProps> = ({ room, username }) => {
   const [showCreatePost, setShowCreatePost] = useState(false);
   return (
     <Layout>
@@ -93,6 +95,7 @@ const Room: NextPage<RoomProps> = ({ room }) => {
       <CreatePost
         show={showCreatePost}
         room={room}
+        username={username}
         onHide={() => setShowCreatePost(false)}
       />
     </Layout>
@@ -102,8 +105,23 @@ const Room: NextPage<RoomProps> = ({ room }) => {
 export const getServerSideProps: GetServerSideProps<RoomProps> = async (
   context
 ) => {
-  const roomId = Number(context.params?.roomId);
+  const cookies = context.req.headers.cookie
+    ? parse(context.req.headers.cookie)
+    : {};
+  const isAuthenticated = !!cookies.authToken;
+  const username = cookies.username;
+
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
   const prisma = new PrismaClient();
+  const roomId = Number(context.params?.roomId);
   const room = await prisma.room
     .findFirst({
       where: { id: roomId },
@@ -120,6 +138,7 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
       room,
       users: room.users,
       threads: room.threads,
+      username: username,
     },
   };
 };
