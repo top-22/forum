@@ -1,5 +1,5 @@
 import Navbar from "./navbar";
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode } from "react";
 import { NextPage } from "next";
 
 interface LayoutProps {

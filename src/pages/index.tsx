@@ -3,7 +3,6 @@ import { Room, PrismaClient } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import Layout from "../components/layout";
 import RoomPreview from "../components/roomPreview";
-import { useState } from "react";
 import { parse } from "cookie";
 
 interface HomeProps {

@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { Room, RoomUser, PrismaClient, User, Thread } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
-import { Modal, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Layout from "../../components/layout";
 import CreatePost from "../../components/createPostPopup";
 import { useState } from "react";
