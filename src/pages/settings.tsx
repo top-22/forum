@@ -3,10 +3,16 @@ import Button from "react-bootstrap/Button";
 import Image from "next/image";
 import Avatar from "../public/avatar.png";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FunctionComponent } from "react";
 import { serialize, parse } from "cookie";
+import { GetServerSideProps, NextPage } from "next";
+import { PrismaClient, Room } from "@prisma/client";
 
-const Settings = () => {
+interface SettingsProps {
+  joinedRooms: Room[];
+}
+
+const Settings: NextPage<SettingsProps> = ({ joinedRooms }) => {
   const router = useRouter();
 
   const goBack = () => {
@@ -32,7 +38,7 @@ const Settings = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout rooms={joinedRooms}>
       <div className="bg-dark d-flex flex-column vh-100 justify-content-center align-items-center w-100">
         <Button
           onClick={goBack}
@@ -54,6 +60,50 @@ const Settings = () => {
       </div>
     </Layout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = context.req.headers.cookie
+    ? parse(context.req.headers.cookie)
+    : {};
+  const isAuthenticated = !!cookies.authToken;
+
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
+  const prisma = new PrismaClient();
+
+  const user = await prisma.user
+    .findUnique({ where: { username: cookies.username } })
+    .catch(console.error);
+
+  if (!user) {
+    context.res.setHeader(
+      "Set-Cookie",
+      "authToken=; username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+    );
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
+  // get joined room of the user (relation RoomUser) and add them to the props
+  const joinedRooms = await prisma.room.findMany({
+    where: { users: { some: { userId: user.id } } },
+  });
+
+  prisma.$disconnect();
+
+  return { props: { joinedRooms } };
 };
 
 export default Settings;

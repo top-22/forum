@@ -14,12 +14,68 @@ interface RoomProps {
     threads: (Thread & { creator: User })[];
   };
   username: string;
+  userId: number;
+  isJoined: boolean;
+  isAdmin: boolean;
+  joinedRooms: Room[];
 }
 
-const Room: NextPage<RoomProps> = ({ room, username }) => {
+const Room: NextPage<RoomProps> = ({
+  room,
+  username,
+  userId,
+  isJoined,
+  isAdmin,
+  joinedRooms,
+}) => {
   const [showCreatePost, setShowCreatePost] = useState(false);
+
+  const handleJoinRoom = async () => {
+    try {
+      const response = await fetch("/api/rooms/join", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          roomId: room.id,
+          userId: userId,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Joined room successfully");
+        window.location.reload();
+      } else {
+        console.error("Failed to join room");
+      }
+    } catch (error) {
+      console.error("Failed to join room:", error);
+    }
+  };
+
+  const handleLeaveRoom = async () => {
+    try {
+      const response = await fetch("/api/rooms/leave", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          roomId: room.id,
+          userId: userId,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Left room successfully");
+        window.location.reload();
+      } else {
+        console.error("Failed to leave room");
+      }
+    } catch (error) {
+      console.error("Failed to leave room:", error);
+    }
+  };
+
   return (
-    <Layout>
+    <Layout rooms={joinedRooms}>
       <Head>
         <title>{`TUC Forum - ${room.name}`}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -28,16 +84,30 @@ const Room: NextPage<RoomProps> = ({ room, username }) => {
       <main>
         <div className="bg-dark vh-100">
           <div className="d-flex justify-content-between p-2">
-            <h1 className="text-primary">{room.name}</h1>
-            <Button className="btn-secondary">Raumoptionen</Button>
+            <div className="d-flex align-items-center">
+              <h1 className="text-primary">{room.name}</h1>
+              {!isAdmin && (
+                <Button
+                  className="btn-secondary ms-2"
+                  onClick={isJoined ? handleLeaveRoom : handleJoinRoom}
+                >
+                  {isJoined ? "Leave Room" : "Join Room"}
+                </Button>
+              )}
+            </div>
+            {isJoined && (
+              <Button className="btn-secondary">Raumoptionen</Button>
+            )}
             {/*Popup für Raumoptionen hinzufügen */}
           </div>
-          <div className="p-2">
-            <Button onClick={() => setShowCreatePost(!showCreatePost)}>
-              CREATE POST
-            </Button>
-            {/*Popup für Roomcreate hinzufügen */}
-          </div>
+          {isJoined && (
+            <div className="p-2">
+              <Button onClick={() => setShowCreatePost(!showCreatePost)}>
+                CREATE POST
+              </Button>
+              {/*Popup für Roomcreate hinzufügen */}
+            </div>
+          )}
           <div className="p-2">
             <div className="container-fluid m-0 p-0 w-100">
               <div className="overflow-auto">
@@ -65,9 +135,11 @@ const Room: NextPage<RoomProps> = ({ room, username }) => {
                               </p>
                             </Link>
                           </div>
-                          <Button className="btn-secondary ms-auto position-absolute top-0 end-0 p-2">
-                            Optionen {/*Popup für Optionen hinzufügen */}
-                          </Button>
+                          {isJoined && (
+                            <Button className="btn-secondary ms-auto position-absolute top-0 end-0 p-2">
+                              Optionen {/*Popup für Optionen hinzufügen */}
+                            </Button>
+                          )}
                         </div>
                       </div>
                     ))
@@ -92,12 +164,14 @@ const Room: NextPage<RoomProps> = ({ room, username }) => {
           </div>
         </div>
       </main>
-      <CreatePost
-        show={showCreatePost}
-        room={room}
-        username={username}
-        onHide={() => setShowCreatePost(false)}
-      />
+      {isJoined && (
+        <CreatePost
+          show={showCreatePost}
+          room={room}
+          onHide={() => setShowCreatePost(false)}
+          username={username}
+        />
+      )}
     </Layout>
   );
 };
@@ -132,6 +206,50 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
     })
     .catch(console.error);
   if (!room) return { redirect: { destination: "/", permanent: false } };
+
+  const user = await prisma.user
+    .findUnique({ where: { username: cookies.username } })
+    .catch(console.error);
+
+  if (!user) {
+    context.res.setHeader(
+      "Set-Cookie",
+      "authToken=; username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+    );
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
+  const roomUser = await prisma.roomUser
+    .findFirst({
+      where: { userId: user.id, roomId: roomId },
+    })
+    .catch(console.error);
+
+  const isJoined = !!roomUser;
+  const isAdmin = roomUser?.role === "ADMIN";
+
+  if (isJoined === undefined) {
+    context.res.setHeader(
+      "Set-Cookie",
+      "authToken=; username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+    );
+    return {
+      redirect: {
+        destination: `/login?next=${encodeURIComponent(context.resolvedUrl)}`,
+        permanent: false,
+      },
+    };
+  }
+
+  const joinedRooms = await prisma.room.findMany({
+    where: { users: { some: { userId: user.id } } },
+  });
+
   prisma.$disconnect();
   return {
     props: {
@@ -139,6 +257,10 @@ export const getServerSideProps: GetServerSideProps<RoomProps> = async (
       users: room.users,
       threads: room.threads,
       username: username,
+      userId: user.id,
+      isJoined: isJoined,
+      isAdmin: isAdmin,
+      joinedRooms,
     },
   };
 };

@@ -3,15 +3,17 @@ import Nav from "react-bootstrap/Nav";
 import Image from "next/image";
 import logo from "../public/Logo.svg";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FunctionComponent } from "react";
 import { parse } from "cookie";
+import { Room } from "@prisma/client";
 
-const VerticalNavbar = () => {
-  const navItems = [
-    { path: "/room/1", label: "Raum 1" },
-    { path: "/room/2", label: "Raum 2" },
-  ];
+interface VerticalNavbarProps {
+  Navrooms: Room[];
+}
 
+const VerticalNavbar: FunctionComponent<VerticalNavbarProps> = ({
+  Navrooms,
+}) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -56,14 +58,15 @@ const VerticalNavbar = () => {
           {/* zentriert die Items */}
           <div className="d-flex flex-column align-items-center">
             {/* Listet alle Items zwischen Home und Einstellungen */}
-            {navItems.map((item) => (
+            {Navrooms.map((room) => (
               <Nav.Link
-                key={item.path}
+                key={room.id}
                 as={Link}
-                href={item.path}
-                active={isActive(item.path)}
+                href={`/room/${room.id}`}
+                active={isActive(`/room/${room.id}`)}
+                className="text-center"
               >
-                {item.label}
+                {room.name}
               </Nav.Link>
             ))}
           </div>
