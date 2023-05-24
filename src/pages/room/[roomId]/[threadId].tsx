@@ -110,26 +110,28 @@ const Thread: NextPage<ThreadProps> = ({
               </div>
             </div>
           </div>
-          <div className="bg-primary m-3 p-3 rounded overflow-auto">
-            {messages.length > 0 ? (
-              messages.map((message) => (
-                <div className="container p-1" key={message.id}>
-                  <div className="row">
-                    <div className="col-auto align-self-center p-0 m-1 w-25">
-                      <div className="d-flex flex-column align-items-start">
-                        <div>{formatTime(new Date(message.createdAt))}</div>
-                        <div>{message.user.name}</div>
+          <div className="bg-primary m-3 p-3 rounded overflow-auto d-flex flex-column-reverse">
+            <div>
+              {messages.length > 0 ? (
+                messages.map((message) => (
+                  <div className="container p-1" key={message.id}>
+                    <div className="row">
+                      <div className="col-auto align-self-center p-0 m-1 w-25">
+                        <div className="d-flex flex-column align-items-start">
+                          <div>{formatTime(new Date(message.createdAt))}</div>
+                          <div>{message.user.name}</div>
+                        </div>
+                      </div>
+                      <div className="col bg-secondary rounded p-2">
+                        {message.content}
                       </div>
                     </div>
-                    <div className="col bg-secondary rounded p-2">
-                      {message.content}
-                    </div>
                   </div>
-                </div>
-              ))
-            ) : (
-              <div>Keine Nachrichten</div>
-            )}
+                ))
+              ) : (
+                <div>Keine Nachrichten</div>
+              )}
+            </div>
           </div>
           {isJoined && (
             <div className="input-group p-3">
