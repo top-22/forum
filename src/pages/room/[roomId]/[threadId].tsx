@@ -11,6 +11,7 @@ import { GetServerSideProps, NextPage } from "next";
 import dynamic from "next/dynamic";
 import Button from "react-bootstrap/Button";
 import { parse } from "cookie";
+import { useState } from "react";
 
 const RoomPage = dynamic(() => import("../[roomId]"));
 
@@ -47,6 +48,40 @@ const Thread: NextPage<ThreadProps> = ({
   isAdmin,
   joinedRooms,
 }) => {
+  const [messageContent, setMessageContent] = useState("");
+
+  const handleSendMessage = async () => {
+    if (!messageContent) {
+      console.error("Please fill out the Message field.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/threads/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: messageContent,
+          userId: userId,
+          threadId: thread.id,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Created Message successfully");
+        window.location.reload();
+      } else {
+        console.error("Failed to create Message");
+      }
+    } catch (error) {
+      console.error("Failed to create Message:", error);
+    }
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMessageContent(event.target.value);
+  };
+
   return (
     <div className="container-fluid">
       <div className="row bg-dark">
@@ -102,8 +137,12 @@ const Thread: NextPage<ThreadProps> = ({
                 type="text"
                 className="form-control"
                 placeholder="Nachricht"
+                value={messageContent}
+                onChange={handleInputChange}
               />
-              <Button variant="outline-primary">Senden</Button>
+              <Button variant="outline-primary" onClick={handleSendMessage}>
+                Senden
+              </Button>
             </div>
           )}
         </div>
