@@ -141,6 +141,7 @@ const Thread: NextPage<ThreadProps> = ({
                 placeholder="Nachricht"
                 value={messageContent}
                 onChange={handleInputChange}
+                onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
               />
               <Button variant="outline-primary" onClick={handleSendMessage}>
                 Senden
