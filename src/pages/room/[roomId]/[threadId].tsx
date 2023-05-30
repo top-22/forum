@@ -11,6 +11,7 @@ import { GetServerSideProps, NextPage } from "next";
 import dynamic from "next/dynamic";
 import Button from "react-bootstrap/Button";
 import { parse } from "cookie";
+import { useState } from "react";
 
 const RoomPage = dynamic(() => import("../[roomId]"));
 
@@ -47,6 +48,40 @@ const Thread: NextPage<ThreadProps> = ({
   isAdmin,
   joinedRooms,
 }) => {
+  const [messageContent, setMessageContent] = useState("");
+
+  const handleSendMessage = async () => {
+    if (!messageContent) {
+      console.error("Please fill out the Message field.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/threads/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: messageContent,
+          userId: userId,
+          threadId: thread.id,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Created Message successfully");
+        window.location.reload();
+      } else {
+        console.error("Failed to create Message");
+      }
+    } catch (error) {
+      console.error("Failed to create Message:", error);
+    }
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMessageContent(event.target.value);
+  };
+
   return (
     <div className="container-fluid">
       <div className="row bg-dark">
@@ -75,26 +110,28 @@ const Thread: NextPage<ThreadProps> = ({
               </div>
             </div>
           </div>
-          <div className="bg-primary m-3 p-3 rounded overflow-auto">
-            {messages.length > 0 ? (
-              messages.map((message) => (
-                <div className="container p-1" key={message.id}>
-                  <div className="row">
-                    <div className="col-auto align-self-center p-0 m-1 w-25">
-                      <div className="d-flex flex-column align-items-start">
-                        <div>{formatTime(new Date(message.createdAt))}</div>
-                        <div>{message.user.name}</div>
+          <div className="bg-primary m-3 p-3 rounded overflow-auto d-flex flex-column-reverse text-white">
+            <div>
+              {messages.length > 0 ? (
+                messages.map((message) => (
+                  <div className="container p-1" key={message.id}>
+                    <div className="row">
+                      <div className="col-auto align-self-center p-0 m-1 w-25">
+                        <div className="d-flex flex-column align-items-start">
+                          <div>{formatTime(new Date(message.createdAt))}</div>
+                          <div>{message.user.name}</div>
+                        </div>
+                      </div>
+                      <div className="col bg-secondary rounded p-2">
+                        {message.content}
                       </div>
                     </div>
-                    <div className="col bg-secondary rounded p-2">
-                      {message.content}
-                    </div>
                   </div>
-                </div>
-              ))
-            ) : (
-              <div>Keine Nachrichten</div>
-            )}
+                ))
+              ) : (
+                <div>Keine Nachrichten</div>
+              )}
+            </div>
           </div>
           {isJoined && (
             <div className="input-group p-3">
@@ -102,8 +139,13 @@ const Thread: NextPage<ThreadProps> = ({
                 type="text"
                 className="form-control"
                 placeholder="Nachricht"
+                value={messageContent}
+                onChange={handleInputChange}
+                onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
               />
-              <Button variant="outline-primary">Senden</Button>
+              <Button variant="outline-primary" onClick={handleSendMessage}>
+                Senden
+              </Button>
             </div>
           )}
         </div>
