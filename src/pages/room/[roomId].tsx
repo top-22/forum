@@ -82,7 +82,7 @@ const Room: NextPage<RoomProps> = ({
       </Head>
 
       <main>
-        <div className="bg-dark vh-100">
+        <div className="bg-dark d-flex flex-column vh-100">
           <div className="d-flex justify-content-between p-2">
             <div className="d-flex align-items-center">
               <h1 className="text-primary">{room.name}</h1>
@@ -108,8 +108,8 @@ const Room: NextPage<RoomProps> = ({
               {/*Popup für Roomcreate hinzufügen */}
             </div>
           )}
-          <div className="p-2">
-            <div className="overflow-auto" style={{ maxHeight: "80vh" }}>
+          <div className="p-2 d-flex overflow-hidden">
+            <div className="rounded d-flex overflow-auto ">
               <div>
                 {room.threads.length > 0 ? (
                   room.threads.map((thread) => (
@@ -151,8 +151,9 @@ const Room: NextPage<RoomProps> = ({
               </div>
             </div>
           </div>
-          {/*<div className="text-white p-2">
-            Infos über den Room für die Rauminfos/Raumoptionen, müssen später an Raumoptionen-Componente übergebn werden und hier rausgelöscht werden
+          <div className="text-white p-2">
+            Infos über den Room für die Rauminfos/Raumoptionen, müssen später an
+            Raumoptionen-Componente übergebn werden und hier rausgelöscht werden
             <span>{room.description}</span>
             <div>
               <h2>Benutzer im Raum:</h2>
@@ -162,7 +163,7 @@ const Room: NextPage<RoomProps> = ({
                 ))}
               </ul>
             </div>
-          </div>*/}
+          </div>
         </div>
       </main>
       {isJoined && (
