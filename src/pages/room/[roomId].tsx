@@ -109,48 +109,45 @@ const Room: NextPage<RoomProps> = ({
             </div>
           )}
           <div className="p-2">
-            <div className="container-fluid m-0 p-0 w-100">
-              <div className="overflow-auto">
-                <div className="flex-nowrap">
-                  {room.threads.length > 0 ? (
-                    room.threads.map((thread) => (
-                      <div className="col mb-2" key={thread.id}>
-                        <div className="card text-bg-primary m-2 p-2 h-100 d-flex align-items-start">
-                          <div className="card-body w-100">
-                            <div className="row">
-                              <div className="col p-0">
-                                <Link
-                                  key={thread.id}
-                                  href={`/room/${room.id}/${thread.id}`}
-                                >
-                                  <h2 className="card-title text-white text-decoration-underline">
-                                    {thread.name}
-                                    {" - "}
-                                    {thread.creator.name ?? "Unbekannt"}
-                                  </h2>
-                                  <p className="card-text text-secondary text-decoration-none">
-                                    {thread.description ??
-                                      "Dieser Thread hat keine genauere Beschreibung."}
-                                  </p>
-                                </Link>
-                              </div>
-                              {isJoined && (
-                                <div className="col-auto p-0">
-                                  <Button className="btn-secondary ms-auto">
-                                    Optionen{" "}
-                                    {/*Popup für Optionen hinzufügen */}
-                                  </Button>
-                                </div>
-                              )}
+            <div className="overflow-auto" style={{ maxHeight: "80vh" }}>
+              <div>
+                {room.threads.length > 0 ? (
+                  room.threads.map((thread) => (
+                    <div className="col mb-2" key={thread.id}>
+                      <div className="card text-bg-primary m-2 p-2 h-100 d-flex align-items-start">
+                        <div className="card-body w-100">
+                          <div className="row">
+                            <div className="col p-0">
+                              <Link
+                                key={thread.id}
+                                href={`/room/${room.id}/${thread.id}`}
+                              >
+                                <h2 className="card-title text-white text-decoration-underline">
+                                  {thread.name}
+                                  {" - "}
+                                  {thread.creator.name ?? "Unbekannt"}
+                                </h2>
+                                <p className="card-text text-secondary text-decoration-none">
+                                  {thread.description ??
+                                    "Dieser Thread hat keine genauere Beschreibung."}
+                                </p>
+                              </Link>
                             </div>
+                            {isJoined && (
+                              <div className="col-auto p-0">
+                                <Button className="btn-secondary ms-auto">
+                                  Optionen {/*Popup für Optionen hinzufügen */}
+                                </Button>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <div className="text-center">Es gibt keine Threads.</div>
-                  )}
-                </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center">Es gibt keine Threads.</div>
+                )}
               </div>
             </div>
           </div>
