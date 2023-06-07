@@ -154,8 +154,8 @@ const Room: NextPage<RoomProps> = ({
               </div>
             </div>
           </div>
-          <div className="text-white p-2">
-            {/*Infos über den Room für die Rauminfos/Raumoptionen, müssen später an Raumoptionen-Componente übergebn werden und hier rausgelöscht werden*/}
+          {/*<div className="text-white p-2">
+            Infos über den Room für die Rauminfos/Raumoptionen, müssen später an Raumoptionen-Componente übergebn werden und hier rausgelöscht werden
             <span>{room.description}</span>
             <div>
               <h2>Benutzer im Raum:</h2>
@@ -165,7 +165,7 @@ const Room: NextPage<RoomProps> = ({
                 ))}
               </ul>
             </div>
-          </div>
+          </div>*/}
         </div>
       </main>
       {isJoined && (
