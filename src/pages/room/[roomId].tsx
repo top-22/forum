@@ -88,20 +88,22 @@ const Room: NextPage<RoomProps> = ({
               <h1 className="text-primary">{room.name}</h1>
               {!isAdmin && (
                 <Button
-                  className="btn-secondary ms-2"
+                  className="btn-secondary ms-2 text-nowrap"
                   onClick={isJoined ? handleLeaveRoom : handleJoinRoom}
                 >
                   {isJoined ? "Leave Room" : "Join Room"}
                 </Button>
               )}
             </div>
-            {isJoined && (
-              <Button className="btn-secondary">Raumoptionen</Button>
-            )}
-            {/*Popup für Raumoptionen hinzufügen */}
+            <div className="d-flex align-items-center">
+              {isJoined && (
+                <Button className="btn-secondary ms-2">Raumoptionen</Button>
+              )}
+              {/*Popup für Raumoptionen hinzufügen */}
+            </div>
           </div>
           {isJoined && (
-            <div className="p-2">
+            <div className="p-3">
               <Button onClick={() => setShowCreatePost(!showCreatePost)}>
                 CREATE POST
               </Button>
@@ -154,8 +156,7 @@ const Room: NextPage<RoomProps> = ({
           <div className="text-white p-2">
             <p>
               Infos über den Room für die Rauminfos/Raumoptionen, müssen später
-              an Raumoptionen-Componente übergebn werden und hier rausgelöscht
-              werden
+              an Raumoptionen-Componente übergeben und hier rausgelöscht werden
             </p>
             <span>{room.description}</span>
             <div>
