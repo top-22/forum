@@ -108,9 +108,9 @@ const Room: NextPage<RoomProps> = ({
               {/*Popup für Roomcreate hinzufügen */}
             </div>
           )}
-          <div className="p-2 d-flex overflow-hidden">
-            <div className="rounded d-flex overflow-auto ">
-              <div>
+          <div className="pt-2 px-2 d-flex overflow-hidden">
+            <div className="rounded d-flex overflow-auto w-100">
+              <div className="w-100">
                 {room.threads.length > 0 ? (
                   room.threads.map((thread) => (
                     <div className="col mb-2" key={thread.id}>
@@ -152,8 +152,11 @@ const Room: NextPage<RoomProps> = ({
             </div>
           </div>
           <div className="text-white p-2">
-            Infos über den Room für die Rauminfos/Raumoptionen, müssen später an
-            Raumoptionen-Componente übergebn werden und hier rausgelöscht werden
+            <p>
+              Infos über den Room für die Rauminfos/Raumoptionen, müssen später
+              an Raumoptionen-Componente übergebn werden und hier rausgelöscht
+              werden
+            </p>
             <span>{room.description}</span>
             <div>
               <h2>Benutzer im Raum:</h2>
