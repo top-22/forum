@@ -154,10 +154,10 @@ const Room: NextPage<RoomProps> = ({
             </div>
           </div>
           <div className="text-white p-2">
-            <p>
+            {/*<p>
               Infos über den Room für die Rauminfos/Raumoptionen, müssen später
               an Raumoptionen-Componente übergeben und hier rausgelöscht werden
-            </p>
+                </p>*/}
             <span>{room.description}</span>
             <div>
               <h2>Benutzer im Raum:</h2>
