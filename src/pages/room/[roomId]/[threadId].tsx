@@ -110,7 +110,7 @@ const Thread: NextPage<ThreadProps> = ({
               </div>
             </div>
           </div>
-          <div className="bg-primary m-3 p-3 rounded overflow-auto d-flex flex-column-reverse text-white">
+          <div className="bg-primary m-3 px-3 py-1 rounded overflow-auto d-flex flex-column-reverse text-white">
             <div>
               {messages.length > 0 ? (
                 messages.map((message) => (

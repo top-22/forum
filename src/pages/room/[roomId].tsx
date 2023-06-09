@@ -82,76 +82,82 @@ const Room: NextPage<RoomProps> = ({
       </Head>
 
       <main>
-        <div className="bg-dark vh-100">
+        <div className="bg-dark d-flex flex-column vh-100">
           <div className="d-flex justify-content-between p-2">
             <div className="d-flex align-items-center">
               <h1 className="text-primary">{room.name}</h1>
               {!isAdmin && (
                 <Button
-                  className="btn-secondary ms-2"
+                  className="btn-secondary ms-2 text-nowrap"
                   onClick={isJoined ? handleLeaveRoom : handleJoinRoom}
                 >
                   {isJoined ? "Leave Room" : "Join Room"}
                 </Button>
               )}
             </div>
-            {isJoined && (
-              <Button className="btn-secondary">Raumoptionen</Button>
-            )}
-            {/*Popup für Raumoptionen hinzufügen */}
+            <div className="d-flex align-items-center">
+              {isJoined && (
+                <Button className="btn-secondary ms-2">Raumoptionen</Button>
+              )}
+              {/*Popup für Raumoptionen hinzufügen */}
+            </div>
           </div>
           {isJoined && (
-            <div className="p-2">
+            <div className="p-3">
               <Button onClick={() => setShowCreatePost(!showCreatePost)}>
                 CREATE POST
               </Button>
               {/*Popup für Roomcreate hinzufügen */}
             </div>
           )}
-          <div className="p-2">
-            <div className="container-fluid m-0 p-0 w-100">
-              <div className="overflow-auto">
-                <div className="col flex-nowrap">
-                  {room.threads.length > 0 ? (
-                    room.threads.map((thread) => (
-                      <div className="col mb-2" key={thread.id}>
-                        <div
-                          className="card text-bg-primary h-100 d-flex align-items-start"
-                          style={{ width: "80%", position: "relative" }}
-                        >
-                          <div className="card-body">
-                            <Link
-                              key={thread.id}
-                              href={`/room/${room.id}/${thread.id}`}
-                            >
-                              <h2 className="card-title text-white text-decoration-underline">
-                                {thread.name}
-                                {" - "}
-                                {thread.creator.name ?? "Unbekannt"}
-                              </h2>
-                              <p className="card-text text-secondary text-decoration-none">
-                                {thread.description ??
-                                  "Dieser Thread hat keine genauere Beschreibung."}
-                              </p>
-                            </Link>
+          <div className="pt-2 px-2 d-flex overflow-hidden">
+            <div className="rounded d-flex overflow-auto w-100">
+              <div className="w-100">
+                {room.threads.length > 0 ? (
+                  room.threads.map((thread) => (
+                    <div className="col mb-2" key={thread.id}>
+                      <div className="card text-bg-primary m-2 p-2 h-100 d-flex align-items-start">
+                        <div className="card-body w-100">
+                          <div className="row">
+                            <div className="col p-0">
+                              <Link
+                                key={thread.id}
+                                href={`/room/${room.id}/${thread.id}`}
+                              >
+                                <h2 className="card-title text-white text-decoration-underline">
+                                  {thread.name}
+                                  {" - "}
+                                  {thread.creator.name ?? "Unbekannt"}
+                                </h2>
+                                <p className="card-text text-secondary text-decoration-none">
+                                  {thread.description ??
+                                    "Dieser Thread hat keine genauere Beschreibung."}
+                                </p>
+                              </Link>
+                            </div>
+                            {isJoined && (
+                              <div className="col-auto p-0">
+                                <Button className="btn-secondary ms-auto">
+                                  Optionen {/*Popup für Optionen hinzufügen */}
+                                </Button>
+                              </div>
+                            )}
                           </div>
-                          {isJoined && (
-                            <Button className="btn-secondary ms-auto position-absolute top-0 end-0 p-2">
-                              Optionen {/*Popup für Optionen hinzufügen */}
-                            </Button>
-                          )}
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <div className="text-center">Es gibt keine Threads.</div>
-                  )}
-                </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center">Es gibt keine Threads.</div>
+                )}
               </div>
             </div>
           </div>
           <div className="text-white p-2">
-            {/*Infos über den Room für die Rauminfos/Raumoptionen, müssen später an Raumoptionen-Componente übergebn werden und hier rausgelöscht werden*/}
+            {/*<p>
+              Infos über den Room für die Rauminfos/Raumoptionen, müssen später
+              an Raumoptionen-Componente übergeben und hier rausgelöscht werden
+                </p>*/}
             <span>{room.description}</span>
             <div>
               <h2>Benutzer im Raum:</h2>
