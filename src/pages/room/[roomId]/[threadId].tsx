@@ -133,7 +133,7 @@ const Thread: NextPage<ThreadProps> = ({
               )}
             </div>
           </div>
-          {isJoined && (
+          {(isJoined && ((!thread.readOnly)||(thread.creatorName == username))) && (
             <div className="input-group p-3">
               <input
                 type="text"
