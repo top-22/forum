@@ -148,11 +148,19 @@ const Thread: NextPage<ThreadProps> = ({
               </Button>
             </div>
           )}
-          {isJoined && thread.readOnly && thread.creatorName != username && (
+          {thread.readOnly && thread.creatorName != username && (
             <div className="text-white px-3 text-center">
               <p>Kommentare sind deaktiviert.</p>
             </div>
           )}
+          {!isJoined &&
+            (!thread.readOnly || thread.creatorName == username) && (
+              <div className="text-white px-3 text-center">
+                <p>
+                  Du musst dem Raum beitreten, um Nachrichten senden zu können.
+                </p>
+              </div>
+            )}
         </div>
       </div>
     </div>
