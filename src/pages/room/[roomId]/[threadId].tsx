@@ -133,7 +133,7 @@ const Thread: NextPage<ThreadProps> = ({
               )}
             </div>
           </div>
-          {isJoined && (
+          {isJoined && (!thread.readOnly || thread.creatorName == username) && (
             <div className="input-group p-3">
               <input
                 type="text"
@@ -148,6 +148,19 @@ const Thread: NextPage<ThreadProps> = ({
               </Button>
             </div>
           )}
+          {thread.readOnly && thread.creatorName != username && (
+            <div className="text-white px-3 text-center">
+              <p>Kommentare sind deaktiviert.</p>
+            </div>
+          )}
+          {!isJoined &&
+            (!thread.readOnly || thread.creatorName == username) && (
+              <div className="text-white px-3 text-center">
+                <p>
+                  Du musst dem Raum beitreten, um Nachrichten senden zu können.
+                </p>
+              </div>
+            )}
         </div>
       </div>
     </div>

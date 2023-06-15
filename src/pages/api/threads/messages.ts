@@ -13,6 +13,37 @@ export default async function handler(
     return res.status(400).json({ message: "All fields are required" });
   }
 
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
+
+  const thread = await prisma.thread.findUnique({
+    where: { id: threadId },
+    include: { room: true },
+  });
+
+  if (!thread) {
+    return res.status(400).json({ message: "Thread not found" });
+  }
+
+  const roomUser = await prisma.roomUser.findFirst({
+    where: { userId: userId, roomId: thread.roomId },
+  });
+
+  const isJoined = !!roomUser;
+
+  if (!isJoined) {
+    return res.status(400).json({ message: "User not in room" });
+  }
+
+  if (thread.readOnly && user.name != thread.creatorName) {
+    return res.status(400).json({ message: "Thread is ReadOnly" });
+  }
+
   try {
     await prisma.message.create({
       data: {
