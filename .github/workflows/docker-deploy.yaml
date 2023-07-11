@@ -48,7 +48,8 @@ jobs:
           if [ "${{ steps.set_type.outputs.type }}" == "main_push" ]; then
             echo "IMAGE_TAG=main" >> $GITHUB_OUTPUT
           else
-            echo "IMAGE_TAG=pr-${{ github.head_ref }}" >> $GITHUB_OUTPUT
+            pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+            echo "IMAGE_TAG=pr-$pull_number" >> $GITHUB_OUTPUT
           fi
 
       - name: Set CONTAINER_NAME ⚙️
